@@ -18,7 +18,7 @@ class AdminController extends Controller {
 		}
 	}
 	
-	public function index() {
+	public function home() {
         if ($this->isLogined()) {
             return view('admin.index');
         } else {

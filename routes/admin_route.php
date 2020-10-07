@@ -5,7 +5,7 @@ Route::group(['prefix' => 'laravel-filemanager'], function () {
 });
 
 Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function () {
-    Route::get('/', 'AdminController@index')->name('admin.index');
+    Route::get('/', 'AdminController@home')->name('admin.index');
 
 	Route::get('login', 'AuthenticationController@getLoginForm')->name('admin.login');
 	Route::post('login', 'AuthenticationController@login');
@@ -73,6 +73,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function () {
 	    Route::get('detail/{id}', 'TransactionController@getTransactionDetail')->name('admin.transaction.detail');
 	    Route::get('delete/{id}', 'TransactionController@delete')->name('admin.transaction.delete');
 	    Route::get('delete-order/{id}', 'TransactionController@deleteOrder')->name('admin.transaction.deleteOrder');
+	    Route::get('update-status/{status}/{id}', 'TransactionController@updateOrderStatus')->name('admin.transaction.updateOrderStatus');
 	});
 
 	Route::group(['prefix'=>'menu'], function () {

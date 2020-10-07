@@ -1,5 +1,13 @@
 @extends('layouts.guest_layout')
 
+@section('css')
+	<style>
+		.page-banners-carousel .items,.slider-carousel .items{
+			padding-top:0px;
+		}
+	</style>
+@stop
+
 @section('content')
 <!-- CONTENT SECTION -->
 <div id="content" class="wrapper">

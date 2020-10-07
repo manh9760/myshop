@@ -20,14 +20,29 @@
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title"><a href="{{route('admin.product.create')}}" class="btn btn-success btn-sm">Thêm mới <i class="fa fa-plus"></i></a></h3>
-            <div class="box-tools">
-              <div class="input-group" style="width: 150px;">
-                <input type="text" name="table_search" class="form-control input-sm pull-right" placeholder="Search">
-                <div class="input-group-btn">
-                  <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                </div>
-              </div>
+            <div class="box-title">
+              <form class="form-inline">
+                <input type="text" name="full_name" value="{{Request::get('full_name')}}" class="form-control" placeholder="Họ tên..." />
+                <input type="text" name="email" value="{{Request::get('email')}}" class="form-control" placeholder="Email..." />
+                <select name="user_type" class="form-control">
+                  <option value="">--- Khách hàng ---</option>
+                  <option value="1" {{ Request::get('user_type') == 1 ? "selected='selected'" : ""}}>Thành viên</option>
+                  <option value="2" {{ Request::get('user_type') == 2 ? "selected='selected'" : ""}}>Chưa đăng ký</option>
+                </select>
+                <select name="status" class="form-control">
+                  <option value="">--- Trạng thái ---</option>
+                  <option value="3" {{ Request::get('status') == 3 ? "selected='selected'" : ""}}>Đã giao</option>
+                  <option value="2" {{ Request::get('status') == 2 ? "selected='selected'" : ""}}>Đang vận chuyển</option>
+                  <option value="1" {{ Request::get('status') == 1 ? "selected='selected'" : ""}}>Tiếp nhận</option>
+                  <option value="4" {{ Request::get('status') == 4 ? "selected='selected'" : ""}}>Đã hủy</option>
+                </select>
+                <button type="submit" class="btn btn-info">
+                  <i class="fa fa-search"></i> Tìm kiếm
+                </button>
+                <button type="submit" name="export_excel" value="true" class="btn btn-success">
+                  <i class="fa fa-save"></i> Xuất File Excel
+                </button>
+              </form>
             </div>
           </div><!-- /.box-header -->
           <div class="box-body table-responsive no-padding">
@@ -122,9 +137,9 @@
                           <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Đang giao</a></li>
-                          <li><a href="#">Đã giao</a></li>
-                          <li><a href="#">Hủy đơn</a></li>
+                          <li><a href="{{ route('admin.transaction.updateOrderStatus', ['processing', $transaction->id]) }}">Đang giao</a></li>
+                          <li><a href="{{ route('admin.transaction.updateOrderStatus', ['complete', $transaction->id]) }}">Đã giao</a></li>
+                          <li><a href="{{ route('admin.transaction.updateOrderStatus', ['canceled', $transaction->id]) }}">Hủy đơn</a></li>
                         </ul>
                       </div>
                     </td>
@@ -136,7 +151,7 @@
           </div><!-- /.box-body -->
           <div class="box-footer clearfix">
             <ul class="pagination pagination-sm no-margin pull-right">
-              {!! $transactions->links() !!}
+              {!! $transactions->appends($query)->links() !!}
             </ul>
           </div>
         </div><!-- /.box -->

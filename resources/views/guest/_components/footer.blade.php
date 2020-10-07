@@ -15,7 +15,7 @@
 			<p>Hotline: 0977 160 823</p>
 			<p>Email: parabol123654@gmail.com</p>
 			<p>Các câu hỏi thường gặp</p>
-			<p>hướng dẫn đặt hàng</p>
+			<p>Hướng dẫn đặt hàng</p>
 			<p>Phương thức vận chuyển</p>
 			<p>Chính sách đổi trả</p>
 		</div>
