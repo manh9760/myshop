@@ -83,8 +83,14 @@
 									@endif
 									<span><strong>{{number_format($product->price,0,',','.')}} đ</strong></span>
 								</div>
-								<a href="{{route('get.cart.add', $product->id)}}" class="button desktop">Chọn mua</a>
-								<a href="{{route('get.cart.add', $product->id)}}" class="button show-on-phone">Chọn mua</a>
+								<span class="add-to-cart">
+									@if($product->number > 0)
+										<a href="{{route('get.cart.add', $product->id)}}" class="button desktop">Chọn mua</a>
+										<a href="{{route('get.cart.add', $product->id)}}" class="button show-on-phone">Chọn mua</a>
+									@else
+										<label>Sản phẩm đã hết hàng</label>
+									@endif
+								</span>
 							</div>
 						</div>
 					</article>

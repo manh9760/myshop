@@ -65,7 +65,11 @@
 									<span class="price">{{number_format($product->price,0,',','.')}} đ</span>
 									<div class="clear"></div>
 									<span class="add-to-cart">
-										<a href="{{route('get.cart.add', $product->id)}}" class="button">Chọn mua</a>
+										@if($product->number > 0)
+											<a href="{{route('get.cart.add', $product->id)}}" class="button">Chọn mua</a>
+										@else
+											<label>Sản phẩm đã hết hàng</label>
+										@endif
 									</span>
 									
 									<div class="rating">
@@ -87,7 +91,7 @@
 								
 								<footer>
 									@if(count($product->keywords) > 0)
-									<p><span>Lượt xem: <strong>19</strong></span></p>
+									<p><span>Lượt xem: <strong>{{ $product->view }}</strong></span></p>
 									@endif
 									@if(count($product->keywords) > 0)
 									<p><span>Từ khóa:</span>

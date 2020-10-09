@@ -19,6 +19,8 @@ Route::group(['namespace'=>'Guest'], function () {
 	    Route::get('cap-nhat/{id}', 'CartController@update')->name('get.cart.update');
 	    Route::get('xoa-san-pham/{id}', 'CartController@delete')->name('get.cart.delete');
 
+        Route::get('cap-nhat-ajax/{id}', 'CartController@updateAjax')->name('updateCartAjax');
+
 	    Route::post('thanh-toan', 'CartController@pay')->name('post.cart.pay');
 
         // Load Tỉnh/Thành phố, Quận/Huyện,...

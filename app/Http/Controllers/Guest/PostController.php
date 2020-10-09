@@ -9,7 +9,6 @@ use App\Models\Post;
 class PostController extends GuestController {
     public function getPostList() {
         $postList = Post::where('active', 1)->paginate(10);
-        $posts = null;
         $saleProducts = Product::where('active', 1)
             ->where('sale', '>', 0)
             ->orderByDesc('sale')
@@ -17,9 +16,11 @@ class PostController extends GuestController {
             ->get();
         $data = [
             'postList' => $postList,
-            'posts' => $posts,
+            'posts' => null,
             'saleProducts' => $saleProducts,
         	'pageTitle' => 'Tin tức công nghệ',
+            'categories' => null,
+            'attributes' => null,
             'bodyClass' => 'blog template-one-column-grid',
         ];
         return view('guest.post.list', $data);

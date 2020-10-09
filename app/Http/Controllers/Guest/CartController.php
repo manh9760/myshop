@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Guest;
 
+use App\Http\Requests\Guest\CartRequest;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Transaction;
@@ -28,6 +29,17 @@ class CartController extends GuestController {
         $product = Product::find($id);
         if (!$product) 
             return redirect()->to('/');
+
+        // Kiểm tra số lượng sản phẩm
+        if ($product->number < 1) {
+            \Session::flash('toastr', [
+                'type' => 'error',
+                'message' => 'Sản phẩm đã hết hàng!',
+            ]);
+            return redirect()->back();
+        }
+
+        // Thêm sản phẩm vào giỏ hàng
     	\Cart::add([
             'id' => $product->id,
             'name' => $product->name,
@@ -57,6 +69,25 @@ class CartController extends GuestController {
         return redirect()->back();
     }
 
+    public function updateAjax(Request $request, $id) {
+        if ($request->ajax()) {
+            // Lấy tham số truyền qua ajax
+            $qty = $request->qty ?? 1;
+            $idProduct = $request->idProduct;
+            $product = Product::find($idProduct);
+
+            if (!$product) {
+                return response(['message' => 'Sản phẩm không tồn tại!']);
+            }
+            if ($product->number < $qty) {
+                return response(['message' => 'Số lượng sản phẩm không đủ!']);
+            }
+
+            \Cart::update($id, $qty);
+            return response(['message' => 'Cập nhật thành công']);
+        }
+    }
+
     public function delete($rowId) {
         \Session::flash('toastr', [
             'type' => 'info',
@@ -66,9 +97,8 @@ class CartController extends GuestController {
         return redirect()->back();
     }
 
-	public function pay(Request $request) {
+	public function pay(CartRequest $request) {
         $data = $request->except('_token');
-
         if (isset(\Auth::user()->id)) {
             $data['user_id'] = \Auth::user()->id;
 

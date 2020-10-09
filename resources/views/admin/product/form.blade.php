@@ -28,16 +28,25 @@
           </div>
 
           <!-- Giảm giá -->
-          <div class="col-xs-3 form-group {{ $errors->first('sale') ? 'has-error':'' }}">
+          <div class="col-xs-2 form-group {{ $errors->first('sale') ? 'has-error':'' }}">
             <label for="sale">Giảm giá (%)</label>
             <input type="number" name="sale" value="{{$product->sale ?? 0}}" class="form-control" placeholder="Nhập % giảm" min="0" />
             @if($errors->first('sale'))
               <span class="text-danger">{{ $errors->first('sale') }}</span>
             @endif
           </div>
+
+          <!-- Số lượng sản phẩm nhập -->
+          <div class="col-xs-2 form-group {{ $errors->first('number') ? 'has-error':'' }}">
+            <label for="number">Số lượng nhập</label>
+            <input type="number" name="number" value="{{$product->number ?? 0}}" class="form-control" placeholder="Số lượng" min="0" />
+            @if($errors->first('number'))
+              <span class="text-danger">{{ $errors->first('number') }}</span>
+            @endif
+          </div>
           
           <!-- Danh mục sản phẩm -->
-          <div class="col-xs-5 form-group {{ $errors->first('category_id') ? 'has-error':'' }}">
+          <div class="col-xs-4 form-group {{ $errors->first('category_id') ? 'has-error':'' }}">
             <label for="category_id">Danh mục sản phẩm</label>
             <select class="form-control select2" name="category_id" style="width: 100%;">
               <option value="">__Chọn danh mục__</option>
@@ -64,30 +73,28 @@
             @endforeach
           </select>
         </div>
-        
+
         <!-- checkbox -->
         <div class="form-group">
           <label for="category_id">Thuộc tính sản phẩm</label>
+          @foreach($attributes as $key => $attribute)
           <div class="checkbox">
-            @foreach($attributes as $key => $attribute)
-              <div class="col-xs-3 form-group">
-                <h6>{{$key}}</h6>
-                @foreach($attribute as $item)
-                <div>
-                  <label>
-                    <input type="checkbox" name="attribute[]" value="{{$item['id']}}" 
-                      {{in_array($item['id'], $oldAttribute) ? "checked" : ""}}/>
-                    {{$item['name']}}
-                  </label>
-                </div>
-                @endforeach
+            <div class="col-xs-6 form-group">
+              <h6>{{$key}}</h6>
+              @foreach($attribute as $item)
+              <div>
+                <label>
+                  <input type="checkbox" name="attribute[]" value="{{$item['id']}}" 
+                    {{in_array($item['id'], $oldAttribute) ? "checked" : ""}}/>
+                  {{$item['name']}}
+                </label>
               </div>
-            @endforeach
+              @endforeach
+            </div>
           </div>
+          @endforeach
         </div>
 
-        <div class="form-group">
-        </div>
         <!-- Mô tả ngắn -->
         <div class="form-group {{ $errors->first('description') ? 'has-error':'' }}">
           <label>Mô tả ngắn</label>

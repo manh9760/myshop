@@ -47,10 +47,6 @@
 		@include('guest._components.footer')
 	</div>
 
-	<script src="js/libs/nprogress.js"></script>
-	<script>
-		NProgress.start();
-	</script>
 	<script src="{{ asset('public/guest/js/libs/jquery.tipsy.js') }}"></script>
 	<script src="{{ asset('public/guest/js/libs/jquery.ui.totop.min.js') }}"></script>
 	<script src="{{ asset('public/guest/js/libs/jquery.fs.scroller.min.js') }}"></script>

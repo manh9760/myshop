@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Post;
+use App\Services\ProcessViewService;
 
 class ProductController extends GuestController {
 
@@ -20,11 +21,59 @@ class ProductController extends GuestController {
         return $groupAttribute;
     }
 
-    public function getProductList() {
-        $products = Product::where('active', 1)
-            ->orderByDesc('id')
-            ->select('id', 'name', 'slug', 'avatar', 'price', 'price_old', 'sale', 'description')
-            ->paginate(16);
+    public function getProductList(Request $request) {
+        // Lấy thuộc tính lọc sản phẩm
+        $paramAttrSearch = $request->except('price', 'page', 'searchQuery');
+        $paramAttrSearch = array_values($paramAttrSearch);
+
+        $products = Product::where('active', 1);
+
+        if ($name = $request->searchQuery) {
+            $products->where('name', 'like', '%'.$name.'%');
+        }
+
+        if (!empty($paramAttrSearch)) {
+            $products->whereHas('attributes', function($query) use($paramAttrSearch) {
+                $query->whereIn('pa_attribute_id', $paramAttrSearch);
+            });
+        }
+
+        // if ($request->price) --> Nếu $request->price = 0 --> không vào switch
+        if ($request->price != null) {
+            $price = $request->price;
+            switch ($price) {
+                case 1:
+                    $products->where('price', '<', 2000000);
+                    break;
+                case 2:
+                    $products->where([
+                        ['price', '>=', 2000000],
+                        ['price', '<=', 6000000],
+                    ]);
+                    break;
+                case 6:
+                    $products->where([
+                        ['price', '>=', 6000000],
+                        ['price', '<=', 10000000],
+                    ]);
+                    break;
+                case 10:
+                    $products->where([
+                        ['price', '>=', 10000000],
+                        ['price', '<=', 14000000],
+                    ]);
+                    break;
+                case 14:
+                    $products->where([
+                        ['price', '>=', 14000000],
+                        ['price', '<=', 18000000],
+                    ]);
+                    break;
+                case 18:
+                    $products->where('price', '>', 18000000);
+                    break;       
+            }
+        }
 
         $mostBoughtProducts = Product::where('active', 1)
             ->where('paid', '>', 0)
@@ -34,11 +83,17 @@ class ProductController extends GuestController {
 
         $posts = Post::where('active', 1)->orderByDesc('id')->limit(4)->get();
 
+        $products = $products
+            ->orderByDesc('id')
+            ->select('id', 'name', 'slug', 'avatar', 'price', 'price_old', 'number', 'sale', 'description')
+            ->paginate(16);
+
         // Không muốn hiển thị sản phẩm top sale bên aside
         $saleProducts = null;
         $attributes = $this->syncAttributeGroup();
         $data = [
             'products' => $products,
+            'query' => $request->query(),
             'mostBoughtProducts' => $mostBoughtProducts,
             'attributes' => $attributes,
             'posts' => $posts,
@@ -58,7 +113,7 @@ class ProductController extends GuestController {
                 'category_id' => $categoryID,
             ])
             ->orderByDesc('id')
-            ->select('id', 'name', 'slug', 'avatar', 'price', 'price_old', 'sale', 'description')
+            ->select('id', 'name', 'slug', 'avatar', 'price', 'price_old', 'number', 'sale', 'description')
             ->paginate(16);
 
         $posts = Post::where('active', 1)->orderByDesc('id')->limit(4)->get();
@@ -91,6 +146,9 @@ class ProductController extends GuestController {
                 ->limit(4)
                 ->get();
             $attributes = $this->syncAttributeGroup();
+
+            // Tính view sản phẩm 
+            ProcessViewService::view('products', 'view', 'product', $id);
     		$data = [
     			'product' => $product,
                 'suggestedProducts' => $this->getSuggestedProducts($product->category_id),
@@ -110,9 +168,10 @@ class ProductController extends GuestController {
         $products = Product::where([
                 'active' => 1,
                 'category_id' => $categoryId,
+                ['number', '>', 0],
             ])
             ->orderByDesc('id')
-            ->select('id', 'name', 'slug', 'avatar', 'price', 'price_old', 'sale')
+            ->select('id', 'name', 'slug', 'avatar', 'price', 'price_old', 'number', 'sale')
             ->paginate(3);
         return $products;
     }

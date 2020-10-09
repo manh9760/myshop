@@ -27,7 +27,6 @@ class AttributeController extends AdminController {
         // Kiểm tra đăng nhập
         if (!$this->isLogined())
             return redirect()->to('/admin/login');
-        
         $categories = Category::all();
     	return view('admin.attribute.create', compact('categories'));
     }

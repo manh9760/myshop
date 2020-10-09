@@ -23,7 +23,8 @@
 		<h4 class="widget-title">{{$key}}</h4>
 
 		@foreach($attribute as $item)
-		<a href="javascript:;">{{$item['name']}}</a>
+			<a href="{{ request()->fullUrlWithQuery(['attr_'.$item['type'] => $item['id']]) }}" 
+				{{Request::get('attr_'.$item['type']) == $item['id'] ? 'style=background-color:#287de7;' : ''}}>{{$item['name']}}</a>
 		@endforeach
 
 		<div class="clear"></div>
@@ -31,21 +32,34 @@
 	@endforeach
 	@endif
 	
+	@if($pageTitle != "Tin tức công nghệ")
+	<style type="text/css">
+		.widget-content .active a {
+			color:black;
+		}
+	</style>
 	<!-- Lọc sản phẩm theo khoảng giá -->
 	<div class="widget widget-slider widget_price_range">
 		<h4 class="widget-title">Chọn khoảng giá</h4>
 		<div class="widget-content">
 			<ul>
-				<li><a href="#">Dưới 1.000.000 đ</a></li>
-				<li><a href="#">1.000.000 đ - 4.000.000 đ</a></li>
-				<li><a href="#">4.000.000 đ - 8.000.000 đ</a></li>
-				<li><a href="#">8.000.000 đ - 12.000.000 đ</a></li>
-				<li><a href="#">12.000.000 đ - 16.000.000 đ</a></li>
-				<li><a href="#">Trên 16.000.000 đ</a></li>
+				<li class="{{Request::get('price') == 1 ? '' : 'active'}}">
+					<a href="{{ request()->fullUrlWithQuery(['price' => 1]) }}">Dưới 2.000.000 đ</a>
+				</li>
+				@for($i = 2; $i < 18; $i+=4)
+					<li class="{{Request::get('price') == $i ? '' : 'active'}}">
+						<a href="{{ request()->fullUrlWithQuery(['price' => $i]) }}">{{$i}}.000.000 đ - {{$i+4}}.000.000 đ</a>
+					</li>
+				@endfor
+				<li class="{{Request::get('price') == 18 ? '' : 'active'}}">
+					<a href="{{ request()->fullUrlWithQuery(['price' => 18]) }}">Trên 18.000.000 đ</a>
+				</li>
 			</ul>
 		</div>
 	</div>
+	@endif
 
+	@if($pageTitle != "Tin tức công nghệ")
 	<!-- Lọc sản phẩm theo đánh giá -->
 	<div class="widget widget-recent-tweets">
 		<h4 class="widget-title">Đánh giá</h4>
@@ -85,6 +99,7 @@
 			</ul>
 		</div>
 	</div>
+	@endif
 	
 	<!-- TOP các sản phẩm đang giảm giá -->
 	@if(isset($saleProducts))
