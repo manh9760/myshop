@@ -11,9 +11,8 @@
 	</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<link rel="icon" href="{{ asset('public/guest/images/logos/logo-icon.png') }}" />
-	<link rel="stylesheet" title="blue" href="{{ asset('public/guest/css/skin-blue.css') }}" type="text/css" media="all" />
 	
-	<link rel="stylesheet" id="base-css" href="{{ asset('public/guest/css/base.min.css') }}" type="text/css" media="all" />
+	<link rel="stylesheet" title="blue" href="{{ asset('public/guest/css/skin-blue.css') }}" type="text/css" media="all" />
 	<link rel="stylesheet" id="font-awesome-css" href="{{ asset('public/guest/css/libs/font-awesome/css/font-awesome.min.css') }}" type="text/css" media="all" />
 	<link rel="stylesheet" id="magnific-popup-css" href="{{ asset('public/guest/css/libs/magnific-popup.css') }}" type="text/css" media="all" />
 	<link rel="stylesheet" id="animate-css" href="{{ asset('public/guest/css/libs/animate.min.css') }}" type="text/css" media="all" />
@@ -47,6 +46,10 @@
 		@include('guest._components.footer')
 	</div>
 
+	<script src="{{ asset('public/guest/js/libs/nprogress.js') }}"></script>
+	<script>
+		NProgress.start();
+	</script>
 	<script src="{{ asset('public/guest/js/libs/jquery.tipsy.js') }}"></script>
 	<script src="{{ asset('public/guest/js/libs/jquery.ui.totop.min.js') }}"></script>
 	<script src="{{ asset('public/guest/js/libs/jquery.fs.scroller.min.js') }}"></script>
@@ -61,9 +64,15 @@
 	<script src="{{ asset('public/guest/js/libs/owl.carousel.min.js') }}"></script>
 	<script src="{{ asset('public/guest/js/libs/jquery.appear.js') }}"></script>
 	<script src="{{ asset('public/guest/js/libs/jquery-ui-1.10.3.custom.min.js') }}"></script>
+	<script src="{{ asset('public/guest/js/libs/masonry.pkgd.min.js') }}"></script>
+	<script src="{{ asset('public/guest/js/libs/idangerous.swiper-2.4.min.js') }}"></script>
 	<script src="{{ asset('public/guest/js/front.js') }}"></script>
 
 	<!-- JS cho phần Styles and Settings -->
+	<script src="{{ asset('public/guest/js/libs/jquery.cookie.js') }}"></script>
+	<script src="{{ asset('public/guest/js/libs/jquery.mCustomScrollbar.min.js') }}"></script>
+	<script src="{{ asset('public/guest/js/libs/less-1.5.1.min.js') }}"></script>
+	<script src="{{ asset('public/guest/js/styleSwitcher.js') }}"></script>
 
 	<!-- Thông báo -->
 	<script src="{{asset('public/guest/toastr/toastr.min.js')}}"></script>

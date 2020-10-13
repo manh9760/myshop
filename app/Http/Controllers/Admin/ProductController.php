@@ -10,6 +10,8 @@ use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Keyword;
 use Carbon\Carbon;
+use App\Exports\ProductExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends AdminController {
     protected function syncAttribute($attributes, $productID) {
@@ -79,15 +81,34 @@ class ProductController extends AdminController {
     //     }
     // }
 
-    public function index() {
+    public function index(Request $request) {
         // Kiểm tra đăng nhập
         if (!$this->isLogined())
             return redirect()->to('/admin/login');
         
         // select `id`, `name` from `categories`where `categories`.`id`
-        $products = Product::with('category:id,name')->paginate(10);
+        $products = Product::with('category:id,name');
+        $categories = Category::all();
+
+        // Các điều kiện lọc
+        if ($name = $request->name) {
+            $products->where('name', 'like', '%'.$name.'%');
+        }
+        if ($category = $request->category) {
+            $products->where('category_id', $category);
+        }
+
+        $products = $products->orderByDesc('id')->paginate(10);
+
+        // Xuất ra file Excel
+        if ($request->export_excel) {
+            return Excel::download(new ProductExport($products), 'san-pham.xlsx');
+        }
+
     	$data = [
     		'products' => $products,
+            'categories' => $categories,
+            'query' => $request->query(),
     	];
     	return view('admin.product.index', $data);
     }

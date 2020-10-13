@@ -27,12 +27,11 @@
 					</div>
 		
 					<nav id="header-menu" class="unit three-quarters hide-on-phone">
-				
 						<ul id="header-menu-ul" class="menu">
 							<li class="menu-item level-0">
 								<form action="{{ route('get.home') }}" method="get">
 									<fieldset>
-										<input type="text" name="searchQuery" value="{{Request::get('searchQuery')}}" style="padding: 8px;padding-right: 160px" placeholder="Nhập tên sản phẩm..." /> 
+										<input type="text" name="searchQuery" value="{{Request::get('searchQuery')}}" style="padding:8px;padding-right: 160px" placeholder="Nhập tên sản phẩm..." /> 
 										<button type="submit" class="button"><i class="fa fa-search"></i> Tìm kiếm</button>
 									</fieldset>
 								</form>
@@ -90,27 +89,6 @@
 											</span>
 										</a>
 									</li>
-									<li class="level-1">
-										<a href="#" class="item no-icon">
-											<span class="menu-item-content ib">
-												<span class="menu-text">Đăng nhập bằng Facebook</span>
-											</span>
-										</a>
-									</li>
-									<li class="level-1">
-										<a href="#" class="item no-icon">
-											<span class="menu-item-content ib">
-												<span class="menu-text">Đăng nhập bằng Google</span>
-											</span>
-										</a>
-									</li>
-									<li class="level-1">
-										<a href="#" class="item no-icon">
-											<span class="menu-item-content ib">
-												<span class="menu-text">Đăng nhập bằng Zalo</span>
-											</span>
-										</a>
-									</li>
 								</ul>
 							</li>
 							@endif
@@ -122,11 +100,9 @@
 								</a>
 							</li>
 						</ul>
-				
 					</nav>
 				</div>
 			</header>
-
 		</div>
 	</div>
 </div>

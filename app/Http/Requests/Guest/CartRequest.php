@@ -18,6 +18,7 @@ class CartRequest extends FormRequest {
             'email' => 'required',
             'city' => 'numeric',
             'district' => 'numeric',
+            'ward' => 'numeric',
             'street_address' => 'required|min:5',
         ];
     }
@@ -31,6 +32,7 @@ class CartRequest extends FormRequest {
             'email.required' => 'Vui lòng nhập địa chỉ email',
             'city.numeric' => 'Vui lòng chọn Tỉnh/Thành phố',
             'district.numeric' => 'Vui lòng chọn Quận/Huyện',
+            'ward.numeric' => 'Vui lòng chọn Xã/Phường/Thị trấn',
             'street_address.required' => 'Vui lòng nhập Số nhà/Tên đường/Thôn/Ấp',
             'street_address.min' => 'Vui lòng nhập Số nhà/Tên đường/Thôn/Ấp',
         ];

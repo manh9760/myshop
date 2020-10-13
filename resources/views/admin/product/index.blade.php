@@ -16,14 +16,23 @@
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title"><a href="{{route('admin.product.create')}}" class="btn btn-success btn-sm">Thêm mới <i class="fa fa-plus"></i></a></h3>
-            <div class="box-tools">
-              <div class="input-group" style="width: 150px;">
-                <input type="text" name="table_search" class="form-control input-sm pull-right" placeholder="Search">
-                <div class="input-group-btn">
-                  <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                </div>
-              </div>
+            <div class="box-title">
+              <form class="form-inline">
+                <input type="text" name="name" value="{{Request::get('name')}}" class="form-control" placeholder="Tên sản phẩm..." />
+                <select name="category" class="form-control">
+                  <option value="0">--- Danh mục sản phẩm ---</option>
+                  @foreach($categories as $item)
+                  <option value="{{$item->id}}" {{ Request::get('category') == $item->id ? "selected='selected'" : ""}}>{{$item->name}}</option>
+                  @endforeach
+                </select>
+                <button type="submit" class="btn btn-info">
+                  <i class="fa fa-search"></i> Tìm kiếm
+                </button>
+                <button type="submit" name="export_excel" value="true" class="btn btn-success">
+                  <i class="fa fa-save"></i> Xuất File Excel
+                </button>
+                <a href="{{route('admin.product.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> Thêm mới</a>
+              </form>
             </div>
           </div><!-- /.box-header -->
           <div class="box-body table-responsive no-padding">
@@ -32,7 +41,6 @@
                 <th>STT</th>
                 <th>Tên sản phẩm</th>
                 <th>Danh mục</th>
-                <th>Đường dẫn</th>
                 <th>Giá sản phẩm</th>
                 <th>Hình ảnh</th>
                 <th>Tình trạng</th>
@@ -49,7 +57,6 @@
                     <td>
                       <span class="label label-info">{{ $product->category->name ?? "[N\A]" }}</span>
                     </td>
-                    <td>{{ $product->slug }}</td>
                     <td>
                       @if($product->sale)
                         Giá cũ: {{ number_format($product->price_old,0,',','.') }} đ<br/>
@@ -91,7 +98,7 @@
           </div><!-- /.box-body -->
           <div class="box-footer clearfix">
             <ul class="pagination pagination-sm no-margin pull-right">
-              {!! $products->links() !!}
+              {!! $products->appends($query)->links() !!}
             </ul>
           </div>
         </div><!-- /.box -->

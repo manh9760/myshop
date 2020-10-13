@@ -59,7 +59,7 @@
 							@if($cartItems)
 							<tbody>
 								<?php $i = 1; ?>
-								@foreach($cartItems as $item)
+								@foreach($cartItems as $key => $item)
 								<tr class="cart_table_item {{ (($i % 2) == 1) ? 'even' : 'odd' }}">
 									<td class="product-thumbnail hide-on-tablet">
 										<a href="{{route('get.product.detail', \Str::slug($item->name.'-'.$item->id))}}">
@@ -81,18 +81,18 @@
 										</span>
 									</td>
 									<td class="product-quantity hide-on-phone">
-										<a href="{{ route('get.cart.update', $item->rowId.'-'.($item->qty - 1)) }}" class="decrease">-</a> 
-										<input type="number" value="{{$item->qty}}" name="" min="1" step="1" />
-										<a href="{{ route('get.cart.update', $item->rowId.'-'.($item->qty + 1)) }}" class="increase">+</a>
-										<a href="{{route('updateCartAjax', $item->rowId)}}" class="js-update-cart" data-id-product="{{$item->id}}" data-id="{{$item->rowId}}">
-											<i class="fa fa-pencil"></i> Lưu
+										<!-- <a href="{{ route('get.cart.update', $item->rowId.'-'.($item->qty - 1)) }}" class="decrease">-</a>  -->
+										<input type="number" value="{{$item->qty}}" name="quantity" min="1" step="1" />
+										<!-- <a href="{{ route('get.cart.update', $item->rowId.'-'.($item->qty + 1)) }}" class="increase">+</a> -->
+										<a href="{{route('updateCartAjax', $key)}}" data-id-product="{{$item->id}}" class="js-update-cart" data-id="{{$key}}" style="background-color:blue;color:white;border-radius:10px;padding:3px">
+											Lưu
 										</a>
 									</td>
 									<td class="product-subtotal">
 										<span class="amount">{{ number_format($item->price * $item->qty,0,',','.') }} đ</span>
 									</td>
-									<td class="product-remove">
-										<a href="{{route('get.cart.delete', $item->rowId)}}" class="remove">&times;</a>
+									<td class="product-subtotal">
+										<a href="{{route('get.cart.delete', $key)}}" class="remove" style="background-color:red;color:white;border-radius:10px;padding:3px">Xóa</a>
 									</td>
 								</tr>
 								<?php $i++; ?>
@@ -181,8 +181,11 @@
 											<tr>
 												<th>Xã/Phường/Thị trấn <abbr class="required" title="required">*</abbr></th>
 												<td>
+													@if($errors->first('ward'))
+										            	<span style="color:red;">{{ $errors->first('ward') }}</span>
+										          	@endif
 													<select class="" id="ward" name="ward">
-														<option value="0">__Chọn Xã/Phường/Thị trấn__</option>
+														<option>__Chọn Xã/Phường/Thị trấn__</option>
 													</select>
 												</td>
 											</tr>
@@ -258,7 +261,6 @@
 						}
 					}).done(function(results){
 						window.location.reload();
-						alert(results.message);
 					});
 				}
 			})
@@ -292,7 +294,7 @@
 							html = "<option>__Chọn Quận/Huyện__</option>";
 							element = '#district';
 						} else {
-							html = "<option value='0'>__Chọn Xã/Phường/Thị trấn__</option>";
+							html = "<option>__Chọn Xã/Phường/Thị trấn__</option>";
 							element = '#ward';
 						}
 

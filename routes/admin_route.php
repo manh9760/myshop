@@ -11,6 +11,16 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function () {
 	Route::post('login', 'AuthenticationController@login');
 	Route::get('logout', 'AuthenticationController@logout')->name('admin.logout');
 
+	Route::group(['prefix'=>'statistic'], function () {
+	    Route::get('', 'StatisticController@index')->name('admin.statistic.index');
+	    Route::get('create', 'StatisticController@create')->name('admin.statistic.create');
+	    Route::post('create', 'StatisticController@created');
+	    Route::get('update/{id}', 'StatisticController@update')->name('admin.statistic.update');
+	    Route::post('update/{id}', 'StatisticController@updated');
+	    Route::get('active/{id}', 'StatisticController@active')->name('admin.statistic.active');
+	    Route::get('delete/{id}', 'StatisticController@delete')->name('admin.statistic.delete');
+	});
+
 	Route::group(['prefix'=>'category'], function () {
 	    Route::get('', 'CategoryController@index')->name('admin.category.index');
 	    Route::get('create', 'CategoryController@create')->name('admin.category.create');

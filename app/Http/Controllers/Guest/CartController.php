@@ -72,19 +72,31 @@ class CartController extends GuestController {
     public function updateAjax(Request $request, $id) {
         if ($request->ajax()) {
             // Lấy tham số truyền qua ajax
-            $qty = $request->qty ?? 1;
+            $qty = $request->qty ?? 2;
             $idProduct = $request->idProduct;
             $product = Product::find($idProduct);
 
             if (!$product) {
-                return response(['message' => 'Sản phẩm không tồn tại!']);
+                \Session::flash('toastr', [
+                    'type' => 'warning',
+                    'message' => 'Sản phẩm không tồn tại!',
+                ]);
+                return null;
             }
             if ($product->number < $qty) {
-                return response(['message' => 'Số lượng sản phẩm không đủ!']);
+                \Session::flash('toastr', [
+                    'type' => 'warning',
+                    'message' => 'Số lượng sản phẩm không đủ!',
+                ]);
+                return null;
             }
 
             \Cart::update($id, $qty);
-            return response(['message' => 'Cập nhật thành công']);
+            \Session::flash('toastr', [
+                'type' => 'success',
+                'message' => 'Cập nhật thành công!',
+            ]);
+            return null;
         }
     }
 
