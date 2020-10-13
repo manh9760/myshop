@@ -8,17 +8,20 @@ use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\Location;
 use App\Models\Order;
+use App\User;
 use Carbon\Carbon;
 
 class CartController extends GuestController {
     public function index() {
         $cartItems = \Cart::content();
         $cities = Location::where('type', 1)->get();
+        $user = User::find(\Session::get('userId'));
         $pageTitle = 'Giỏ hàng';
         $data = [
             'cartItems' => $cartItems,
             'cities' => $cities,
             'pageTitle' => $pageTitle,
+            'user' => $user,
             'pageTitle' => 'Chi tiết giỏ hàng',
             'bodyClass' => 'woocommerce-cart woocommerce-page page',
         ];
@@ -47,6 +50,7 @@ class CartController extends GuestController {
             'price' => $product->price,
             'weight' => 0,
             'options' => [
+                'price_entry' => $product->price_entry,
                 'price_old' => $product->price_old, 
                 'sale' => $product->sale,
                 'image' => $product->avatar,
@@ -111,11 +115,11 @@ class CartController extends GuestController {
 
 	public function pay(CartRequest $request) {
         $data = $request->except('_token');
-        if (isset(\Auth::user()->id)) {
-            $data['user_id'] = \Auth::user()->id;
-
-            // ---- Dùng để lưu thông tin tài khoản nếu TK chưa có thông tin địa chỉ -----------
-            // if (!isset(\Auth::user()->city)) {
+        if (\Session::get('userId')) {
+            $data['user_id'] = \Session::get('userId');
+            // $user = User::find(\Session::get('userId'));
+            // //---- Dùng để lưu thông tin tài khoản nếu TK chưa có thông tin địa chỉ -----------
+            // if (!isset($user->city)) {
             //     \DB::table('users')
             //         ->where('id', $data['user_id'])
             //         ->update([

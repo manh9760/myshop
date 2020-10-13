@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use App\User;
 
 class Transaction extends Model {
 	protected $table = 'transactions';

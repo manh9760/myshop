@@ -18,8 +18,17 @@
         </div>
 
         <div class="row form-group">
+          <!-- Giá nhập -->
+          <div class="col-xs-5 form-group {{ $errors->first('price_entry') ? 'has-error':'' }}">
+            <label for="price_entry">Giá nhập</label>
+            <input type="text" name="price_entry" value="{{$product->price_entry ?? old('price_entry')}}" class="form-control" placeholder="Giá nhập" />
+            @if($errors->first('price_entry'))
+              <span class="text-danger">{{ $errors->first('price_entry') }}</span>
+            @endif
+          </div>
+
           <!-- Giá bán ra -->
-          <div class="col-xs-4 form-group {{ $errors->first('price_old') ? 'has-error':'' }}">
+          <div class="col-xs-5 form-group {{ $errors->first('price_old') ? 'has-error':'' }}">
             <label for="price_old">Giá bán ra (Chưa tính % giảm)</label>
             <input type="text" name="price_old" value="{{$product->price_old ?? old('price_old')}}" class="form-control" placeholder="Nhập giá bán (vd: 8,500,000)" />
             @if($errors->first('price_old'))
@@ -35,7 +44,9 @@
               <span class="text-danger">{{ $errors->first('sale') }}</span>
             @endif
           </div>
+        </div><!-- /.row form-group -->
 
+        <div class="row form-group">
           <!-- Số lượng sản phẩm nhập -->
           <div class="col-xs-2 form-group {{ $errors->first('number') ? 'has-error':'' }}">
             <label for="number">Số lượng nhập</label>
@@ -44,11 +55,11 @@
               <span class="text-danger">{{ $errors->first('number') }}</span>
             @endif
           </div>
-          
+
           <!-- Danh mục sản phẩm -->
           <div class="col-xs-4 form-group {{ $errors->first('category_id') ? 'has-error':'' }}">
             <label for="category_id">Danh mục sản phẩm</label>
-            <select class="form-control select2" name="category_id" style="width: 100%;">
+            <select class="form-control select2" name="category_id">
               <option value="">__Chọn danh mục__</option>
               @foreach($categories as $category)
                 <option value="{{$category->id}}" {{ (($product->category_id ?? 0) == $category->id) ? "selected='selected'" : "" }}>
@@ -60,19 +71,19 @@
               <span class="text-danger">{{ $errors->first('category_id') }}</span>
             @endif
           </div>
-        </div><!-- /.row form-group -->
 
-        <!-- Từ khóa -->
-        <div class="form-group {{ $errors->first('name') ? 'has-error':'' }}">
-          <label for="keywords">Chọn từ khóa cho sản phẩm</label>
-          <select class="form-control js-select2-keyword" name="keywords[]" multiple="">
-            @foreach($keywords as $keyword)
-              <option value="{{$keyword->id}}" {{in_array($keyword->id, $oldKeyword) ? "selected='selected'" : ""}}>
-                {{$keyword->name}}
-              </option>
-            @endforeach
-          </select>
-        </div>
+          <!-- Từ khóa -->
+          <div class="col-xs-6 form-group">
+            <label for="keywords">Chọn từ khóa cho sản phẩm</label>
+            <select class="form-control js-select2-keyword" name="keywords[]" multiple="">
+              @foreach($keywords as $keyword)
+                <option value="{{$keyword->id}}" {{in_array($keyword->id, $oldKeyword) ? "selected='selected'" : ""}}>
+                  {{$keyword->name}}
+                </option>
+              @endforeach
+            </select>
+          </div>
+        </div><!-- /.row form-group -->
 
         <!-- checkbox -->
         <div class="form-group">
@@ -80,16 +91,14 @@
           @foreach($attributes as $key => $attribute)
           <div class="checkbox">
             <div class="col-xs-6 form-group">
-              <h6>{{$key}}</h6>
-              @foreach($attribute as $item)
-              <div>
-                <label>
-                  <input type="checkbox" name="attribute[]" value="{{$item['id']}}" 
-                    {{in_array($item['id'], $oldAttribute) ? "checked" : ""}}/>
+              <select class="form-control select2" name="attribute[]">
+                <option value="">__{{$key}}__</option>
+                @foreach($attribute as $item)
+                <option value="{{$item['id']}}" {{ in_array($item['id'], $oldAttribute) ? "selected='selected'" : "" }}>
                   {{$item['name']}}
-                </label>
-              </div>
-              @endforeach
+                </option>
+                @endforeach
+              </select>
             </div>
           </div>
           @endforeach

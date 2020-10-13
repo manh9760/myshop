@@ -58,7 +58,10 @@
 						<table class="shop_table cart">
 							@if($cartItems)
 							<tbody>
-								<?php $i = 1; ?>
+								<?php 
+									$i = 1; 
+									$total_cost = 0;
+								?>
 								@foreach($cartItems as $key => $item)
 								<tr class="cart_table_item {{ (($i % 2) == 1) ? 'even' : 'odd' }}">
 									<td class="product-thumbnail hide-on-tablet">
@@ -95,7 +98,10 @@
 										<a href="{{route('get.cart.delete', $key)}}" class="remove" style="background-color:red;color:white;border-radius:10px;padding:3px">Xóa</a>
 									</td>
 								</tr>
-								<?php $i++; ?>
+								<?php 
+									$total_cost += ($item->qty * $item->options->price_entry);
+									$i++;
+								?>
 								@endforeach
 								<tr>
 									<td colspan="6" class="actions">
@@ -121,6 +127,8 @@
 									
 									<form action="{{ route('get.cart.items') }}" method="post">
 										@csrf
+										<input type="hidden" name="total_cost" value="{{$total_cost ?? 0}}">
+
 										<table class="shipping">
 											<tr>
 												<th>Họ tên <abbr class="required" title="required">*</abbr></th>
@@ -128,7 +136,7 @@
 													@if($errors->first('full_name'))
 										            	<span style="color:red;">{{ $errors->first('full_name') }}</span>
 										          	@endif
-									          		<input type="text" name="full_name" placeholder="Tên người nhận..." value="{{(\Auth::check()) ? \Auth::user()->full_name : ''}}" />
+									          		<input type="text" name="full_name" placeholder="Tên người nhận..." value="{{$user ? $user->full_name : ''}}" />
 									          	</td>
 											</tr>
 											
@@ -139,7 +147,7 @@
 													@if($errors->first('phone'))
 										            	<span style="color:red;">{{ $errors->first('phone') }}</span>
 										          	@endif
-													<input type="text" name="phone" placeholder="Điện thoại..." value="{{(\Auth::check()) ? \Auth::user()->phone : ''}}" />
+													<input type="text" name="phone" placeholder="Điện thoại..." value="{{$user ? $user->phone : ''}}" />
 												</td>
 											</tr>
 											<tr>
@@ -148,7 +156,7 @@
 													@if($errors->first('email'))
 										            	<span style="color:red;">{{ $errors->first('email') }}</span>
 										          	@endif
-													<input type="email" name="email" placeholder="Địa chỉ email..." value="{{(\Auth::check()) ? \Auth::user()->email : ''}}" />
+													<input type="email" name="email" placeholder="Địa chỉ email..." value="{{$user ? $user->email : ''}}" />
 												</td>
 											</tr>
 											<tr>
@@ -160,7 +168,7 @@
 													<select class="js_location" data-type="city" name="city">
 														<option>__Chọn Tỉnh/Thành phố__</option>
 														@foreach($cities as $city)
-															<option value="{{$city->id}}" {{ (\Auth::user()->city ?? 0 == $city->id) ? "selected='selected'" : "" }}>
+															<option value="{{$city->id}}">
 																{{$city->name}}
 															</option>
 														@endforeach

@@ -8,6 +8,7 @@ use App\Models\Location;
 use App\Models\Order;
 use App\Exports\TransactionExport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\User;
 
 class TransactionController extends AdminController {
     public function index(Request $request) {
@@ -71,18 +72,46 @@ class TransactionController extends AdminController {
     	return view('admin.transaction.index', $data);
     }
 
-    public function getTransactionDetail(Request $request, $id) {
+    // public function getTransactionDetail(Request $request, $id) {
+    //     // Kiểm tra đăng nhập
+    //     if (!$this->isLogined())
+    //         return redirect()->to('/admin/login');
+        
+    //     if($request->ajax()){
+    //         $orders = Order::with('product:id,name,slug,avatar')->where('transaction_id', $id)->get();
+    //         $html = view("admin._components.order_detail", compact('orders'))->render();    
+    //         return response([
+    //             'html' => $html,
+    //         ]);
+    //     }
+    // }
+
+    public function getTransactionDetail($id) {
         // Kiểm tra đăng nhập
         if (!$this->isLogined())
             return redirect()->to('/admin/login');
-        
-        if($request->ajax()){
-            $orders = Order::with('product:id,name,slug,avatar')->where('transaction_id', $id)->get();
-            $html = view("admin._components.order_detail", compact('orders'))->render();    
-            return response([
-                'html' => $html,
-            ]);
-        }
+
+        $orders = Order::with('product:id,name,slug,avatar')->where('transaction_id', $id)->get();
+        $transaction = Transaction::find($id);
+        $data = [
+            'transaction' => $transaction,
+            'orders' => $orders,
+        ];
+        return view('admin.transaction.detail', $data);    
+    }
+
+    public function printTransaction($id) {
+        // Kiểm tra đăng nhập
+        if (!$this->isLogined())
+            return redirect()->to('/admin/login');
+
+        $orders = Order::with('product:id,name,slug,avatar')->where('transaction_id', $id)->get();
+        $transaction = Transaction::find($id);
+        $data = [
+            'transaction' => $transaction,
+            'orders' => $orders,
+        ];
+        return view('admin.transaction.print', $data);    
     }
 
     public function delete($id) {
@@ -95,19 +124,15 @@ class TransactionController extends AdminController {
         return redirect()->back();
     }
 
-    public function deleteOrder(Request $request, $id) {
-        if($request->ajax()){
-            $order = Order::find($id);
-            if ($order) {
-                $money = $order->quantity * $order->product_price;
-                Transaction::where('id', $order->transaction_id)->decrement('total_price', $money);
-                $order->delete();
-            }
-            
-            return response([
-                'code' => 200,
-            ]);
+    public function deleteOrder($id) {
+        $order = Order::find($id);
+        if ($order) {
+            $money = $order->quantity * $order->product_price;
+            Transaction::where('id', $order->transaction_id)->decrement('total_money', $money);
+            $order->delete();
         }
+        \Alert::info('Thông báo', 'Đã xóa sản phẩm khỏi đơn hàng');
+        return redirect()->back();
     }
 
     public function updateOrderStatus($status, $id) {

@@ -99,7 +99,7 @@
 			</div>
 		
 			<!-- Phân trang -->
-			{!! $products->links() !!}
+			{!! $products->appends($query ?? [])->links() !!}
 			<!-- <div class="pagination">						
 				<div class="numeric">
 					<a href="javascript:;" class="button current">1</a>

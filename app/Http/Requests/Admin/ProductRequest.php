@@ -23,6 +23,7 @@ class ProductRequest extends FormRequest {
     {
         return [
             'name' => 'required|min:3|unique:products,name,'.$this->id,
+            'price_entry' => 'required',
             'price_old' => 'required',
             'sale' => 'required',
             'category_id' => 'required',

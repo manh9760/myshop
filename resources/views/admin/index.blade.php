@@ -121,7 +121,8 @@
               <div class="col-md-10">
                 <div class="chart">
                   <figure class="highcharts-figure">
-                      <div id="container"></div>
+                    <div id="container" data-list-day="{{$listDay}}" data-list-revenue="{{$arrRevenueInMonth}}" data-list-cost="{{$arrCostInMonth}}" data-list-profit="{{$arrProfitInMonth}}">
+                    </div>
                   </figure>
                 </div><!-- /.chart-responsive -->
               </div><!-- /.col -->
@@ -164,23 +165,26 @@
             <div class="row">
               <div class="col-sm-4 col-xs-8">
                 <div class="description-block border-right">
-                  <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
-                  <h5 class="description-header">1.000000.000 đ</h5>
-                  <span class="description-text">Tổng doanh thu</span>
+                  <h5 class="description-header text-light-blue">
+                    {{number_format(array_sum(json_decode($arrRevenueInMonth)),0,',','.')}}
+                  </h5>
+                  <span class="description-text">Tổng doanh thu (VNĐ)</span>
                 </div><!-- /.description-block -->
               </div><!-- /.col -->
               <div class="col-sm-4 col-xs-8">
                 <div class="description-block border-right">
-                  <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
-                  <h5 class="description-header">1.000000.000 đ</h5>
-                  <span class="description-text">Tổng chi phí</span>
+                  <h5 class="description-header text-green">
+                    {{number_format(array_sum(json_decode($arrProfitInMonth)),0,',','.')}}
+                  </h5>
+                  <span class="description-text">Tổng lợi nhuận (VNĐ)</span>
                 </div><!-- /.description-block -->
               </div><!-- /.col -->
               <div class="col-sm-4 col-xs-8">
                 <div class="description-block">
-                  <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 20%</span>
-                  <h5 class="description-header">1.000000.000 đ</h5>
-                  <span class="description-text">Tổng lợi nhuận</span>
+                  <h5 class="description-header">
+                    {{number_format(array_sum(json_decode($arrCostInMonth)),0,',','.')}}
+                  </h5>
+                  <span class="description-text">Tổng chi phí (VNĐ)</span>
                 </div><!-- /.description-block -->
               </div><!-- /.col -->
             </div><!-- /.row -->
@@ -194,263 +198,6 @@
       <!-- Left col -->
       <div class="col-md-8">
         <!-- MAP & BOX PANE -->
-        <div class="box box-success">
-          <div class="box-header with-border">
-            <h3 class="box-title">Visitors Report</h3>
-            <div class="box-tools pull-right">
-              <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-              <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-            </div>
-          </div><!-- /.box-header -->
-          <div class="box-body no-padding">
-            <div class="row">
-              <div class="col-md-9 col-sm-8">
-                <div class="pad">
-                  <!-- Map will be created here -->
-                  <div id="world-map-markers" style="height: 325px;"></div>
-                </div>
-              </div><!-- /.col -->
-              <div class="col-md-3 col-sm-4">
-                <div class="pad box-pane-right bg-green" style="min-height: 280px">
-                  <div class="description-block margin-bottom">
-                    <div class="sparkbar pad" data-color="#fff">90,70,90,70,75,80,70</div>
-                    <h5 class="description-header">8390</h5>
-                    <span class="description-text">Visits</span>
-                  </div><!-- /.description-block -->
-                  <div class="description-block margin-bottom">
-                    <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
-                    <h5 class="description-header">30%</h5>
-                    <span class="description-text">Referrals</span>
-                  </div><!-- /.description-block -->
-                  <div class="description-block">
-                    <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
-                    <h5 class="description-header">70%</h5>
-                    <span class="description-text">Organic</span>
-                  </div><!-- /.description-block -->
-                </div>
-              </div><!-- /.col -->
-            </div><!-- /.row -->
-          </div><!-- /.box-body -->
-        </div><!-- /.box -->
-        <div class="row">
-          <div class="col-md-6">
-            <!-- DIRECT CHAT -->
-            <div class="box box-warning direct-chat direct-chat-warning">
-              <div class="box-header with-border">
-                <h3 class="box-title">Direct Chat</h3>
-                <div class="box-tools pull-right">
-                  <span data-toggle="tooltip" title="3 New Messages" class="badge bg-yellow">3</span>
-                  <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                  <button class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"><i class="fa fa-comments"></i></button>
-                  <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                </div>
-              </div><!-- /.box-header -->
-              <div class="box-body">
-                <!-- Conversations are loaded here -->
-                <div class="direct-chat-messages">
-                  <!-- Message. Default to the left -->
-                  <div class="direct-chat-msg">
-                    <div class="direct-chat-info clearfix">
-                      <span class="direct-chat-name pull-left">Alexander Pierce</span>
-                      <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
-                    </div><!-- /.direct-chat-info -->
-                    <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                      Is this template really for free? That's unbelievable!
-                    </div><!-- /.direct-chat-text -->
-                  </div><!-- /.direct-chat-msg -->
-
-                  <!-- Message to the right -->
-                  <div class="direct-chat-msg right">
-                    <div class="direct-chat-info clearfix">
-                      <span class="direct-chat-name pull-right">Sarah Bullock</span>
-                      <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
-                    </div><!-- /.direct-chat-info -->
-                    <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                      You better believe it!
-                    </div><!-- /.direct-chat-text -->
-                  </div><!-- /.direct-chat-msg -->
-
-                  <!-- Message. Default to the left -->
-                  <div class="direct-chat-msg">
-                    <div class="direct-chat-info clearfix">
-                      <span class="direct-chat-name pull-left">Alexander Pierce</span>
-                      <span class="direct-chat-timestamp pull-right">23 Jan 5:37 pm</span>
-                    </div><!-- /.direct-chat-info -->
-                    <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                      Working with AdminLTE on a great new app! Wanna join?
-                    </div><!-- /.direct-chat-text -->
-                  </div><!-- /.direct-chat-msg -->
-
-                  <!-- Message to the right -->
-                  <div class="direct-chat-msg right">
-                    <div class="direct-chat-info clearfix">
-                      <span class="direct-chat-name pull-right">Sarah Bullock</span>
-                      <span class="direct-chat-timestamp pull-left">23 Jan 6:10 pm</span>
-                    </div><!-- /.direct-chat-info -->
-                    <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                      I would love to.
-                    </div><!-- /.direct-chat-text -->
-                  </div><!-- /.direct-chat-msg -->
-
-                </div><!--/.direct-chat-messages-->
-
-                <!-- Contacts are loaded here -->
-                <div class="direct-chat-contacts">
-                  <ul class="contacts-list">
-                    <li>
-                      <a href="#">
-                        <img class="contacts-list-img" src="dist/img/user1-128x128.jpg">
-                        <div class="contacts-list-info">
-                          <span class="contacts-list-name">
-                            Count Dracula
-                            <small class="contacts-list-date pull-right">2/28/2015</small>
-                          </span>
-                          <span class="contacts-list-msg">How have you been? I was...</span>
-                        </div><!-- /.contacts-list-info -->
-                      </a>
-                    </li><!-- End Contact Item -->
-                    <li>
-                      <a href="#">
-                        <img class="contacts-list-img" src="dist/img/user7-128x128.jpg">
-                        <div class="contacts-list-info">
-                          <span class="contacts-list-name">
-                            Sarah Doe
-                            <small class="contacts-list-date pull-right">2/23/2015</small>
-                          </span>
-                          <span class="contacts-list-msg">I will be waiting for...</span>
-                        </div><!-- /.contacts-list-info -->
-                      </a>
-                    </li><!-- End Contact Item -->
-                    <li>
-                      <a href="#">
-                        <img class="contacts-list-img" src="dist/img/user3-128x128.jpg">
-                        <div class="contacts-list-info">
-                          <span class="contacts-list-name">
-                            Nadia Jolie
-                            <small class="contacts-list-date pull-right">2/20/2015</small>
-                          </span>
-                          <span class="contacts-list-msg">I'll call you back at...</span>
-                        </div><!-- /.contacts-list-info -->
-                      </a>
-                    </li><!-- End Contact Item -->
-                    <li>
-                      <a href="#">
-                        <img class="contacts-list-img" src="dist/img/user5-128x128.jpg">
-                        <div class="contacts-list-info">
-                          <span class="contacts-list-name">
-                            Nora S. Vans
-                            <small class="contacts-list-date pull-right">2/10/2015</small>
-                          </span>
-                          <span class="contacts-list-msg">Where is your new...</span>
-                        </div><!-- /.contacts-list-info -->
-                      </a>
-                    </li><!-- End Contact Item -->
-                    <li>
-                      <a href="#">
-                        <img class="contacts-list-img" src="dist/img/user6-128x128.jpg">
-                        <div class="contacts-list-info">
-                          <span class="contacts-list-name">
-                            John K.
-                            <small class="contacts-list-date pull-right">1/27/2015</small>
-                          </span>
-                          <span class="contacts-list-msg">Can I take a look at...</span>
-                        </div><!-- /.contacts-list-info -->
-                      </a>
-                    </li><!-- End Contact Item -->
-                    <li>
-                      <a href="#">
-                        <img class="contacts-list-img" src="dist/img/user8-128x128.jpg">
-                        <div class="contacts-list-info">
-                          <span class="contacts-list-name">
-                            Kenneth M.
-                            <small class="contacts-list-date pull-right">1/4/2015</small>
-                          </span>
-                          <span class="contacts-list-msg">Never mind I found...</span>
-                        </div><!-- /.contacts-list-info -->
-                      </a>
-                    </li><!-- End Contact Item -->
-                  </ul><!-- /.contatcts-list -->
-                </div><!-- /.direct-chat-pane -->
-              </div><!-- /.box-body -->
-              <div class="box-footer">
-                <form action="#" method="post">
-                  <div class="input-group">
-                    <input type="text" name="message" placeholder="Type Message ..." class="form-control">
-                    <span class="input-group-btn">
-                      <button type="button" class="btn btn-warning btn-flat">Send</button>
-                    </span>
-                  </div>
-                </form>
-              </div><!-- /.box-footer-->
-            </div><!--/.direct-chat -->
-          </div><!-- /.col -->
-
-          <div class="col-md-6">
-            <!-- USERS LIST -->
-            <div class="box box-danger">
-              <div class="box-header with-border">
-                <h3 class="box-title">Latest Members</h3>
-                <div class="box-tools pull-right">
-                  <span class="label label-danger">8 New Members</span>
-                  <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                  <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                </div>
-              </div><!-- /.box-header -->
-              <div class="box-body no-padding">
-                <ul class="users-list clearfix">
-                  <li>
-                    <img src="dist/img/user1-128x128.jpg" alt="User Image">
-                    <a class="users-list-name" href="#">Alexander Pierce</a>
-                    <span class="users-list-date">Today</span>
-                  </li>
-                  <li>
-                    <img src="dist/img/user8-128x128.jpg" alt="User Image">
-                    <a class="users-list-name" href="#">Norman</a>
-                    <span class="users-list-date">Yesterday</span>
-                  </li>
-                  <li>
-                    <img src="dist/img/user7-128x128.jpg" alt="User Image">
-                    <a class="users-list-name" href="#">Jane</a>
-                    <span class="users-list-date">12 Jan</span>
-                  </li>
-                  <li>
-                    <img src="dist/img/user6-128x128.jpg" alt="User Image">
-                    <a class="users-list-name" href="#">John</a>
-                    <span class="users-list-date">12 Jan</span>
-                  </li>
-                  <li>
-                    <img src="dist/img/user2-160x160.jpg" alt="User Image">
-                    <a class="users-list-name" href="#">Alexander</a>
-                    <span class="users-list-date">13 Jan</span>
-                  </li>
-                  <li>
-                    <img src="dist/img/user5-128x128.jpg" alt="User Image">
-                    <a class="users-list-name" href="#">Sarah</a>
-                    <span class="users-list-date">14 Jan</span>
-                  </li>
-                  <li>
-                    <img src="dist/img/user4-128x128.jpg" alt="User Image">
-                    <a class="users-list-name" href="#">Nora</a>
-                    <span class="users-list-date">15 Jan</span>
-                  </li>
-                  <li>
-                    <img src="dist/img/user3-128x128.jpg" alt="User Image">
-                    <a class="users-list-name" href="#">Nadia</a>
-                    <span class="users-list-date">15 Jan</span>
-                  </li>
-                </ul><!-- /.users-list -->
-              </div><!-- /.box-body -->
-              <div class="box-footer text-center">
-                <a href="javascript::" class="uppercase">View All Users</a>
-              </div><!-- /.box-footer -->
-            </div><!--/.box -->
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-
         <!-- TABLE: LATEST ORDERS -->
         <div class="box box-info">
           <div class="box-header with-border">
@@ -508,96 +255,6 @@
       </div><!-- /.col -->
 
       <div class="col-md-4">
-        <!-- Info Boxes Style 2 -->
-        <div class="info-box bg-yellow">
-          <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
-          <div class="info-box-content">
-            <span class="info-box-text">Inventory</span>
-            <span class="info-box-number">5,200</span>
-            <div class="progress">
-              <div class="progress-bar" style="width: 50%"></div>
-            </div>
-            <span class="progress-description">
-              50% Increase in 30 Days
-            </span>
-          </div><!-- /.info-box-content -->
-        </div><!-- /.info-box -->
-        <div class="info-box bg-green">
-          <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
-          <div class="info-box-content">
-            <span class="info-box-text">Mentions</span>
-            <span class="info-box-number">92,050</span>
-            <div class="progress">
-              <div class="progress-bar" style="width: 20%"></div>
-            </div>
-            <span class="progress-description">
-              20% Increase in 30 Days
-            </span>
-          </div><!-- /.info-box-content -->
-        </div><!-- /.info-box -->
-        <div class="info-box bg-red">
-          <span class="info-box-icon"><i class="ion ion-ios-cloud-download-outline"></i></span>
-          <div class="info-box-content">
-            <span class="info-box-text">Downloads</span>
-            <span class="info-box-number">114,381</span>
-            <div class="progress">
-              <div class="progress-bar" style="width: 70%"></div>
-            </div>
-            <span class="progress-description">
-              70% Increase in 30 Days
-            </span>
-          </div><!-- /.info-box-content -->
-        </div><!-- /.info-box -->
-        <div class="info-box bg-aqua">
-          <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
-          <div class="info-box-content">
-            <span class="info-box-text">Direct Messages</span>
-            <span class="info-box-number">163,921</span>
-            <div class="progress">
-              <div class="progress-bar" style="width: 40%"></div>
-            </div>
-            <span class="progress-description">
-              40% Increase in 30 Days
-            </span>
-          </div><!-- /.info-box-content -->
-        </div><!-- /.info-box -->
-
-        <div class="box box-default">
-          <div class="box-header with-border">
-            <h3 class="box-title">Browser Usage</h3>
-            <div class="box-tools pull-right">
-              <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-              <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-            </div>
-          </div><!-- /.box-header -->
-          <div class="box-body">
-            <div class="row">
-              <div class="col-md-8">
-                <div class="chart-responsive">
-                  <canvas id="pieChart" height="150"></canvas>
-                </div><!-- ./chart-responsive -->
-              </div><!-- /.col -->
-              <div class="col-md-4">
-                <ul class="chart-legend clearfix">
-                  <li><i class="fa fa-circle-o text-red"></i> Chrome</li>
-                  <li><i class="fa fa-circle-o text-green"></i> IE</li>
-                  <li><i class="fa fa-circle-o text-yellow"></i> FireFox</li>
-                  <li><i class="fa fa-circle-o text-aqua"></i> Safari</li>
-                  <li><i class="fa fa-circle-o text-light-blue"></i> Opera</li>
-                  <li><i class="fa fa-circle-o text-gray"></i> Navigator</li>
-                </ul>
-              </div><!-- /.col -->
-            </div><!-- /.row -->
-          </div><!-- /.box-body -->
-          <div class="box-footer no-padding">
-            <ul class="nav nav-pills nav-stacked">
-              <li><a href="#">United States of America <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 12%</span></a></li>
-              <li><a href="#">India <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 4%</span></a></li>
-              <li><a href="#">China <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>
-            </ul>
-          </div><!-- /.footer -->
-        </div><!-- /.box -->
-
         <!-- PRODUCT LIST -->
         <div class="box box-primary">
           <div class="box-header with-border">
@@ -627,80 +284,550 @@
         </div><!-- /.box -->
       </div><!-- /.col -->
     </div><!-- /.row -->
+
+    <div class="row">
+      <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+      <div class="col-md-4">
+        <!-- DIRECT CHAT -->
+        <div class="box box-warning direct-chat direct-chat-warning">
+          <div class="box-header with-border">
+            <h3 class="box-title">Direct Chat</h3>
+            <div class="box-tools pull-right">
+              <span data-toggle="tooltip" title="3 New Messages" class="badge bg-yellow">3</span>
+              <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+              <button class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"><i class="fa fa-comments"></i></button>
+              <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+          </div><!-- /.box-header -->
+          <div class="box-body">
+            <!-- Conversations are loaded here -->
+            <div class="direct-chat-messages">
+              <!-- Message. Default to the left -->
+              <div class="direct-chat-msg">
+                <div class="direct-chat-info clearfix">
+                  <span class="direct-chat-name pull-left">Alexander Pierce</span>
+                  <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
+                </div><!-- /.direct-chat-info -->
+                <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+                <div class="direct-chat-text">
+                  Is this template really for free? That's unbelievable!
+                </div><!-- /.direct-chat-text -->
+              </div><!-- /.direct-chat-msg -->
+
+              <!-- Message to the right -->
+              <div class="direct-chat-msg right">
+                <div class="direct-chat-info clearfix">
+                  <span class="direct-chat-name pull-right">Sarah Bullock</span>
+                  <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
+                </div><!-- /.direct-chat-info -->
+                <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+                <div class="direct-chat-text">
+                  You better believe it!
+                </div><!-- /.direct-chat-text -->
+              </div><!-- /.direct-chat-msg -->
+
+              <!-- Message. Default to the left -->
+              <div class="direct-chat-msg">
+                <div class="direct-chat-info clearfix">
+                  <span class="direct-chat-name pull-left">Alexander Pierce</span>
+                  <span class="direct-chat-timestamp pull-right">23 Jan 5:37 pm</span>
+                </div><!-- /.direct-chat-info -->
+                <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+                <div class="direct-chat-text">
+                  Working with AdminLTE on a great new app! Wanna join?
+                </div><!-- /.direct-chat-text -->
+              </div><!-- /.direct-chat-msg -->
+
+              <!-- Message to the right -->
+              <div class="direct-chat-msg right">
+                <div class="direct-chat-info clearfix">
+                  <span class="direct-chat-name pull-right">Sarah Bullock</span>
+                  <span class="direct-chat-timestamp pull-left">23 Jan 6:10 pm</span>
+                </div><!-- /.direct-chat-info -->
+                <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+                <div class="direct-chat-text">
+                  I would love to.
+                </div><!-- /.direct-chat-text -->
+              </div><!-- /.direct-chat-msg -->
+
+            </div><!--/.direct-chat-messages-->
+
+            <!-- Contacts are loaded here -->
+            <div class="direct-chat-contacts">
+              <ul class="contacts-list">
+                <li>
+                  <a href="#">
+                    <img class="contacts-list-img" src="dist/img/user1-128x128.jpg">
+                    <div class="contacts-list-info">
+                      <span class="contacts-list-name">
+                        Count Dracula
+                        <small class="contacts-list-date pull-right">2/28/2015</small>
+                      </span>
+                      <span class="contacts-list-msg">How have you been? I was...</span>
+                    </div><!-- /.contacts-list-info -->
+                  </a>
+                </li><!-- End Contact Item -->
+                <li>
+                  <a href="#">
+                    <img class="contacts-list-img" src="dist/img/user7-128x128.jpg">
+                    <div class="contacts-list-info">
+                      <span class="contacts-list-name">
+                        Sarah Doe
+                        <small class="contacts-list-date pull-right">2/23/2015</small>
+                      </span>
+                      <span class="contacts-list-msg">I will be waiting for...</span>
+                    </div><!-- /.contacts-list-info -->
+                  </a>
+                </li><!-- End Contact Item -->
+                <li>
+                  <a href="#">
+                    <img class="contacts-list-img" src="dist/img/user3-128x128.jpg">
+                    <div class="contacts-list-info">
+                      <span class="contacts-list-name">
+                        Nadia Jolie
+                        <small class="contacts-list-date pull-right">2/20/2015</small>
+                      </span>
+                      <span class="contacts-list-msg">I'll call you back at...</span>
+                    </div><!-- /.contacts-list-info -->
+                  </a>
+                </li><!-- End Contact Item -->
+                <li>
+                  <a href="#">
+                    <img class="contacts-list-img" src="dist/img/user5-128x128.jpg">
+                    <div class="contacts-list-info">
+                      <span class="contacts-list-name">
+                        Nora S. Vans
+                        <small class="contacts-list-date pull-right">2/10/2015</small>
+                      </span>
+                      <span class="contacts-list-msg">Where is your new...</span>
+                    </div><!-- /.contacts-list-info -->
+                  </a>
+                </li><!-- End Contact Item -->
+                <li>
+                  <a href="#">
+                    <img class="contacts-list-img" src="dist/img/user6-128x128.jpg">
+                    <div class="contacts-list-info">
+                      <span class="contacts-list-name">
+                        John K.
+                        <small class="contacts-list-date pull-right">1/27/2015</small>
+                      </span>
+                      <span class="contacts-list-msg">Can I take a look at...</span>
+                    </div><!-- /.contacts-list-info -->
+                  </a>
+                </li><!-- End Contact Item -->
+                <li>
+                  <a href="#">
+                    <img class="contacts-list-img" src="dist/img/user8-128x128.jpg">
+                    <div class="contacts-list-info">
+                      <span class="contacts-list-name">
+                        Kenneth M.
+                        <small class="contacts-list-date pull-right">1/4/2015</small>
+                      </span>
+                      <span class="contacts-list-msg">Never mind I found...</span>
+                    </div><!-- /.contacts-list-info -->
+                  </a>
+                </li><!-- End Contact Item -->
+              </ul><!-- /.contatcts-list -->
+            </div><!-- /.direct-chat-pane -->
+          </div><!-- /.box-body -->
+          <div class="box-footer">
+            <form action="#" method="post">
+              <div class="input-group">
+                <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-warning btn-flat">Send</button>
+                </span>
+              </div>
+            </form>
+          </div><!-- /.box-footer-->
+        </div><!--/.direct-chat -->
+      </div><!-- /.col -->
+      <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+      <div class="col-md-4">
+        <!-- DIRECT CHAT -->
+        <div class="box box-warning direct-chat direct-chat-warning">
+          <div class="box-header with-border">
+            <h3 class="box-title">Direct Chat</h3>
+            <div class="box-tools pull-right">
+              <span data-toggle="tooltip" title="3 New Messages" class="badge bg-yellow">3</span>
+              <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+              <button class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"><i class="fa fa-comments"></i></button>
+              <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+          </div><!-- /.box-header -->
+          <div class="box-body">
+            <!-- Conversations are loaded here -->
+            <div class="direct-chat-messages">
+              <!-- Message. Default to the left -->
+              <div class="direct-chat-msg">
+                <div class="direct-chat-info clearfix">
+                  <span class="direct-chat-name pull-left">Alexander Pierce</span>
+                  <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
+                </div><!-- /.direct-chat-info -->
+                <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+                <div class="direct-chat-text">
+                  Is this template really for free? That's unbelievable!
+                </div><!-- /.direct-chat-text -->
+              </div><!-- /.direct-chat-msg -->
+
+              <!-- Message to the right -->
+              <div class="direct-chat-msg right">
+                <div class="direct-chat-info clearfix">
+                  <span class="direct-chat-name pull-right">Sarah Bullock</span>
+                  <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
+                </div><!-- /.direct-chat-info -->
+                <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+                <div class="direct-chat-text">
+                  You better believe it!
+                </div><!-- /.direct-chat-text -->
+              </div><!-- /.direct-chat-msg -->
+
+              <!-- Message. Default to the left -->
+              <div class="direct-chat-msg">
+                <div class="direct-chat-info clearfix">
+                  <span class="direct-chat-name pull-left">Alexander Pierce</span>
+                  <span class="direct-chat-timestamp pull-right">23 Jan 5:37 pm</span>
+                </div><!-- /.direct-chat-info -->
+                <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+                <div class="direct-chat-text">
+                  Working with AdminLTE on a great new app! Wanna join?
+                </div><!-- /.direct-chat-text -->
+              </div><!-- /.direct-chat-msg -->
+
+              <!-- Message to the right -->
+              <div class="direct-chat-msg right">
+                <div class="direct-chat-info clearfix">
+                  <span class="direct-chat-name pull-right">Sarah Bullock</span>
+                  <span class="direct-chat-timestamp pull-left">23 Jan 6:10 pm</span>
+                </div><!-- /.direct-chat-info -->
+                <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+                <div class="direct-chat-text">
+                  I would love to.
+                </div><!-- /.direct-chat-text -->
+              </div><!-- /.direct-chat-msg -->
+
+            </div><!--/.direct-chat-messages-->
+
+            <!-- Contacts are loaded here -->
+            <div class="direct-chat-contacts">
+              <ul class="contacts-list">
+                <li>
+                  <a href="#">
+                    <img class="contacts-list-img" src="dist/img/user1-128x128.jpg">
+                    <div class="contacts-list-info">
+                      <span class="contacts-list-name">
+                        Count Dracula
+                        <small class="contacts-list-date pull-right">2/28/2015</small>
+                      </span>
+                      <span class="contacts-list-msg">How have you been? I was...</span>
+                    </div><!-- /.contacts-list-info -->
+                  </a>
+                </li><!-- End Contact Item -->
+                <li>
+                  <a href="#">
+                    <img class="contacts-list-img" src="dist/img/user7-128x128.jpg">
+                    <div class="contacts-list-info">
+                      <span class="contacts-list-name">
+                        Sarah Doe
+                        <small class="contacts-list-date pull-right">2/23/2015</small>
+                      </span>
+                      <span class="contacts-list-msg">I will be waiting for...</span>
+                    </div><!-- /.contacts-list-info -->
+                  </a>
+                </li><!-- End Contact Item -->
+                <li>
+                  <a href="#">
+                    <img class="contacts-list-img" src="dist/img/user3-128x128.jpg">
+                    <div class="contacts-list-info">
+                      <span class="contacts-list-name">
+                        Nadia Jolie
+                        <small class="contacts-list-date pull-right">2/20/2015</small>
+                      </span>
+                      <span class="contacts-list-msg">I'll call you back at...</span>
+                    </div><!-- /.contacts-list-info -->
+                  </a>
+                </li><!-- End Contact Item -->
+                <li>
+                  <a href="#">
+                    <img class="contacts-list-img" src="dist/img/user5-128x128.jpg">
+                    <div class="contacts-list-info">
+                      <span class="contacts-list-name">
+                        Nora S. Vans
+                        <small class="contacts-list-date pull-right">2/10/2015</small>
+                      </span>
+                      <span class="contacts-list-msg">Where is your new...</span>
+                    </div><!-- /.contacts-list-info -->
+                  </a>
+                </li><!-- End Contact Item -->
+                <li>
+                  <a href="#">
+                    <img class="contacts-list-img" src="dist/img/user6-128x128.jpg">
+                    <div class="contacts-list-info">
+                      <span class="contacts-list-name">
+                        John K.
+                        <small class="contacts-list-date pull-right">1/27/2015</small>
+                      </span>
+                      <span class="contacts-list-msg">Can I take a look at...</span>
+                    </div><!-- /.contacts-list-info -->
+                  </a>
+                </li><!-- End Contact Item -->
+                <li>
+                  <a href="#">
+                    <img class="contacts-list-img" src="dist/img/user8-128x128.jpg">
+                    <div class="contacts-list-info">
+                      <span class="contacts-list-name">
+                        Kenneth M.
+                        <small class="contacts-list-date pull-right">1/4/2015</small>
+                      </span>
+                      <span class="contacts-list-msg">Never mind I found...</span>
+                    </div><!-- /.contacts-list-info -->
+                  </a>
+                </li><!-- End Contact Item -->
+              </ul><!-- /.contatcts-list -->
+            </div><!-- /.direct-chat-pane -->
+          </div><!-- /.box-body -->
+          <div class="box-footer">
+            <form action="#" method="post">
+              <div class="input-group">
+                <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-warning btn-flat">Send</button>
+                </span>
+              </div>
+            </form>
+          </div><!-- /.box-footer-->
+        </div><!--/.direct-chat -->
+      </div><!-- /.col -->
+      <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+      <div class="col-md-4">
+        <!-- DIRECT CHAT -->
+        <div class="box box-warning direct-chat direct-chat-warning">
+          <div class="box-header with-border">
+            <h3 class="box-title">Direct Chat</h3>
+            <div class="box-tools pull-right">
+              <span data-toggle="tooltip" title="3 New Messages" class="badge bg-yellow">3</span>
+              <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+              <button class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"><i class="fa fa-comments"></i></button>
+              <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+          </div><!-- /.box-header -->
+          <div class="box-body">
+            <!-- Conversations are loaded here -->
+            <div class="direct-chat-messages">
+              <!-- Message. Default to the left -->
+              <div class="direct-chat-msg">
+                <div class="direct-chat-info clearfix">
+                  <span class="direct-chat-name pull-left">Alexander Pierce</span>
+                  <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
+                </div><!-- /.direct-chat-info -->
+                <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+                <div class="direct-chat-text">
+                  Is this template really for free? That's unbelievable!
+                </div><!-- /.direct-chat-text -->
+              </div><!-- /.direct-chat-msg -->
+
+              <!-- Message to the right -->
+              <div class="direct-chat-msg right">
+                <div class="direct-chat-info clearfix">
+                  <span class="direct-chat-name pull-right">Sarah Bullock</span>
+                  <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
+                </div><!-- /.direct-chat-info -->
+                <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+                <div class="direct-chat-text">
+                  You better believe it!
+                </div><!-- /.direct-chat-text -->
+              </div><!-- /.direct-chat-msg -->
+
+              <!-- Message. Default to the left -->
+              <div class="direct-chat-msg">
+                <div class="direct-chat-info clearfix">
+                  <span class="direct-chat-name pull-left">Alexander Pierce</span>
+                  <span class="direct-chat-timestamp pull-right">23 Jan 5:37 pm</span>
+                </div><!-- /.direct-chat-info -->
+                <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+                <div class="direct-chat-text">
+                  Working with AdminLTE on a great new app! Wanna join?
+                </div><!-- /.direct-chat-text -->
+              </div><!-- /.direct-chat-msg -->
+
+              <!-- Message to the right -->
+              <div class="direct-chat-msg right">
+                <div class="direct-chat-info clearfix">
+                  <span class="direct-chat-name pull-right">Sarah Bullock</span>
+                  <span class="direct-chat-timestamp pull-left">23 Jan 6:10 pm</span>
+                </div><!-- /.direct-chat-info -->
+                <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
+                <div class="direct-chat-text">
+                  I would love to.
+                </div><!-- /.direct-chat-text -->
+              </div><!-- /.direct-chat-msg -->
+
+            </div><!--/.direct-chat-messages-->
+
+            <!-- Contacts are loaded here -->
+            <div class="direct-chat-contacts">
+              <ul class="contacts-list">
+                <li>
+                  <a href="#">
+                    <img class="contacts-list-img" src="dist/img/user1-128x128.jpg">
+                    <div class="contacts-list-info">
+                      <span class="contacts-list-name">
+                        Count Dracula
+                        <small class="contacts-list-date pull-right">2/28/2015</small>
+                      </span>
+                      <span class="contacts-list-msg">How have you been? I was...</span>
+                    </div><!-- /.contacts-list-info -->
+                  </a>
+                </li><!-- End Contact Item -->
+                <li>
+                  <a href="#">
+                    <img class="contacts-list-img" src="dist/img/user7-128x128.jpg">
+                    <div class="contacts-list-info">
+                      <span class="contacts-list-name">
+                        Sarah Doe
+                        <small class="contacts-list-date pull-right">2/23/2015</small>
+                      </span>
+                      <span class="contacts-list-msg">I will be waiting for...</span>
+                    </div><!-- /.contacts-list-info -->
+                  </a>
+                </li><!-- End Contact Item -->
+                <li>
+                  <a href="#">
+                    <img class="contacts-list-img" src="dist/img/user3-128x128.jpg">
+                    <div class="contacts-list-info">
+                      <span class="contacts-list-name">
+                        Nadia Jolie
+                        <small class="contacts-list-date pull-right">2/20/2015</small>
+                      </span>
+                      <span class="contacts-list-msg">I'll call you back at...</span>
+                    </div><!-- /.contacts-list-info -->
+                  </a>
+                </li><!-- End Contact Item -->
+                <li>
+                  <a href="#">
+                    <img class="contacts-list-img" src="dist/img/user5-128x128.jpg">
+                    <div class="contacts-list-info">
+                      <span class="contacts-list-name">
+                        Nora S. Vans
+                        <small class="contacts-list-date pull-right">2/10/2015</small>
+                      </span>
+                      <span class="contacts-list-msg">Where is your new...</span>
+                    </div><!-- /.contacts-list-info -->
+                  </a>
+                </li><!-- End Contact Item -->
+                <li>
+                  <a href="#">
+                    <img class="contacts-list-img" src="dist/img/user6-128x128.jpg">
+                    <div class="contacts-list-info">
+                      <span class="contacts-list-name">
+                        John K.
+                        <small class="contacts-list-date pull-right">1/27/2015</small>
+                      </span>
+                      <span class="contacts-list-msg">Can I take a look at...</span>
+                    </div><!-- /.contacts-list-info -->
+                  </a>
+                </li><!-- End Contact Item -->
+                <li>
+                  <a href="#">
+                    <img class="contacts-list-img" src="dist/img/user8-128x128.jpg">
+                    <div class="contacts-list-info">
+                      <span class="contacts-list-name">
+                        Kenneth M.
+                        <small class="contacts-list-date pull-right">1/4/2015</small>
+                      </span>
+                      <span class="contacts-list-msg">Never mind I found...</span>
+                    </div><!-- /.contacts-list-info -->
+                  </a>
+                </li><!-- End Contact Item -->
+              </ul><!-- /.contatcts-list -->
+            </div><!-- /.direct-chat-pane -->
+          </div><!-- /.box-body -->
+          <div class="box-footer">
+            <form action="#" method="post">
+              <div class="input-group">
+                <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-warning btn-flat">Send</button>
+                </span>
+              </div>
+            </form>
+          </div><!-- /.box-footer-->
+        </div><!--/.direct-chat -->
+      </div><!-- /.col -->
+    </div><!-- /.row -->
   </section><!-- /.content -->
 @stop
 
 @section('script')
-  <!-- Sparkline -->
-  <script src="{{ asset('public/admin/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
-  <!-- jvectormap -->
-  <script src="{{ asset('public/admin/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
-  <script src="{{ asset('public/admin/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
-  <!-- SlimScroll 1.3.0 -->
-  <script src="{{ asset('public/admin/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
-  <!-- ChartJS 1.0.1 -->
-  <script src="{{ asset('public/admin/plugins/chartjs/Chart.min.js') }}"></script>
-  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="{{ asset('public/admin/dist/js/pages/dashboard2.js') }}"></script>
-
-  <script src="https://code.highcharts.com/highcharts.js"></script>
-  <script src="https://code.highcharts.com/modules/series-label.js"></script>
-  <script src="https://code.highcharts.com/modules/exporting.js"></script>
-  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="{{ asset('public/admin/plugins/chartjs/highcharts.js') }}"></script>
+  <script src="{{ asset('public/admin/plugins/chartjs/series-label.js') }}"></script>
+  <script src="{{ asset('public/admin/plugins/chartjs/exporting.js') }}"></script>
+  <script src="{{ asset('public/admin/plugins/chartjs/export-data.js') }}"></script>
   <script type="text/javascript">
-    Highcharts.chart('container', {
-        chart: {
-            type: 'spline'
-        },
-        title: {
-            text: 'Doanh số bán hàng - 2020'
-        },
-        xAxis: {
-            title: {
-                text: 'Tháng'
-            },
-            categories: ['01', '02', '03', '04', '05', '06',
-                '07', '08', '09', '10', '11', '12']
-        },
-        yAxis: {
-            title: {
-                text: 'Đơn vị tiền: VNĐ'
-            },
-            labels: {
-                formatter: function () {
-                  var nf = Intl.NumberFormat();
-                  var x = this.value * 1000000;
-                  return String(x).replace(/(.)(?=(\d{3})+$)/g,'$1.');
-                }
-            }
-        },
-        tooltip: {
-            crosshairs: true,
-            shared: true
-        },
-        plotOptions: {
-            spline: {
-                marker: {
-                    radius: 4,
-                    lineColor: '#666666',
-                    lineWidth: 1
-                }
-            }
-        },
-        series: [{
-            name: 'Tokyo',
-            marker: {
-                symbol: 'square'
-            },
-            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 23.3, 18.3, 13.9, 9.6, 14.3]
+    let listDay = $("#container").attr("data-list-day");
+    listDay = JSON.parse(listDay);
+    
+    let listRevenue = $("#container").attr("data-list-revenue");
+    listRevenue = JSON.parse(listRevenue);
 
-        }, {
-            name: 'London',
-            marker: {
-                symbol: 'diamond'
-            },
-            data: [3.9,4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-        }]
+    let listCost = $("#container").attr("data-list-cost");
+    listCost = JSON.parse(listCost);
+
+    let listProfit = $("#container").attr("data-list-profit");
+    listProfit = JSON.parse(listProfit);
+
+    Highcharts.chart('container', {
+      chart: {
+        type: 'spline'
+      },
+      title: {
+        text: 'Doanh số bán hàng - 2020'
+      },
+      xAxis: {
+        categories: listDay
+      },
+      yAxis: {
+        title: {
+            text: 'Đơn vị tiền: VNĐ'
+        },
+        labels: {
+          formatter: function () {
+            return String(this.value).replace(/(.)(?=(\d{3})+$)/g,'$1.');
+          }
+        }
+      },
+      tooltip: {
+        crosshairs: true,
+        shared: true
+      },
+      plotOptions: {
+        spline: {
+          marker: {
+            radius: 4,
+            lineColor: '#666666',
+            lineWidth: 1
+          }
+        }
+      },
+      series: [{
+        name: 'Doanh thu',
+        marker: {
+          symbol: 'square'
+        },
+        data: listRevenue
+      }, {
+        name: 'Chi chí',
+        marker: {
+          symbol: 'diamond'
+        },
+        data: listCost
+      }, {
+        name: 'Lợi nhuận',
+        marker: {
+          symbol: 'circle'
+        },
+        data: listProfit
+      }]
     });
   </script>
 @stop

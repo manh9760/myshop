@@ -80,7 +80,9 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function () {
 	    Route::post('create', 'TransactionController@created');
 	    Route::get('update/{id}', 'TransactionController@update')->name('admin.transaction.update');
 	    Route::post('update/{id}', 'TransactionController@updated');
+	    
 	    Route::get('detail/{id}', 'TransactionController@getTransactionDetail')->name('admin.transaction.detail');
+	    Route::get('print/{id}', 'TransactionController@printTransaction')->name('admin.transaction.print');
 	    Route::get('delete/{id}', 'TransactionController@delete')->name('admin.transaction.delete');
 	    Route::get('delete-order/{id}', 'TransactionController@deleteOrder')->name('admin.transaction.deleteOrder');
 	    Route::get('update-status/{status}/{id}', 'TransactionController@updateOrderStatus')->name('admin.transaction.updateOrderStatus');
