@@ -8,6 +8,8 @@ use App\Http\Requests\Guest\RegisterRequest;
 use App\User;
 use Carbon\Carbon;
 use App\Models\Product;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegisteredUser;
 
 class AuthenticationController extends GuestController {
 
@@ -39,6 +41,7 @@ class AuthenticationController extends GuestController {
 	            'type' => 'success',
 	            'message' => 'Đăng ký thành công',
 	        ]);
+            Mail::to($request->email)->send(new RegisteredUser($request->full_name));
             return redirect()->route('get.login');
         } else {
             \Session::put('failedRegister', 'Thông tin tài khoản không hợp lệ!');

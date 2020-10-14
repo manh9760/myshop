@@ -12,6 +12,10 @@ Route::group(['namespace'=>'Guest'], function () {
     Route::post('dang-nhap', 'AuthenticationController@login');
     Route::get('dang-xuat', 'AuthenticationController@logout')->name('get.logout');
 
+    Route::group(['prefix'=>'tai-khoan'], function () {
+        Route::get('thong-tin', 'UserController@getInfo')->name('get.user.info');
+    });
+
     // ----------------------- Giỏ hàng ------------------------------------------------
     Route::group(['prefix'=>'gio-hang'], function () {
         Route::get('', 'CartController@index')->name('get.cart.index');

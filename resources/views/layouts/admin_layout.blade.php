@@ -194,7 +194,7 @@
             <li class="header">THỐNG KÊ BÁN HÀNG</li>
             <li>
               <a href="{{route('admin.index')}}">
-                <i class="fa fa-dashboard"></i> 
+                <i class="fa fa-pie-chart"></i> 
                 <span>Trang thống kê</span>
               </a>
             </li>

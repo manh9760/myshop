@@ -153,7 +153,7 @@
                   </div><br>
                   <div class="progress-group">
                     <button type="submit" class="btn btn-info">
-                      <i class="fa fa-searc"></i> Thống kê
+                      <i class="fa fa-pie-chart"></i> Thống kê
                     </button>
                   </div>
                 </form>

@@ -30,13 +30,13 @@
       <div class="col-sm-4 invoice-col">
         Người gửi
         <address>
-          <strong>Cửa hàng linh kiện máy tính Văn Mạnh</strong><br>
+          <strong>Linh kiện máy tính Văn Mạnh</strong><br>
           Số 236B Lê Văn Sỹ <br />
-          Phường 1 <br/> 
+          Phường 01 <br/> 
           Quận Tân Bình<br/>
           Hồ Chí Minh<br/>
           Điện thoại: 0565 902 617<br>
-          Địa chỉ email: vanmanh.linhkien@gmail.com
+          Email: vanmanh.linhkien@gmail.com
         </address>
       </div><!-- /.col -->
       <div class="col-sm-4 invoice-col">
@@ -70,7 +70,7 @@
             {{ $city->name }}<br />
           @endif
           Điện thoại: {{ $transaction->phone }}<br>
-          Địa chỉ email: {{ $transaction->email }}
+          Email: {{ $transaction->email }}
         </address>
       </div><!-- /.col -->
       <div class="col-sm-4 invoice-col">

@@ -10,6 +10,9 @@ use App\Models\Location;
 use App\Models\Order;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Invoice;
+use App\Libraries\InlineEmail;
 
 class CartController extends GuestController {
     public function index() {
@@ -136,6 +139,9 @@ class CartController extends GuestController {
         $transactionId = Transaction::insertGetId($data);
         if ($transactionId) {
             $cartItems = \Cart::content();
+            $transaction = Transaction::find($transactionId);
+            // Gửi email đơn hàng mới đặt cho khách
+            Mail::to($request->email)->send(new Invoice($transaction, $cartItems));
             foreach ($cartItems as $key => $item) {
                 // Lưu đơn hàng
                 Order::insert([

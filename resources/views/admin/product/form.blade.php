@@ -92,7 +92,7 @@
           <div class="checkbox">
             <div class="col-xs-6 form-group">
               <select class="form-control select2" name="attribute[]">
-                <option value="">__{{$key}}__</option>
+                <option value="0">__{{$key}}__</option>
                 @foreach($attribute as $item)
                 <option value="{{$item['id']}}" {{ in_array($item['id'], $oldAttribute) ? "selected='selected'" : "" }}>
                   {{$item['name']}}
