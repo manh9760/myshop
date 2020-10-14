@@ -35,8 +35,8 @@
           Phường 1 <br/> 
           Quận Tân Bình<br/>
           Hồ Chí Minh<br/>
-          Điện thoại: 0977 160 823<br>
-          Địa chỉ email: parabol123654@gmail.com
+          Điện thoại: 0565 902 617<br>
+          Địa chỉ email: vanmanh.linhkien@gmail.com
         </address>
       </div><!-- /.col -->
       <div class="col-sm-4 invoice-col">

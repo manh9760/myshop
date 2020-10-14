@@ -8,6 +8,8 @@ use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Post;
 use App\Services\ProcessViewService;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderShipped;
 
 class ProductController extends GuestController {
 
@@ -22,6 +24,9 @@ class ProductController extends GuestController {
     }
 
     public function getProductList(Request $request) {
+
+        Mail::to('parabol123654@gmail.com')->send(new OrderShipped());
+
         // Lấy thuộc tính lọc sản phẩm
         $paramAttrSearch = $request->except('price', 'page', 'searchQuery');
         $paramAttrSearch = array_values($paramAttrSearch);

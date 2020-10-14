@@ -20,10 +20,10 @@ class AdminController extends Controller {
 		}
 	}
 	
-	public static function getDaysInMonth() {
+	public static function getDaysInMonth($m = null, $y = null) {
 		$arrDay = [];
-		$month = date('m');
-		$year = date('Y');
+		$month = $m ?? date('m');
+		$year = $y ?? date('Y');
 
 		// Lấy các ngày trong tháng $month
 		for ($day = 1; $day <= 31; $day++) { 
@@ -36,7 +36,7 @@ class AdminController extends Controller {
 		return $arrDay;
 	}
 
-	public function home() {
+	public function home(Request $request) {
 		// Kiểm tra đăng nhập
         if (!$this->isLogined())
             return redirect()->to('/admin/login');
@@ -53,6 +53,15 @@ class AdminController extends Controller {
 
 		// Lấy ds các ngày trong tháng
 		$listDay = $this->getDaysInMonth();
+
+		if ($month = $request->month) {
+			$year = $request->year;
+            // Lấy ds các ngày trong tháng $month
+			$listDay = $this->getDaysInMonth($month, $year); 
+        } else {
+        	$month = date('m');
+        	$year = date('Y');
+        }
 
 		// Doanh thu theo tháng (Trạng thái đơn hàng 'Đã giao' <=> 3)
 		$revenueInMonth = Transaction::where('status', 3)
@@ -103,6 +112,8 @@ class AdminController extends Controller {
     		'latestTransactions' => $latestTransactions,
     		'totalUser' => $totalUser,
     		'topViewedProducts' => $topViewedProducts,
+    		'month' => $month,
+    		'year' => $year,
     		'listDay' => json_encode($listDay),
     		'arrRevenueInMonth' => json_encode($arrRevenueInMonth),
     		'arrCostInMonth' => json_encode($arrCostInMonth),

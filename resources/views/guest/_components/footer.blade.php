@@ -12,8 +12,8 @@
 	
 		<div class="unit one-quarter widget widget-recent-photos">
 			<h4 class="widget-title">Hỗ trợ khách hàng</h4>
-			<p>Hotline: 0977 160 823</p>
-			<p>Email: parabol123654@gmail.com</p>
+			<p>Hotline: 0565 902 617</p>
+			<p>Email: vanmanh.linhkien@gmail.com</p>
 			<p>Các câu hỏi thường gặp</p>
 			<p>Hướng dẫn đặt hàng</p>
 			<p>Phương thức vận chuyển</p>

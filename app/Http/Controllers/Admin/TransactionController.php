@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\Location;
+use App\Models\Product;
 use App\Models\Order;
 use App\Exports\TransactionExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -129,6 +130,9 @@ class TransactionController extends AdminController {
         if ($order) {
             $money = $order->quantity * $order->product_price;
             Transaction::where('id', $order->transaction_id)->decrement('total_money', $money);
+            
+            // Tăng số lượng tồn kho của mỗi sản phẩm trong đơn hàng bị hủy
+            Product::where('id', $order->product_id)->increment('number', $order->quantity);
             $order->delete();
         }
         \Alert::info('Thông báo', 'Đã xóa sản phẩm khỏi đơn hàng');
@@ -147,6 +151,11 @@ class TransactionController extends AdminController {
                     break;
                 case 'canceled':
                     $transaction->status = 4;
+                    $orders = Order::with('product:id,name,number,avatar')->where('transaction_id', $id)->get();
+                    foreach ($orders as $item) {
+                        // Tăng số lượng tồn kho của mỗi sản phẩm trong đơn hàng bị hủy
+                        Product::where('id', $item->product_id)->increment('number', $item->quantity);
+                    }
                     break;
                 default:
                     break;

@@ -149,6 +149,10 @@ class CartController extends GuestController {
 
                 // Tăng số lượng mua (+1 cho cột 'pay' của bảng 'products')
                 Product::where('id', $item->id)->increment('paid');
+                // Giảm tạm thời số lượng tồn kho của sản phẩm
+                // -- Nếu Hủy đơn -> Tăng lại
+                // -- Nếu xóa sản phẩm trong chi tiết đơn hàng -> Tăng lại
+                Product::where('id', $item->id)->decrement('number', $item->qty);
             }
         }
         \Session::flash('toastr', [

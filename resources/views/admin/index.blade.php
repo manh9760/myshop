@@ -100,7 +100,7 @@
       <div class="col-md-12">
         <div class="box">
           <div class="box-header with-border">
-            <h3 class="box-title">Doanh số bán hàng</h3>
+            <h3 class="box-title">Thống kê bán hàng</h3>
             <div class="box-tools pull-right">
               <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
               <div class="btn-group">
@@ -121,43 +121,42 @@
               <div class="col-md-10">
                 <div class="chart">
                   <figure class="highcharts-figure">
-                    <div id="container" data-list-day="{{$listDay}}" data-list-revenue="{{$arrRevenueInMonth}}" data-list-cost="{{$arrCostInMonth}}" data-list-profit="{{$arrProfitInMonth}}">
+                    <div id="container" data-list-day="{{$listDay}}" data-list-revenue="{{$arrRevenueInMonth}}" data-list-cost="{{$arrCostInMonth}}" data-list-profit="{{$arrProfitInMonth}}" data-month="{{$month}}" data-year="{{$year}}">
                     </div>
                   </figure>
                 </div><!-- /.chart-responsive -->
               </div><!-- /.col -->
               <div class="col-md-2">
-                <p class="text-center">
-                  <strong>Goal Completion</strong>
+                <p>
+                  <strong>Chọn Tháng/Năm</strong>
                 </p>
-                <div class="progress-group">
-                  <span class="progress-text">Add Products to Cart</span>
-                  <span class="progress-number"><b>160</b>/200</span>
-                  <div class="progress sm">
-                    <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
+                <form class="form-inline">
+                  <div class="progress-group">
+                    <select name="month" class="form-control">
+                      <option value="">--Tháng--</option>
+                      @for($month = 1; $month < 13; $month++)
+                      <option value="{{$month}}" {{ (Request::get('month') ?? date('m')) == $month ? "selected='selected'" : ""}}>
+                        {{$month}}
+                      </option>
+                      @endfor
+                    </select>
+                  </div><br>
+                  <div class="progress-group">
+                    <select name="year" class="form-control">
+                      <option value="">--Năm--</option>
+                      @for($year = 2015; $year < (date('Y') + 1); $year++)
+                      <option value="{{$year}}" {{ (Request::get('year') ?? date('Y')) == $year ? "selected='selected'" : ""}}>
+                        {{$year}}
+                      </option>
+                      @endfor
+                    </select>
+                  </div><br>
+                  <div class="progress-group">
+                    <button type="submit" class="btn btn-info">
+                      <i class="fa fa-searc"></i> Thống kê
+                    </button>
                   </div>
-                </div><!-- /.progress-group -->
-                <div class="progress-group">
-                  <span class="progress-text">Complete Purchase</span>
-                  <span class="progress-number"><b>310</b>/400</span>
-                  <div class="progress sm">
-                    <div class="progress-bar progress-bar-red" style="width: 80%"></div>
-                  </div>
-                </div><!-- /.progress-group -->
-                <div class="progress-group">
-                  <span class="progress-text">Visit Premium Page</span>
-                  <span class="progress-number"><b>480</b>/800</span>
-                  <div class="progress sm">
-                    <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                  </div>
-                </div><!-- /.progress-group -->
-                <div class="progress-group">
-                  <span class="progress-text">Send Inquiries</span>
-                  <span class="progress-number"><b>250</b>/500</span>
-                  <div class="progress sm">
-                    <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
-                  </div>
-                </div><!-- /.progress-group -->
+                </form>
               </div><!-- /.col -->
             </div><!-- /.row -->
           </div><!-- ./box-body -->
@@ -776,12 +775,15 @@
     let listProfit = $("#container").attr("data-list-profit");
     listProfit = JSON.parse(listProfit);
 
+    let month = $("#container").attr("data-month");
+    let year = $("#container").attr("data-year");
+
     Highcharts.chart('container', {
       chart: {
         type: 'spline'
       },
       title: {
-        text: 'Doanh số bán hàng - 2020'
+        text: 'Doanh số bán hàng tháng ' + month + ' - ' + year
       },
       xAxis: {
         categories: listDay
