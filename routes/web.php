@@ -33,6 +33,8 @@ Route::group(['namespace'=>'Guest'], function () {
 
     // ----------------------- Thanh toán ------------------------------------------------
     Route::post('don-hang', 'CartController@pay')->name('get.cart.items');
+    Route::get('thanh-toan', 'CartController@checkout')->name('get.checkout');
+    Route::post('thanh-toan-online', 'CartController@getPaymentForm')->name('get.paymentForm');
 
     // ----------------------- Bài viết ------------------------------------------------
     Route::get('bai-viet', 'PostController@getPostList')->name('get.post_list');

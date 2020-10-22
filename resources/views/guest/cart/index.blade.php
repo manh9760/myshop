@@ -85,7 +85,7 @@
 									</td>
 									<td class="product-quantity hide-on-phone">
 										<!-- <a href="{{ route('get.cart.update', $item->rowId.'-'.($item->qty - 1)) }}" class="decrease">-</a>  -->
-										<input type="number" value="{{$item->qty}}" name="quantity" min="1" step="1" />
+										<input type="number" value="{{$item->qty}}" name="quantity" min="1" step="1" max="10" />
 										<!-- <a href="{{ route('get.cart.update', $item->rowId.'-'.($item->qty + 1)) }}" class="increase">+</a> -->
 										<a href="{{route('updateCartAjax', $key)}}" data-id-product="{{$item->id}}" class="js-update-cart" data-id="{{$key}}" style="background-color:blue;color:white;border-radius:10px;padding:3px">
 											Lưu
@@ -108,11 +108,38 @@
 										<label for="coupon_code">Mã khuyến mãi</label>
 										<input name="coupon_code" type="text" class="input-text" id="coupon_code" value="" /> 
 										<input type="submit" class="button" name="apply_coupon" value="Áp dụng" />
+
+										<span class="pull-right">
+											<a href="{{route('get.checkout')}}" class="checkout-button button alt">Tiến hành đặt hàng</a>
+										</span>
 									</td>
 								</tr>
 							</tbody>
 							@endif
 						</table>
+
+						<h3>Cart totals:</h3>
+						<table class="totals">
+							<tr>
+								<th>Tạm tính</th>
+								<td><span class="order-subtotal">{{ str_replace(',','.', \Cart::subtotal(0)) }} đ</span></td>
+							</tr>
+							<tr>
+								<th>Phí vận chuyển</th>
+								<td>
+									<label><input type="radio" name="shipping" value="" checked="checked" /> Miễn phí</label> <br />
+									<label><input type="radio" name="shipping" value="" />Nội thành: 29.000 đ</label> <br />
+									<label><input type="radio" name="shipping" value="" />Ngoại thành: 129.000 đ</label>
+								</td>
+							</tr>
+							<tr>
+								<th>Thành tiền</th>
+								<td>
+									<span class="order-total">{{ str_replace(',','.', \Cart::subtotal(0)) }} đ</span>
+								</td>
+							</tr>
+						</table>
+				
 						
 						<div class="post-content">
 							
@@ -206,6 +233,18 @@
 										          	<input type="text" name="street_address" placeholder="Địa chỉ nhà..." value="{{(\Auth::check()) ? \Auth::user()->email : ''}}" />
 										        </td>
 											</tr>
+											<tr>
+												<th>Ghi chú</th>
+												<td>
+										          	<p><textarea name="note" placeholder="Ghi chú..."></textarea></p>
+										        </td>
+											</tr>
+											<table class="totals">
+												<tr>
+													<th><label><input type="radio" name="payment_method" value="1" checked="checked" /> Thanh toán khi nhận hàng</label></th>
+													<th><label><input type="radio" name="payment_method" value="2" /> Thanh toán Online</label></th>
+												</tr>
+											</table>
 											<tr>
 												<td class="submit" colspan="2">
 													<button type="submit" class="button">Tiến hành đặt hàng</button>
