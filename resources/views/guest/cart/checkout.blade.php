@@ -58,7 +58,7 @@
 		
 		<span class="pull-right">
 			<a href="javascript:;" class="my-account"><i class="fa fa-user"></i> My account</a>
-			<a href="javascript:;" class="my-cart"><i class="fa fa-shopping-cart"></i> Cart: 7 items / $99.00</a>
+			<a href="javascript:;" class="my-cart"><i class="fa fa-shopping-cart"></i> Cart: 700 items / $99.00</a>
 		</span>
 		
 		<!--
