@@ -143,6 +143,69 @@
 								<h2 class="title">Đánh giá (7)</h2>
 
 								<div id="comments">
+									@if($isUserBought)
+									<!-- Viết đánh giá -->
+									<div id="respond">
+										<form action="{{ route('post.reviewProduct') }}" id="commentform" method="post">
+											@csrf
+											<input type="hidden" name="userId" value="{{Session::get('userId') ?? ''}}" />
+											<fieldset>
+												<div class="wrapper-block">
+													<ul style="float:left;margin-right:40px;">
+														<li style="margin-bottom:0px">
+															<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+															<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+															<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+															<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+															<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+															&nbsp;&nbsp;&nbsp;
+															<label><input type="radio" name="star" checked="checked" value="5" /> 5 sao</label>
+														</li>
+														<li style="margin-bottom:0px">
+															<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+															<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+															<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+															<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+															<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+															&nbsp;&nbsp;&nbsp;
+															<label><input type="radio" name="star" value="4" /> 4 sao</label>
+														</li>
+														<li style="margin-bottom:0px">
+															<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+															<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+															<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+															<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+															<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+															&nbsp;&nbsp;&nbsp;
+															<label><input type="radio" name="star" value="3" /> 3 sao</label>
+														</li>
+														<li style="margin-bottom:0px">
+															<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+															<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+															<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+															<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+															<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+															&nbsp;&nbsp;&nbsp;
+															<label><input type="radio" name="star" value="2" /> 2 sao</label>
+														</li>
+														<li style="margin-bottom:0px">
+															<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+															<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+															<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+															<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+															<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+															&nbsp;&nbsp;&nbsp;
+															<label><input type="radio" name="star" value="1" /> 1 sao</label>
+														</li>
+
+														<li><input type="submit" id="submit" value="Gửi đánh giá" /></li>
+													</ul>
+													<textarea name="comment" id="comment" placeholder="Đánh giá sản phẩm của bạn"></textarea>
+												</div>
+											</fieldset>
+										</form>
+									</div>
+									@endif
 									<ol class="comment-list">
 										<li class="comment odd depth-1">
 											<div class="comment-avatar">
@@ -199,90 +262,7 @@
 											</div>
 										</li>
 									</ol>
-						
-									@if($isUserBought)
-									<!-- Viết đánh giá -->
-									<div id="respond">
-										<h3>Viết đánh giá:</h3>
-								
-										<form action="javascript:;" id="commentform" method="post">
-											<fieldset>
-												<div class="widget-content">
-													<ul>
-														<li style="margin-bottom:0px">
-															<a href="#">
-																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-															</a><span>(16 đánh giá)</span>
-														</li>
-														<li style="margin-bottom:0px">
-															<a href="#">
-																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-																<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
-															</a><span>(16 đánh giá)</span>
-														</li>
-														<li style="margin-bottom:0px">
-															<a href="#">
-																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-																<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
-																<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
-															</a><span>(16 đánh giá)</span>
-														</li>
-														<li style="margin-bottom:0px">
-															<a href="#">
-																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-																<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
-																<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
-																<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
-															</a><span>(16 đánh giá)</span>
-														</li>
-														<li style="margin-bottom:0px">
-															<a href="#">
-																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-																<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
-																<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
-																<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
-																<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
-															</a><span>(16 đánh giá)</span>
-														</li>
-													</ul>
-												</div>
 
-												<div class="wrapper-block ib half">
-													<label class="label" for="author">
-														Tên:
-													</label>
-													<input type="text" id="author" name="author" size="30" />
-												</div>
-										
-												<div class="wrapper-block ib half">
-													<label class="label" for="email">
-														Địa chỉ email:
-													</label>
-													<input type="email" id="email" name="email" size="30" />
-												</div>
-										
-												<div class="wrapper-block">
-													<label class="label" for="comment">
-														Nội dung:
-													</label>
-													<textarea name="comment" id="comment"></textarea>
-												</div>
-									
-												<input type="submit" id="submit" value="Gửi đánh giá" />
-											</fieldset>
-										</form>
-									</div>
-									@else
 									<div id="respond">
 										<h3>Gửi câu hỏi:</h3>
 								
@@ -292,14 +272,14 @@
 													<label class="label" for="author">
 														Tên:
 													</label>
-													<input type="text" id="author" name="author" size="30" />
+													<input type="text" id="author" name="author" size="30" value="{{Session::get('userFullName') ?? ''}}" />
 												</div>
 										
 												<div class="wrapper-block ib half">
 													<label class="label" for="email">
 														Địa chỉ email:
 													</label>
-													<input type="email" id="email" name="email" size="30" />
+													<input type="email" id="email" name="email" size="30" value="{{Session::get('userEmail') ?? ''}}" />
 												</div>
 										
 												<div class="wrapper-block">
@@ -313,7 +293,6 @@
 											</fieldset>
 										</form>
 									</div>
-									@endif
 								</div>
 							</div>
 						</div>

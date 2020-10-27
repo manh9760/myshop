@@ -4,6 +4,7 @@ Route::group(['namespace'=>'Guest'], function () {
     Route::get('', 'ProductController@getProductList')->name('get.home');
     Route::get('danh-muc/{slug}', 'ProductController@getProductListByCategory')->name('get.product.list');
     Route::get('san-pham/{slug}', 'ProductController@getProductDetail')->name('get.product.detail');
+    Route::post('danh-gia-san-pham', 'ProductController@review')->name('post.reviewProduct');
 
     // ----------------------- Tài khoản --------------------------------------------------
     Route::get('dang-ky', 'AuthenticationController@getRegisterForm')->name('get.register');

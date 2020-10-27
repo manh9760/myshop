@@ -72,6 +72,7 @@ class AuthenticationController extends GuestController {
 
         if ($result) {
             \Session::put('userId', $result->id);
+            \Session::put('userEmail', $result->email);
             \Session::put('userFullName', $result->full_name);
             return redirect()->intended('/');
         } else {
@@ -82,6 +83,7 @@ class AuthenticationController extends GuestController {
 
     public function logout(Request $request) {
         \Session::put('userId', null);
+        \Session::put('userEmail', null);
         \Session::put('userFullName', null);
         return redirect()->to('/');
     }

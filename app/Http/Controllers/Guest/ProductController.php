@@ -241,6 +241,11 @@ class ProductController extends GuestController {
     	return redirect()->to('/');
     }
 
+    public function review(Request $request) {
+        $data = $request->except('_token');
+        dd($data);
+    }
+
     // Lấy sản phẩm liên quan
     private function getSuggestedProducts($categoryId) {
         $products = Product::where([
