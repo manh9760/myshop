@@ -49,6 +49,7 @@
                 <th>Địa chỉ nhận hàng</th>
                 <th>Tổng tiền</th>
                 <th>Trạng thái</th>
+                <th>Thanh toán</th>
                 <th>Ghi chú</th>
                 <th>Ngày tạo</th>
                 <th>Ngày sửa</th>
@@ -109,6 +110,15 @@
                       <span class="{{$transaction->getStatus($transaction->status)['class']}}">
                         {{ $transaction->getStatus($transaction->status)['name'] }}
                       </span>
+                    </td>
+                    <td>
+                      @if($transaction->payment_method == 1)
+                        <span class="label label-default">COD</span>
+                      @elseif($transaction->payment_method == 2)
+                        <span class="label label-default">Online</span>
+                      @elseif($transaction->payment_method == 3)
+                        <span class="label label-success">Đã thanh toán</span>
+                      @endif
                     </td>
                     <td>{{ $transaction->note }}</td>
                     <td>

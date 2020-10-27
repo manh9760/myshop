@@ -30,10 +30,8 @@
 						<ul id="header-menu-ul" class="menu">
 							<li class="menu-item level-0"> 
 								<form action="{{ route('get.home') }}" method="get">
-									<fieldset>
-										<input type="text" name="searchQuery" value="{{Request::get('searchQuery')}}" style="padding:8px;padding-right: 220px" placeholder="Nhập tên sản phẩm..." /> 
-										<button type="submit" class="button"><i class="fa fa-search"></i> Tìm kiếm</button>
-									</fieldset>
+									<input type="text" name="searchQuery" value="{{Request::get('searchQuery')}}" style="padding:8px;padding-right: 220px" placeholder="Nhập tên sản phẩm..." /> 
+									<button type="submit" class="button"><i class="fa fa-search"></i> Tìm kiếm</button>
 								</form>
 							</li>
 							@if(Session::get('userId'))

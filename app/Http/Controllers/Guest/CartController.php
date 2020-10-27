@@ -151,10 +151,10 @@ class CartController extends GuestController {
     public function getPaymentForm() {
         error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
 
-        $vnp_TmnCode = "BOLKPQ6I"; //Mã website tại VNPAY 
-        $vnp_HashSecret = "YKJBDPKOAIOIAFWXGVFKXYSGDOUQQVHN"; //Chuỗi bí mật
+        $vnp_TmnCode = "L5S0ZLXU"; //Mã website tại VNPAY 
+        $vnp_HashSecret = "ZMRQENYAPGRNERPODYFEFOYKWUBEIXOQ"; //Chuỗi bí mật
         $vnp_Url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://localhost:8080/myshop/";
+        $vnp_Returnurl = "http://localhost:8080/myshop/xu-ly-online";
 
         $vnp_TxnRef = $_POST['order_id']; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = $_POST['order_desc'];
@@ -202,69 +202,103 @@ class CartController extends GuestController {
             $vnpSecureHash = hash('sha256', $vnp_HashSecret . $hashdata);
             $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
         }
-        $returnData = array('code' => '00'
-            , 'message' => 'success'
-            , 'data' => $vnp_Url
+        $returnData = array(
+            'code' => '00', 
+            'message' => 'success', 
+            'data' => $vnp_Url
         );
         
         return redirect()->to($returnData['data']);
     }
 
+    public function handlePayment(Request $request) {
+        if ($request->vnp_ResponseCode == '00') {
+            $transactionId = $request->vnp_TxnRef;
+
+            $transaction = Transaction::find($transactionId);
+            if ($transaction) {
+                \Cart::destroy();
+                $transaction->payment_method = 3;
+                $transaction->save();
+                \Session::flash('toastr', [
+                    'type' => 'success',
+                    'message' => 'Đơn hàng thanh toán thành công',
+                ]);
+                return redirect()->to('/');
+            }
+            \Session::flash('toastr', [
+                'type' => 'error',
+                'message' => 'Mã đơn hàng không tồn tại',
+            ]);
+            return redirect()->to('/');
+        }
+        \Session::flash('toastr', [
+            'type' => 'error',
+            'message' => 'Lỗi không thanh toán được',
+        ]);
+        return redirect()->to('/');
+    }
+
 	public function pay(CartRequest $request) {
         $data = $request->except('_token');
         $totalMoney = str_replace(',','', \Cart::subtotal(0));
-        if ($data['payment_method'] == 1) {
-            if (\Session::get('userId')) {
-                $data['user_id'] = \Session::get('userId');
-                $user = User::find(\Session::get('userId'));
-                //---- Dùng để lưu thông tin tài khoản nếu TK chưa có thông tin địa chỉ -----------
-                if (!isset($user->city)) {
-                    \DB::table('users')
-                        ->where('id', $data['user_id'])
-                        ->update([
-                            'phone' => $data['phone'],
-                            'street_address' => $data['street_address'],
-                            'city' => $data['city'],
-                            'district' => $data['district'],
-                            'ward' => $data['ward'],
-                        ]);
-                } 
-            }  
-            $data['total_money'] = str_replace(',','', \Cart::subtotal(0));
-            $data['created_at'] = Carbon::now();
-            $transactionId = Transaction::insertGetId($data);
-            if ($transactionId) {
-                $cartItems = \Cart::content();
-                $transaction = Transaction::find($transactionId);
-                // Gửi email đơn hàng mới đặt cho khách
-                Mail::to($request->email)->send(new Invoice($transaction, $cartItems));
-                foreach ($cartItems as $key => $item) {
-                    // Lưu đơn hàng
-                    Order::insert([
-                        'transaction_id' => $transactionId,
-                        'product_id' => $item->id,
-                        'sale' => $item->options->sale,
-                        'quantity' => $item->qty,
-                        'product_price' => $item->price,
-                        'total_price' => $item->price * $item->qty,
+        
+        if (\Session::get('userId')) {
+            $data['user_id'] = \Session::get('userId');
+            $user = User::find(\Session::get('userId'));
+            //---- Dùng để lưu thông tin tài khoản nếu TK chưa có thông tin địa chỉ -----------
+            if (!isset($user->city)) {
+                \DB::table('users')
+                    ->where('id', $data['user_id'])
+                    ->update([
+                        'phone' => $data['phone'],
+                        'street_address' => $data['street_address'],
+                        'city' => $data['city'],
+                        'district' => $data['district'],
+                        'ward' => $data['ward'],
                     ]);
+            } 
+        }  
+        $data['total_money'] = str_replace(',','', \Cart::subtotal(0));
+        $data['created_at'] = Carbon::now();
+        $transactionId = Transaction::insertGetId($data);
+        if ($transactionId) {
+            $cartItems = \Cart::content();
+            $transaction = Transaction::find($transactionId);
+            // Gửi email đơn hàng mới đặt cho khách
+            Mail::to($request->email)->send(new Invoice($transaction, $cartItems));
+            foreach ($cartItems as $key => $item) {
+                // Lưu đơn hàng
+                Order::insert([
+                    'transaction_id' => $transactionId,
+                    'product_id' => $item->id,
+                    'sale' => $item->options->sale,
+                    'quantity' => $item->qty,
+                    'product_price' => $item->price,
+                    'total_price' => $item->price * $item->qty,
+                ]);
 
-                    // Tăng số lượng mua (+1 cho cột 'pay' của bảng 'products')
-                    Product::where('id', $item->id)->increment('paid');
-                    // Giảm tạm thời số lượng tồn kho của sản phẩm
-                    // -- Nếu Hủy đơn -> Tăng lại
-                    // -- Nếu xóa sản phẩm trong chi tiết đơn hàng -> Tăng lại
-                    Product::where('id', $item->id)->decrement('number', $item->qty);
-                }
+                // Tăng số lượng mua (+1 cho cột 'pay' của bảng 'products')
+                Product::where('id', $item->id)->increment('paid');
+                // Giảm tạm thời số lượng tồn kho của sản phẩm
+                // -- Nếu Hủy đơn -> Tăng lại
+                // -- Nếu xóa sản phẩm trong chi tiết đơn hàng -> Tăng lại
+                Product::where('id', $item->id)->decrement('number', $item->qty);
             }
-            \Session::flash('toastr', [
-                'type' => 'success',
-                'message' => 'Tạo đơn hàng thành công',
-            ]);
+        }
+        \Session::flash('toastr', [
+            'type' => 'success',
+            'message' => 'Tạo đơn hàng thành công',
+        ]);
+        if ($data['payment_method'] == 1) {
             \Cart::destroy();
             return redirect()->to('/');
         } elseif ($data['payment_method'] == 2) {
-            return view('guest.cart.payment');
+            $TransactionData = [
+                'transactionId' => $transactionId,
+                'totalMoney' => $totalMoney,
+            ];
+            return view('guest.cart.payment', $TransactionData);
         } else {
             return redirect()->to('/');
         }

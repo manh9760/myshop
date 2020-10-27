@@ -7,6 +7,8 @@ use App\Models\Product;
 use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Transaction;
+use App\Models\Order;
 use App\Services\ProcessViewService;
 use Illuminate\Support\Facades\Mail;
 
@@ -207,17 +209,35 @@ class ProductController extends GuestController {
 
             // Tính view sản phẩm 
             ProcessViewService::view('products', 'view', 'product', $id);
+
+            // Kiểm tra tài khoản đang nhập đã mua sản phẩm này chưa để có thể đánh giá sản phẩm
+            $isUserBought = false;
+            $userId = \Session::get('userId');
+            if ($userId) {
+                $transactions = Transaction::where('user_id', $userId)->get();
+                foreach ($transactions as $transaction) {
+                    // Lấy sản phẩm (lấy cái đầu tiên là được) mà tài khoản đã mua
+                    $order = Order::where('transaction_id', $transaction->id)->first();
+                    if ($order->product_id == $id) {
+                        $isUserBought = true;
+                        break;
+                    }
+                }
+            }
+
     		$data = [
     			'product' => $product,
                 'suggestedProducts' => $this->getSuggestedProducts($product->category_id),
                 'attributes' =>$attributes,
                 'posts' =>$posts,
                 'saleProducts' => $saleProducts,
+                'isUserBought' => $isUserBought,
                 'pageTitle' => $product->name,
                 'bodyClass' => 'single-product',
     		];
     		return view('guest.product.detail', $data);
     	}
+
     	return redirect()->to('/');
     }
 

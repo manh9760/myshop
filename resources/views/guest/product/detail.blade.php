@@ -144,243 +144,178 @@
 
 								<div id="comments">
 									<ol class="comment-list">
-										<li class="comment even thread-even depth-1">
-										<div class="comment-avatar">
-											<img src="images/temp/avatar_2.jpg" width="70" height="70" alt="" />
-										</div>
-								
-										<div class="comment-data">
-											<span class="author">James May</span>
-											<span class="time">3 July 2013</span>
-										</div>
-								
-										<div class="comment-content">
-											<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form. By injected humour, or randomised words which don't look even slightly believable.</p>
-										</div>
-								
-										<div class="comment-reply">
-											<a href="javascript:;">Trả lời</a> <i class="arrow-keep-reading"></i>
-										</div>
-							
-										<ol class="children">
-											<li class="comment even thread-even depth-2">
-												<div class="comment-avatar">
-													<img src="images/temp/avatar_3.jpg" width="70" height="70" alt="" />
-												</div>
-								
-												<div class="comment-data">	
-													<span class="author">James May</span>
-													<span class="time">3 July 2013</span>
-												</div>
-								
-												<div class="comment-content">
-													<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form. By injected humour, or randomised words which don't look even slightly believable.</p>
-												</div>
-								
-												<div class="comment-reply">
-													<a href="javascript:;">Trả lời</a> <i class="arrow-keep-reading"></i>
-												</div>
-											</li>
-										</ol>
-									</li>
-
-									<li class="comment odd depth-1">
-							
-										<div class="comment-avatar">
-								
-											<img src="images/temp/avatar_4.jpg" width="70" height="70" alt="" />
-								
-										</div>
-								
-										<div class="comment-data">
-								
-											<span class="author">James May</span>
+										<li class="comment odd depth-1">
+											<div class="comment-avatar">
+												<img src="images/temp/avatar_4.jpg" width="70" height="70" alt="" />
+											</div>
 									
-											<span class="time">3 July 2013</span>
-								
-										</div>
-								
-										<div class="comment-content">
-											<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form. By injected humour, or randomised words which don't look even slightly believable.</p>
-										</div>
-								
-										<div class="comment-reply">
-											<a href="javascript:;">Reply</a> <i class="arrow-keep-reading"></i>
-											<!--
-											<a href="javascript:;" class="likes">
-												Like 
-												<i class="fa fa-thumbs-up"></i>
-											</a>
-											-->
-										</div>
-							
-									</li>
-									<li class="comment odd depth-1">
-							
-										<div class="comment-avatar">
-								
-											<img src="images/temp/avatar_1.jpg" width="70" height="70" alt="" />
-								
-										</div>
-								
-										<div class="comment-data">
-								
-											<span class="author">James May</span>
+											<div class="comment-data">
+												<span class="author">James May</span>
+												<span class="time">3 July 2013</span>
+											</div>
+											<div class="comment-content">
+												<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form. By injected humour, or randomised words which don't look even slightly believable.</p>
+											</div>
 									
-											<span class="time">3 July 2013</span>
+											<div class="comment-reply">
+												<a href="javascript:;">Reply</a> <i class="arrow-keep-reading"></i>
+												<!--
+												<a href="javascript:;" class="likes">
+													Like 
+													<i class="fa fa-thumbs-up"></i>
+												</a>
+												-->
+											</div>
 								
-										</div>
+										</li>
+										<li class="comment odd depth-1">
 								
-										<div class="comment-content">
-											<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form. By injected humour, or randomised words which don't look even slightly believable.</p>
-										</div>
-								
-										<div class="comment-reply">
-											<a href="javascript:;">Reply</a> <i class="arrow-keep-reading"></i>
-											<!--
-											<a href="javascript:;" class="likes">
-												Like 
-												<i class="fa fa-thumbs-up"></i>
-											</a>
-											-->
-										</div>
-							
-										<ol class="children">
-											<li class="comment even thread-even depth-2">
-							
-												<div class="comment-avatar">
-								
-													<img src="images/temp/avatar_3.jpg" width="70" height="70" alt="" />
+											<div class="comment-avatar">
 									
-												</div>
-								
-												<div class="comment-data">
+												<img src="images/temp/avatar_1.jpg" width="70" height="70" alt="" />
 									
-													<span class="author">James May</span>
+											</div>
 									
-													<span class="time">3 July 2013</span>
-								
-												</div>
-								
-												<div class="comment-content">
-													<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form. By injected humour, or randomised words which don't look even slightly believable.</p>
-												</div>
-								
-												<div class="comment-reply">
-													<a href="javascript:;">Reply</a> <i class="arrow-keep-reading"></i>
-													<!--
-													<a href="javascript:;" class="likes">
-														Like 
-														<i class="fa fa-thumbs-up"></i>
-													</a>
-													-->
-												</div>
-							
-												<ol class="children">
-													<li class="comment even thread-even depth-3">
-							
-														<div class="comment-avatar">
-								
-															<img src="images/temp/avatar_1.jpg" width="70" height="70" alt="" />
-								
-														</div>
-								
-														<div class="comment-data">
+											<div class="comment-data">
 									
-															<span class="author">James May</span>
+												<span class="author">James May</span>
+										
+												<span class="time">3 July 2013</span>
 									
-															<span class="time">3 July 2013</span>
-								
-														</div>
-								
-														<div class="comment-content">
-															<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form. By injected humour, or randomised words which don't look even slightly believable.</p>
-														</div>
-								
-														<div class="comment-reply">
-															<a href="javascript:;">Reply</a> <i class="arrow-keep-reading"></i>
-															<!--
-															<a href="javascript:;" class="likes">
-																Like 
-																<i class="fa fa-thumbs-up"></i>
-															</a>
-															-->
-														</div>
-							
-													</li>
-													<li class="comment odd thread-even depth-3">
-							
-														<div class="comment-avatar">
-								
-															<img src="images/temp/avatar_2.jpg" width="70" height="70" alt="" />
-								
-														</div>
-								
-														<div class="comment-data">
+											</div>
 									
-															<span class="author">James May</span>
+											<div class="comment-content">
+												<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form. By injected humour, or randomised words which don't look even slightly believable.</p>
+											</div>
 									
-															<span class="time">3 July 2013</span>
-								
-														</div>
-								
-														<div class="comment-content">
-															<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form. By injected humour, or randomised words which don't look even slightly believable.</p>
-														</div>
-								
-														<div class="comment-reply">
-															<a href="javascript:;">Reply</a> <i class="arrow-keep-reading"></i>
-															<!--
-															<a href="javascript:;" class="likes">
-																Like 
-																<i class="fa fa-thumbs-up"></i>
-															</a>
-															-->
-														</div>
-							
-													</li>
-												</ol>
-							
-											</li>
-										</ol>
-							
-									</li>
-								</ol>
+											<div class="comment-reply">
+												<a href="javascript:;">Reply</a> <i class="arrow-keep-reading"></i>
+												<!--
+												<a href="javascript:;" class="likes">
+													Like 
+													<i class="fa fa-thumbs-up"></i>
+												</a>
+												-->
+											</div>
+										</li>
+									</ol>
 						
-								<!-- Viết đánh giá -->
-								<div id="respond">
-									<h3>Viết đánh giá:</h3>
-							
-									<form action="javascript:;" id="commentform" method="post">
-										<fieldset>
+									@if($isUserBought)
+									<!-- Viết đánh giá -->
+									<div id="respond">
+										<h3>Viết đánh giá:</h3>
 								
-											<div class="wrapper-block ib half">
-												<label class="label" for="author">
-													Tên:
-												</label>
-												<input type="text" id="author" name="author" size="30" />
-											</div>
+										<form action="javascript:;" id="commentform" method="post">
+											<fieldset>
+												<div class="widget-content">
+													<ul>
+														<li style="margin-bottom:0px">
+															<a href="#">
+																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+															</a><span>(16 đánh giá)</span>
+														</li>
+														<li style="margin-bottom:0px">
+															<a href="#">
+																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+																<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+															</a><span>(16 đánh giá)</span>
+														</li>
+														<li style="margin-bottom:0px">
+															<a href="#">
+																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+																<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+																<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+															</a><span>(16 đánh giá)</span>
+														</li>
+														<li style="margin-bottom:0px">
+															<a href="#">
+																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+																<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+																<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+																<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+															</a><span>(16 đánh giá)</span>
+														</li>
+														<li style="margin-bottom:0px">
+															<a href="#">
+																<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+																<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+																<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+																<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+																<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+															</a><span>(16 đánh giá)</span>
+														</li>
+													</ul>
+												</div>
+
+												<div class="wrapper-block ib half">
+													<label class="label" for="author">
+														Tên:
+													</label>
+													<input type="text" id="author" name="author" size="30" />
+												</div>
+										
+												<div class="wrapper-block ib half">
+													<label class="label" for="email">
+														Địa chỉ email:
+													</label>
+													<input type="email" id="email" name="email" size="30" />
+												</div>
+										
+												<div class="wrapper-block">
+													<label class="label" for="comment">
+														Nội dung:
+													</label>
+													<textarea name="comment" id="comment"></textarea>
+												</div>
 									
-											<div class="wrapper-block ib half">
-												<label class="label" for="email">
-													Địa chỉ email:
-												</label>
-												<input type="email" id="email" name="email" size="30" />
-											</div>
-									
-											<div class="wrapper-block">
-												<label class="label" for="comment">
-													Nội dung:
-												</label>
-												<textarea name="comment" id="comment"></textarea>
-											</div>
+												<input type="submit" id="submit" value="Gửi đánh giá" />
+											</fieldset>
+										</form>
+									</div>
+									@else
+									<div id="respond">
+										<h3>Gửi câu hỏi:</h3>
 								
-											<input type="submit" id="submit" value="Gửi đánh giá" />
-										</fieldset>
-									</form>
+										<form action="javascript:;" id="commentform" method="post">
+											<fieldset>
+												<div class="wrapper-block ib half">
+													<label class="label" for="author">
+														Tên:
+													</label>
+													<input type="text" id="author" name="author" size="30" />
+												</div>
+										
+												<div class="wrapper-block ib half">
+													<label class="label" for="email">
+														Địa chỉ email:
+													</label>
+													<input type="email" id="email" name="email" size="30" />
+												</div>
+										
+												<div class="wrapper-block">
+													<label class="label" for="comment">
+														Nội dung:
+													</label>
+													<textarea name="comment" id="comment"></textarea>
+												</div>
+									
+												<input type="submit" id="submit" value="Gửi câu hỏi" />
+											</fieldset>
+										</form>
+									</div>
+									@endif
 								</div>
 							</div>
-
 						</div>
 					</section>
 				</div>

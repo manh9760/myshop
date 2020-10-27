@@ -7,7 +7,7 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Tạo mới đơn hàng</title>
+        <title>Thanh toán qua VNPAY</title>
         <!-- Bootstrap core CSS -->
         <link href="/vnpay_php/assets/bootstrap.min.css" rel="stylesheet"/>
         <!-- Custom styles for this template -->
@@ -19,38 +19,33 @@
 
         <div class="container">
             <div class="header clearfix">
-                <h3 class="text-muted">VNPAY DEMO</h3>
+                <h3 class="text-muted">Cửa hàng linh kiện máy tính Văn Mạnh | Thanh toán qua VNPAY</h3>
             </div>
             <h3>Tạo mới đơn hàng</h3>
             <div class="table-responsive">
                 <form action="{{ route('get.paymentForm') }}" id="create_form" method="post">       
                     @csrf
-                    <div class="form-group">
+                    <div class="form-group" style="display:none;">
                         <label for="language">Loại hàng hóa </label>
                         <select name="order_type" id="order_type" class="form-control">
-                            <option value="topup">Nạp tiền điện thoại</option>
                             <option value="billpayment">Thanh toán hóa đơn</option>
-                            <option value="fashion">Thời trang</option>
-                            <option value="other">Khác - Xem thêm tại VNPAY</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="order_id">Mã hóa đơn</label>
-                        <input class="form-control" id="order_id" name="order_id" type="text" value="<?php echo date("YmdHis") ?>"/>
+                        <input class="form-control" id="order_id" name="order_id" type="text" value="{{$transactionId}}" />
                     </div>
                     <div class="form-group">
                         <label for="amount">Số tiền</label>
-                        <input class="form-control" id="amount"
-                               name="amount" type="number" value="10000"/>
+                        <input class="form-control" id="amount" name="amount" type="number" value="{{$totalMoney}}"/>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="display:none;">
                         <label for="order_desc">Nội dung thanh toán</label>
                         <textarea class="form-control" cols="20" id="order_desc" name="order_desc" rows="2">Noi dung thanh toan</textarea>
                     </div>
                     <div class="form-group">
                         <label for="bank_code">Ngân hàng</label>
                         <select name="bank_code" id="bank_code" class="form-control">
-                            <option value="">Không chọn</option>
                             <option value="NCB"> Ngan hang NCB</option>
                             <option value="AGRIBANK"> Ngan hang Agribank</option>
                             <option value="SCB"> Ngan hang SCB</option>
@@ -75,21 +70,20 @@
                             <option value="VISA"> Thanh toan qua VISA/MASTER</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="display:none;">
                         <label for="language">Ngôn ngữ</label>
                         <select name="language" id="language" class="form-control">
                             <option value="vn">Tiếng Việt</option>
-                            <option value="en">English</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Thanh toán Redirect</button>
+                    <button type="submit" class="btn btn-primary">Thanh toán</button>
                 </form>
             </div>
             <p>
                 &nbsp;
             </p>
             <footer class="footer">
-                <p>&copy; VNPAY 2015</p>
+                <p>&copy; VNPAY 2020</p>
             </footer>
         </div>  
         <link href="https://sandbox.vnpayment.vn/paymentv2/lib/vnpay/vnpay.css" rel="stylesheet"/>

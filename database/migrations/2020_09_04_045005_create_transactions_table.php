@@ -28,7 +28,7 @@ class CreateTransactionsTable extends Migration
             $table->tinyInteger('status')->default(1);
             $table->tinyInteger('payment_method')
                 ->default(1)
-                ->comment('1. COD, 2. Online');
+                ->comment('1. COD, 2. Online, 3. Đã thanh toán Online');
             $table->timestamps();
         });
     }

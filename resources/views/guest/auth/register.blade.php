@@ -32,7 +32,7 @@
 					</p>
 					<p>
 						<label for="username">Địa chỉ email: <span class="required">*</span></label>
-						<input type="email" id="username" name="email" value="" class="{{ $errors->first('email') ? 'has-error':'' }}" />
+						<input type="email" id="username" name="email" style="width: 390px;" value="" class="{{ $errors->first('email') ? 'has-error':'' }}" />
 						@if($errors->first('email'))
 			            	<span style="color:red;">{{ $errors->first('email') }}</span>
 			          	@endif

@@ -20,24 +20,31 @@
 	<!-- Retina iPad --> 
 	<link rel="apple-touch-icon" sizes="144x144" href="images/favicon/144x144.png" />
 	<!--[if lt IE 9]>
-	<script src="js/libs/respond.min.js"></script>
+	<script src="{{ asset('public/guest/js/libs/respond.min.js') }}"></script>
 	<![endif]-->
 	<link rel="stylesheet" title="blue" href="{{ asset('public/guest/css/skin-blue.css') }}" type="text/css" media="all" />
+	<link rel="alternate stylesheet" title="brown" href="{{ asset('public/guest/css/skin-brown.css') }}" type="text/css" media="all" />
+	<link rel="alternate stylesheet" title="dark-green" href="{{ asset('public/guest/css/skin-dark-green.css') }}" type="text/css" media="all" />
+	<link rel="alternate stylesheet" title="gray" href="{{ asset('public/guest/css/skin-gray.css') }}" type="text/css" media="all" />
+	<link rel="alternate stylesheet" title="light-green" href="{{ asset('public/guest/css/skin-light-green.css') }}" type="text/css" media="all" />
+	<link rel="alternate stylesheet" title="orange" href="{{ asset('public/guest/css/skin-orange.css') }}" type="text/css" media="all" />
+	<link rel="alternate stylesheet" title="pink" href="{{ asset('public/guest/css/skin-pink.css') }}" type="text/css" media="all" />
+	<link rel="alternate stylesheet" title="purple" href="{{ asset('public/guest/css/skin-purple.css') }}" type="text/css" media="all" />
+	<link rel="alternate stylesheet" title="red" href="{{ asset('public/guest/css/skin-red.css') }}" type="text/css" media="all" />
+	<link rel="alternate stylesheet" title="sky-blue" href="{{ asset('public/guest/css/skin-sky-blue.css') }}" type="text/css" media="all" />
 	
 	<link rel="stylesheet" id="font-awesome-css" href="{{ asset('public/guest/css/libs/font-awesome/css/font-awesome.min.css') }}" type="text/css" media="all" />
 	<link rel="stylesheet" id="magnific-popup-css" href="{{ asset('public/guest/css/libs/magnific-popup.css') }}" type="text/css" media="all" />
-	<link rel="stylesheet" id="animate-css" href="{{ asset('public/guest/css/libs/animate.min.cs') }}" type="text/css" media="all" />
+	<link rel="stylesheet" id="animate-css" href="{{ asset('public/guest/css/libs/animate.min.css') }}" type="text/css" media="all" />
 	<link rel="stylesheet" href="{{ asset('public/guest/css/libs/liquid-slider.css') }}" type="text/css" media="all" />
 	<link rel="stylesheet" href="{{ asset('public/guest/css/libs/owl.carousel.css') }}" type="text/css" media="all" />
 	<!--[if lt IE 9]>
-		<link rel="stylesheet" href="css/ie.css">
-		<script src="js/libs/html5.js"></script>
+		<link rel="stylesheet" href="{{ asset('public/guest/css/ie.css') }}">
+		<script src="{{ asset('public/guest/js/libs/html5.js') }}"></script>
 	<![endif]-->
 	<link href="http://fonts.googleapis.com/css?family=Bitter|Roboto:400,300,700|Roboto+Slab:300,400,700" rel="stylesheet" type="text/css" />
 	<script src="{{ asset('public/guest/js/libs/jquery-1.10.2.min.js') }}"></script>
 	<script src="{{ asset('public/guest/js/libs/retina-1.1.0.min.js') }}"></script>
-	<!-- STYLES SWITCHER LESS FILE, REMOVE AT REAL PROJECT -->
-	<link rel="stylesheet/less" type="text/css" href="css/less/font_switcher.less" />
 </head>
 <body class="widgetized-footer page woocommerce-checkout">
 <div class="primary-wrapper">
@@ -58,7 +65,7 @@
 		
 		<span class="pull-right">
 			<a href="javascript:;" class="my-account"><i class="fa fa-user"></i> My account</a>
-			<a href="javascript:;" class="my-cart"><i class="fa fa-shopping-cart"></i> Cart: 700 items / $99.00</a>
+			<a href="javascript:;" class="my-cart"><i class="fa fa-shopping-cart"></i> Cart: 7 items / $99.00</a>
 		</span>
 		
 		<!--
@@ -161,15 +168,496 @@
 						<nav id="header-menu" class="unit three-quarters hide-on-phone">
 					
 							<ul id="header-menu-ul" class="menu">
-								<li class="menu-item level-0"> 
-									<form action="{{ route('get.home') }}" method="get">
-										<fieldset>
-											<input type="text" name="searchQuery" value="{{Request::get('searchQuery')}}" placeholder="Nhập tên sản phẩm..." /> 
-											<a type="submit" class="button"><i class="fa fa-search"></i> Tìm kiếm</a>
-										</fieldset>
-									</form>
+								<li class="menu-item level-0">
+									<!--
+									
+										TO REMOVE MENU ICON, CHANGE CLASSNAME TO "NO-ICON"
+										
+									-->
+									<a href="index.html" class="item no-icon">
+										<span class="menu-item-content ib">
+											<span class="menu-text">Home <i class="arrow-drop"></i></span>
+										</span>
+									</a>
+									<ul class="sub-menu">
+										<li class="level-1">
+											<a href="index.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Blog layout</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="index-business.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Business layout</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="index-portfolio.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Portfolio layout</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="index-parallax.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Parallax layout</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="index-one-page.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">One page layout</span>
+												</span>
+											</a>
+										</li>
+									</ul>
 								</li>
-
+								<li class="menu-item level-0 mega-menu">
+									<a href="shop.html" class="item no-icon">
+										<span class="menu-item-content ib">
+											<span class="menu-text">Shop <i class="arrow-drop"></i></span>
+										</span>
+									</a>
+									
+									<div class="wproto-mega-menu-content box">
+										<ul class="ul-item">
+											<li class="lvl-0">
+												<a href="shop-grid.html">Gadgets</a> <span class="new-item">new</span>
+												<ul>
+													<li class="lvl-1"><a href="shop-grid.html">Mobile phones</a></li>
+													<li class="lvl-1"><a href="shop-grid.html">Smartphones</a></li>
+													<li class="lvl-1"><a href="shop-grid.html">Tablets</a></li>
+													<li class="lvl-1"><a href="shop-grid.html">Nootebooks</a></li>
+													<li class="lvl-1"><a href="shop-grid.html">Watches</a></li>
+												</ul>
+											</li>
+											<li class="lvl-0">
+												<a href="shop.html">Music</a>
+												<ul>
+													<li class="lvl-1"><a href="shop.html">Earphones</a></li>
+													<li class="lvl-1"><a href="shop.html">Players</a></li>
+													<li class="lvl-1"><a href="shop.html">Acustic</a></li>
+													<li class="lvl-1"><a href="shop.html">Speakers</a> <span class="featured-item"><i class="fa fa-thumbs-up"></i></span></li>
+													<li class="lvl-1"><a href="shop.html">Albums</a></li>
+													<li class="lvl-1"><a href="shop.html">Amplifiers</a></li>
+												</ul>
+											</li>
+											<li class="lvl-0">
+												<a href="shop-grid.html">PC parts</a>
+												<ul>
+													<li class="lvl-1"><a href="shop-grid.html">SSD</a> <span class="featured-item"><i class="fa fa-thumbs-up"></i></span></li>
+													<li class="lvl-1"><a href="shop-grid.html">Procesors</a></li>
+													<li class="lvl-1"><a href="shop-grid.html">Video</a></li>
+													<li class="lvl-1"><a href="shop-grid.html">Monitors</a></li>
+													<li class="lvl-1"><a href="shop-grid.html">USB gadgets</a></li>
+												</ul>
+											</li>
+											<li class="lvl-0">
+												<a href="shop.html">Presents</a>
+												<ul>
+													<li class="lvl-1"><a href="shop.html">USB gadgets</a></li>
+													<li class="lvl-1"><a href="shop.html">Smartphones</a></li>
+													<li class="lvl-1"><a href="shop.html">Tablets</a></li>
+													<li class="lvl-1"><a href="shop.html">Books</a> <span class="new-item">new</span></li>
+													<li class="lvl-1"><a href="shop.html">Audio gadgets</a></li>
+													<li class="lvl-1"><a href="shop.html">Tablets</a></li>
+												</ul>
+											</li>
+											<li class="lvl-0">
+												<a href="shop-grid.html">Clothing</a>
+												<ul>
+													<li class="lvl-1"><a href="shop-grid.html">Men shoes</a></li>
+													<li class="lvl-1"><a href="shop-grid.html">Women shoes</a></li>
+													<li class="lvl-1"><a href="shop-grid.html">Outerwear</a></li>
+													<li class="lvl-1"><a href="shop-grid.html">Hats</a></li>
+													<li class="lvl-1"><a href="shop-grid.html">Undercoat</a></li>
+												</ul>
+											</li>
+											<li class="lvl-0">
+												<!--
+												
+													FEATURED CATEGORY MENU ITEM
+													
+												-->
+												<a href="shop-grid.html">Some Featured Category</a>
+												<div class="featured-cat-img">
+													<div class="post-slider-carousel">
+														<img src="images/temp/featured-cat-1.jpg" width="290" height="80" alt="" />
+														<img src="images/temp/featured-cat-2.jpg" width="290" height="80" alt="" />
+													</div>
+													<span class="post-slider-prev"></span>
+													<span class="post-slider-next"></span>
+													<div class="clear"></div>
+												</div>
+												<div class="featured-cat-desc">
+													Tincidunt, magnis, est lacus ac egestas! Proin amet ultrices, velit? Mattis montes dictumst enim? Ut pulvinar velit in mid.
+												</div>
+												<a href="shop-grid.html" class="more">Learn more</a>
+											</li>
+										</ul>
+										<div class="clear"></div>
+									</div>
+									
+								</li>
+								<li class="menu-item current-menu-item current_page_item current-menu-ancestor current-menu-parent level-0">
+									<a href="page-features.html" class="item no-icon">
+										<span class="menu-item-content ib">
+											<span class="menu-text">Pages <i class="arrow-drop"></i></span>
+										</span>
+									</a>
+									<ul class="sub-menu">
+										<li class="level-1">
+											<a href="page-features.html" class="item with-icon">
+												<!--<span class="icon"><i class="fa fa-star"></i></span>-->
+												<span class="menu-item-content ib">
+													<span class="menu-text">Theme Features</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="page-elements.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Elements / Shortcodes</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="page-widgets_custom.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Widgets <i class="menu-angle"></i></span>
+												</span>
+											</a>
+											<ul class="sub-menu">
+												<li class="level-2">
+													<a href="page-widgets_custom.html" class="item no-icon">
+														<span class="menu-item-content ib">
+															<span class="menu-text">Custom Widgets</span>
+														</span>
+													</a>
+												</li>
+												<li class="level-2">
+													<a href="page-widgets_custom_footer.html" class="item no-icon">
+														<span class="menu-item-content ib">
+															<span class="menu-text">Custom Widgets (Footer)</span>
+														</span>
+													</a>
+												</li>
+												<li class="level-2">
+													<a href="page-widgets_wp.html" class="item no-icon">
+														<span class="menu-item-content ib">
+															<span class="menu-text">Standard Widgets</span>
+														</span>
+													</a>
+												</li>
+												<li class="level-2">
+													<a href="page-widgets_wp_footer.html" class="item no-icon">
+														<span class="menu-item-content ib">
+															<span class="menu-text">Standard Widgets (Footer)</span>
+														</span>
+													</a>
+												</li>
+											</ul>
+										</li>
+										<li class="level-1">
+											<a href="page-left-sidebar.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Page Layouts <i class="menu-angle"></i></span>
+												</span>
+											</a>
+											<ul class="sub-menu">
+												<li class="level-2">
+													<a href="page-left-sidebar.html" class="item no-icon">
+														<span class="menu-item-content ib">
+															<span class="menu-text">Page with left sidebar</span>
+														</span>
+													</a>
+												</li>
+												<li class="level-2">
+													<a href="page-right-sidebar.html" class="item no-icon">
+														<span class="menu-item-content ib">
+															<span class="menu-text">Page with right sidebar</span>
+														</span>
+													</a>
+												</li>
+												<li class="level-2">
+													<a href="page-full-width.html" class="item no-icon">
+														<span class="menu-item-content ib">
+															<span class="menu-text">Full-width page</span>
+														</span>
+													</a>
+												</li>
+												<li class="level-2">
+													<a href="page-simple-footer.html" class="item no-icon">
+														<span class="menu-item-content ib">
+															<span class="menu-text">Simple footer</span>
+														</span>
+													</a>
+												</li>
+												<li class="level-2">
+													<a href="page-widgetized-footer.html" class="item no-icon">
+														<span class="menu-item-content ib">
+															<span class="menu-text">Widgetized footer</span>
+														</span>
+													</a>
+												</li>
+											</ul>
+										</li>
+										<li class="level-1">
+											<a href="page-cart.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">E-Commerce <i class="menu-angle"></i></span>
+												</span>
+											</a>
+											<ul class="sub-menu">
+												<li class="level-2">
+													<a href="shop.html" class="item no-icon">
+														<span class="menu-item-content ib">
+															<span class="menu-text">Shop (list layout)</span>
+														</span>
+													</a>
+												</li>
+												<li class="level-2">
+													<a href="shop-grid.html" class="item no-icon">
+														<span class="menu-item-content ib">
+															<span class="menu-text">Shop (grid layout)</span>
+														</span>
+													</a>
+												</li>
+												<li class="level-2">
+													<a href="shop-single.html" class="item no-icon">
+														<span class="menu-item-content ib">
+															<span class="menu-text">Single product</span>
+														</span>
+													</a>
+												</li>
+												<li class="level-2">
+													<a href="page-cart.html" class="item no-icon">
+														<span class="menu-item-content ib">
+															<span class="menu-text">Cart</span>
+														</span>
+													</a>
+												</li>
+												<li class="level-2">
+													<a href="page-checkout.html" class="item no-icon">
+														<span class="menu-item-content ib">
+															<span class="menu-text">Checkout</span>
+														</span>
+													</a>
+												</li>
+												<li class="level-2">
+													<a href="page-lost-password.html" class="item no-icon">
+														<span class="menu-item-content ib">
+															<span class="menu-text">Lost password</span>
+														</span>
+													</a>
+												</li>
+											</ul>
+										</li>
+										<li class="level-1">
+											<a href="javascript:;" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Custom menu <i class="menu-angle"></i></span>
+												</span>
+											</a>
+											<ul class="sub-menu">
+												<li class="level-2">
+													<a href="javascript:;" class="item no-icon">
+														<span class="menu-item-content ib">
+															<span class="menu-text">Im hidden from mobiles</span>
+														</span>
+													</a>
+												</li>
+												<li class="level-2">
+													<a href="javascript:;" class="item with-icon">
+														<span class="icon"><i class="fa fa-star"></i></span>
+														<span class="menu-item-content ib">
+															<span class="menu-text">Menu item with icon</span>
+														</span>
+													</a>
+												</li>
+											</ul>
+										</li>
+										<li class="level-1">
+											<a href="page-animations.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Animations</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="page-pricing_tables.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Pricing Tables</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="page-coming-soon.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Coming soon page</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="page-single.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Single post / page</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="page-author.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Author page</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="page-search-results.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Search page</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="page-404.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Error 404</span>
+												</span>
+											</a>
+										</li>
+									</ul>
+								</li>
+								<li class="menu-item level-0">
+									<a href="portfolio-hexagon.html" class="item no-icon">
+										<span class="menu-item-content ib">
+											<span class="menu-text">Portfolio <i class="arrow-drop"></i></span>
+										</span>
+									</a>
+									<ul class="sub-menu">
+										<li class="level-1">
+											<a href="portfolio-hexagon.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Hexagon view</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="portfolio-masonry.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Masonry view</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="portfolio-timeline.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Timeline</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="portfolio-four-columns.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Four columns</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="portfolio-one-column-list.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">One column list</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="portfolio-one-column-grid.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">One column grid</span>
+												</span>
+											</a>
+										</li>
+									</ul>
+								</li>
+								<li class="menu-item level-0">
+									<a href="javascript:;" class="item no-icon">
+										<span class="menu-item-content ib">
+											<span class="menu-text">Content <i class="arrow-drop"></i></span>
+										</span>
+									</a>
+									<ul class="sub-menu">
+										<li class="level-1">
+											<a href="videos.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Videos</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="photoalbums.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Photo Albums</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="catalog.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Catalog</span>
+												</span>
+											</a>
+										</li>
+									</ul>
+								</li>
+								<li class="menu-item level-0">
+									<a href="blog-masonry.html" class="item no-icon">
+										<span class="menu-item-content ib">
+											<span class="menu-text">Blog <i class="arrow-drop"></i></span>
+										</span>
+									</a>
+									<ul class="sub-menu">
+										<li class="level-1">
+											<a href="blog-masonry.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Masonry</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="blog-timeline.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Timeline</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="blog-one_column.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">One column list</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="blog-one_column_grid.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">One column grid</span>
+												</span>
+											</a>
+										</li>
+										<li class="level-1">
+											<a href="blog-four_columns.html" class="item no-icon">
+												<span class="menu-item-content ib">
+													<span class="menu-text">Four columns</span>
+												</span>
+											</a>
+										</li>
+									</ul>
+								</li>
 								<li class="menu-item level-0">
 									<a href="page-contact.html" class="item no-icon">
 										<span class="menu-item-content ib">
@@ -210,59 +698,16 @@
 						<div class="breadcrumbs"><a href="javascript:;">Home</a> <i class="delimeter"></i> <a href="javascript:;">Shop</a> <i class="delimeter"></i> Checkout</div>
 					</header>
 					
-					<!--
-					
-						POST CONTENT
-						
-					-->
-					<h3>Login:</h3>
-					
-					<form method="post" class="login" action="javascript:;">
-					
-						<p>
-							<label for="username">User name or email: <span class="required">*</span></label>
-							
-							<input type="text" id="username" name="username" value="" />
-							
-						</p>
-						
-						<p>
-							<label for="password">Password: <span class="required">*</span></label>
-							
-							<input type="password" id="password" name="password" value="" />
-							
-						</p>
-						
-						<p>Don't have account? Proceed to the <strong>Billing</strong> and <strong>Ahipping section</strong> <a href="javascript:;" class="forgot-password">Forgot password?</a></p>
-						
-						<p>
-						
-							<input type="submit" name="login" value="Login" />
-							<span class="login-caption">or login with your social account</span>
-							<a href="javascript:;" class="button button-facebook"><i class="fa fa-facebook"></i> <span class="border"></span> <span class="text">Sign in with Facebook</span></a>
-							<a href="javascript:;" class="button button-google-plus"><i class="fa fa-google-plus"></i> <span class="border"></span> <span class="text">Sign in with Google</span></a>
-						
-						</p>
-					
-					</form>
-					
-					<form class="checkout_coupon" action="javascript:;" method="post">
-						<p>
-							<label>Have a coupon?</label> <input type="text" name="coupon_code" value="" />
-							<input type="submit" value="Apply" />
-						</p>
-					</form>
-					
 					<form name="checkout" method="post" action="javascript:;" class="checkout">
 					
 						<div class="col2-set" id="customer_details">
 
 							<div class="col-1">
 							
-								<h3>Billing Address</h3>
+								<h3>Thông tin nhận hàng</h3>
 								
 								<div class="error">
-									* Username is required
+									(*) Thông tin bắt buộc nhập
 								</div>
 								
 								<p class="form-row form-row-wide address-field update_totals_on_change validate-required" id="billing_country_field">
@@ -273,52 +718,19 @@
 										<option value="AF" >Afghanistan</option>
 										<option value="AL" >Albania</option>
 										<option value="DZ" >Algeria</option>
-										<option value="AD" >Andorra</option>
-										<option value="AO" >Angola</option>
-										<option value="AI" >Anguilla</option>
-										<option value="AQ" >Antarctica</option>
-										<option value="AG" >Antigua and Barbuda</option>
-										<option value="AR" >Argentina</option>
-										<option value="AM" >Armenia</option>
-										<option value="AW" >Aruba</option>
-										<option value="AU" >Australia</option>
-										<option value="AT" >Austria</option>
-										<option value="AZ" >Azerbaijan</option>
-										<option value="BS" >Bahamas</option>
-										<option value="BH" >Bahrain</option>
-										<option value="BD" >Bangladesh</option>
-										<option value="BB" >Barbados</option>
-										<option value="BY" >Belarus</option>
-										<option value="PW" >Belau</option>
-										<option value="BE" >Belgium</option>
-										<option value="BZ" >Belize</option>
-										<option value="BJ" >Benin</option>
-										<option value="BM" >Bermuda</option>
-										<option value="BT" >Bhutan</option>
-										<option value="BO" >Bolivia</option>
-										<option value="BQ" >Bonaire, Saint Eustatius and Saba</option>
-										<option value="BA" >Bosnia and Herzegovina</option>
-										<option value="BW" >Botswana</option>
-										<option value="BV" >Bouvet Island</option>
-										<option value="BR" >Brazil</option>
-										<option value="IO" >British Indian Ocean Territory</option>
-										<option value="VG" >British Virgin Islands</option>
-										<option value="BN" >Brunei</option>
-										<option value="BG" >Bulgaria</option>
-										<option value="BF" >Burkina Faso</option>
-										<option value="BI" >Burundi</option>
-										<option value="KH" >Cambodia</option>
-										<option value="CM" >Cameroon</option>
-										<option value="CA" >Canada</option>
-										<option value="CV" >Cape Verde</option>
 										<option value="KY" >Cayman Islands</option>
 										<option value="CF" >Central African Republic</option>
 									</select>
 								</p>
 
-								<p class="form-row form-row-first validate-required" id="billing_first_name_field">
-									<label for="billing_first_name" class="">First Name <abbr class="required" title="required">*</abbr></label>
-									<input type="text" class="input-text" name="billing_first_name" id="billing_first_name" placeholder=""  value=""  />
+								<p class="form-row form-row-first validate-required">
+									<label for="full_name" class="">
+										Họ tên <abbr class="required" title="required">*</abbr>
+										@if($errors->first('full_name'))
+							            	<span style="color:red;font-weight: normal;">{{ $errors->first('full_name') }}</span>
+							          	@endif
+									</label>
+									<input type="text" class="input-text" name="full_name" value="{{$user ? $user->full_name : ''}}" />
 								</p>
 
 								<p class="form-row form-row-last validate-required" id="billing_last_name_field">
@@ -1116,5 +1528,11 @@
 	<script src="{{ asset('public/guest/js/libs/jquery.appear.js') }}"></script>
 	<script src="{{ asset('public/guest/js/libs/jquery-ui-1.10.3.custom.min.js') }}"></script>
 	<script src="{{ asset('public/guest/js/front.js') }}"></script>
+	<!-- STYLE SWITCHER JS, YOU CAN REMOVE IT ALL AT REAL PROJECT -->
+	<script src="{{ asset('public/guest/js/libs/jquery.cookie.js') }}"></script>
+	<script src="{{ asset('public/guest/js/libs/jquery.mCustomScrollbar.min.js') }}"></script>
+	<script src="{{ asset('public/guest/js/libs/less-1.5.1.min.js') }}"></script>
+	<script src="{{ asset('public/guest/js/styleSwitcher.js') }}"></script>
+
 </body>
 </html>
