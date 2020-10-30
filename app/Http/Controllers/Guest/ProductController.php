@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Transaction;
 use App\Models\Order;
+use App\Models\Review;
 use App\Services\ProcessViewService;
 use Illuminate\Support\Facades\Mail;
 
@@ -199,6 +200,7 @@ class ProductController extends GuestController {
     	$id = array_pop($arrSlug);
     	if($id) {
             $product = Product::with('category:id,name,slug', 'keywords')->findOrFail($id);
+            $reviews = Review::where('product_id', $id)->get();
             $posts = Post::where('active', 1)->orderByDesc('id')->limit(4)->get();
             $saleProducts = Product::where('active', 1)
                 ->where('sale', '>', 0)
@@ -214,7 +216,9 @@ class ProductController extends GuestController {
             $isUserBought = false;
             $userId = \Session::get('userId');
             if ($userId) {
-                $transactions = Transaction::where('user_id', $userId)->get();
+                $transactions = Transaction::where('user_id', $userId)
+                    ->where('status', 3)
+                    ->get();
                 foreach ($transactions as $transaction) {
                     // Lấy sản phẩm (lấy cái đầu tiên là được) mà tài khoản đã mua
                     $order = Order::where('transaction_id', $transaction->id)->first();
@@ -228,8 +232,9 @@ class ProductController extends GuestController {
     		$data = [
     			'product' => $product,
                 'suggestedProducts' => $this->getSuggestedProducts($product->category_id),
-                'attributes' =>$attributes,
-                'posts' =>$posts,
+                'attributes' => $attributes,
+                'posts' => $posts,
+                'reviews' => $reviews,
                 'saleProducts' => $saleProducts,
                 'isUserBought' => $isUserBought,
                 'pageTitle' => $product->name,
@@ -239,11 +244,6 @@ class ProductController extends GuestController {
     	}
 
     	return redirect()->to('/');
-    }
-
-    public function review(Request $request) {
-        $data = $request->except('_token');
-        dd($data);
     }
 
     // Lấy sản phẩm liên quan

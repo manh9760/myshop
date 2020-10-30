@@ -73,12 +73,18 @@
 									</span>
 									
 									<div class="rating">
-										<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-										<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-										<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-										<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-										<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
-										<span>(<strong>5</strong> đánh giá)</span>
+										<!-- Hiển thị số sao review của sản phẩm -->
+										@for($i = 0; $i < $product->review_star; $i++)
+											<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+										@endfor
+
+										<!-- Trường hợp sản phẩm được đánh giá < 5 sao thì thêm sao rỗng cho đủ 5 sao -->
+										@if($product->review_star < 5)
+											@for($i = 0; $i < (5 - $product->review_star); $i++)
+												<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+											@endfor	
+										@endif
+										<span>(<strong>{{$product->review_total}}</strong> đánh giá)</span>
 									</div>
 								</header>
 								
@@ -140,7 +146,7 @@
 							</div>
 
 							<div>
-								<h2 class="title">Đánh giá (7)</h2>
+								<h2 class="title">Đánh giá ({{$product->review_total}})</h2>
 
 								<div id="comments">
 									@if($isUserBought)
@@ -148,7 +154,8 @@
 									<div id="respond">
 										<form action="{{ route('post.reviewProduct') }}" id="commentform" method="post">
 											@csrf
-											<input type="hidden" name="userId" value="{{Session::get('userId') ?? ''}}" />
+											<input type="hidden" name="user_id" value="{{Session::get('userId') ?? ''}}" />
+											<input type="hidden" name="product_id" value="{{$product->id}}" />
 											<fieldset>
 												<div class="wrapper-block">
 													<ul style="float:left;margin-right:40px;">
@@ -200,68 +207,35 @@
 
 														<li><input type="submit" id="submit" value="Gửi đánh giá" /></li>
 													</ul>
-													<textarea name="comment" id="comment" placeholder="Đánh giá sản phẩm của bạn"></textarea>
+													<textarea name="content" id="comment" placeholder="Đánh giá sản phẩm của bạn"></textarea>
 												</div>
 											</fieldset>
 										</form>
 									</div>
 									@endif
+
+									@if($reviews)
 									<ol class="comment-list">
+										@foreach($reviews as $review)
 										<li class="comment odd depth-1">
 											<div class="comment-avatar">
 												<img src="images/temp/avatar_4.jpg" width="70" height="70" alt="" />
 											</div>
 									
 											<div class="comment-data">
-												<span class="author">James May</span>
-												<span class="time">3 July 2013</span>
+												<span class="author">{{$review->user->full_name}}</span>
+												<span class="time">{{ $review->created_at->format("d/m/Y") }}</span>
 											</div>
 											<div class="comment-content">
-												<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form. By injected humour, or randomised words which don't look even slightly believable.</p>
-											</div>
-									
-											<div class="comment-reply">
-												<a href="javascript:;">Reply</a> <i class="arrow-keep-reading"></i>
-												<!--
-												<a href="javascript:;" class="likes">
-													Like 
-													<i class="fa fa-thumbs-up"></i>
-												</a>
-												-->
-											</div>
-								
-										</li>
-										<li class="comment odd depth-1">
-								
-											<div class="comment-avatar">
-									
-												<img src="images/temp/avatar_1.jpg" width="70" height="70" alt="" />
-									
-											</div>
-									
-											<div class="comment-data">
-									
-												<span class="author">James May</span>
-										
-												<span class="time">3 July 2013</span>
-									
-											</div>
-									
-											<div class="comment-content">
-												<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form. By injected humour, or randomised words which don't look even slightly believable.</p>
-											</div>
-									
-											<div class="comment-reply">
-												<a href="javascript:;">Reply</a> <i class="arrow-keep-reading"></i>
-												<!--
-												<a href="javascript:;" class="likes">
-													Like 
-													<i class="fa fa-thumbs-up"></i>
-												</a>
-												-->
+												@for($i = 0; $i < $review->star; $i++)
+													<img src="{{ asset('public/guest/images/star-1.png') }}" width="10" height="10" alt="" />
+												@endfor
+												<p>{{$review->content}}</p>
 											</div>
 										</li>
+										@endforeach
 									</ol>
+									@endif
 
 									<div id="respond">
 										<h3>Gửi câu hỏi:</h3>
