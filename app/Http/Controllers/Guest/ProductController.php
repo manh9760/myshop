@@ -44,6 +44,22 @@ class ProductController extends GuestController {
             });
         }
 
+        // Lọc sản phẩm theo đánh giá ------- Chưa chạy được
+        if ($request->starFrom != null) {
+            $starFrom = $request->starFrom;
+            switch ($starFrom) {
+                case 3:
+                    $products->where('average_star', '>=', 3);
+                    break;
+                case 4:
+                    $products->where('average_star', '>=', 4);
+                    break;
+                case 5:
+                    $products->where('average_star', '>=', 5);
+                    break;      
+            }
+        }
+
         // if ($request->price) --> Nếu $request->price = 0 --> không vào switch
         if ($request->price != null) {
             $price = $request->price;
@@ -84,19 +100,20 @@ class ProductController extends GuestController {
         $mostBoughtProducts = Product::where('active', 1)
             ->where('paid', '>', 0)
             ->orderByDesc('paid')
-            ->select('id', 'name', 'slug', 'avatar', 'price', 'price_old', 'sale', 'description')
+            ->select('id', 'name', 'slug', 'avatar', 'price', 'price_old', 'sale', 'average_star', 'description')
             ->paginate(16);
 
         $posts = Post::where('active', 1)->orderByDesc('id')->limit(4)->get();
 
         $products = $products
             ->orderByDesc('id')
-            ->select('id', 'name', 'slug', 'avatar', 'price', 'price_old', 'price_entry', 'number', 'sale', 'description')
+            ->select('id', 'name', 'slug', 'avatar', 'price', 'price_old', 'price_entry', 'number', 'sale', 'average_star', 'description')
             ->paginate(16);
 
         // Không muốn hiển thị sản phẩm top sale bên aside
         $saleProducts = null;
         $attributes = $this->syncAttributeGroup();
+
         $data = [
             'products' => $products,
             'query' => $request->query(),
@@ -175,7 +192,7 @@ class ProductController extends GuestController {
 
         $products = $products
             ->orderByDesc('id')
-            ->select('id', 'name', 'slug', 'avatar', 'price', 'price_old', 'price_entry', 'number', 'sale', 'description')
+            ->select('id', 'name', 'slug', 'avatar', 'price', 'price_old', 'price_entry', 'number', 'sale', 'average_star', 'description')
             ->paginate(16);
         
         // Không muốn hiển thị sản phẩm top sale bên aside
@@ -214,8 +231,16 @@ class ProductController extends GuestController {
 
             // Kiểm tra tài khoản đang nhập đã mua sản phẩm này chưa để có thể đánh giá sản phẩm
             $isUserBought = false;
+            // Nếu tài khoản này đã đánh giá sản phẩm thì ẩn form đánh giá
+            $isNotUserReviewed = true;
             $userId = \Session::get('userId');
             if ($userId) {
+                foreach ($reviews as $review) {
+                    if ($review->user_id == $userId) {
+                        $isNotUserReviewed = false;
+                        break;
+                    }
+                }
                 $transactions = Transaction::where('user_id', $userId)
                     ->where('status', 3)
                     ->get();
@@ -237,6 +262,7 @@ class ProductController extends GuestController {
                 'reviews' => $reviews,
                 'saleProducts' => $saleProducts,
                 'isUserBought' => $isUserBought,
+                'isNotUserReviewed' => $isNotUserReviewed,
                 'pageTitle' => $product->name,
                 'bodyClass' => 'single-product',
     		];
@@ -254,7 +280,7 @@ class ProductController extends GuestController {
                 ['number', '>', 0],
             ])
             ->orderByDesc('id')
-            ->select('id', 'name', 'slug', 'avatar', 'price', 'price_old', 'number', 'sale')
+            ->select('id', 'name', 'slug', 'avatar', 'price', 'price_old', 'number', 'sale', 'average_star')
             ->paginate(3);
         return $products;
     }

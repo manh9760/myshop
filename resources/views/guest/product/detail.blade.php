@@ -74,13 +74,13 @@
 									
 									<div class="rating">
 										<!-- Hiển thị số sao review của sản phẩm -->
-										@for($i = 0; $i < $product->review_star; $i++)
+										@for($i = 0; $i < $product->average_star; $i++)
 											<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
 										@endfor
 
 										<!-- Trường hợp sản phẩm được đánh giá < 5 sao thì thêm sao rỗng cho đủ 5 sao -->
-										@if($product->review_star < 5)
-											@for($i = 0; $i < (5 - $product->review_star); $i++)
+										@if($product->average_star < 5)
+											@for($i = 0; $i < (5 - $product->average_star); $i++)
 												<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
 											@endfor	
 										@endif
@@ -149,7 +149,8 @@
 								<h2 class="title">Đánh giá ({{$product->review_total}})</h2>
 
 								<div id="comments">
-									@if($isUserBought)
+									<!-- Nếu user đã mua sản phẩm này và chưa đánh giá -->
+									@if($isUserBought && $isNotUserReviewed)
 									<!-- Viết đánh giá -->
 									<div id="respond">
 										<form action="{{ route('post.reviewProduct') }}" id="commentform" method="post">
@@ -236,37 +237,6 @@
 										@endforeach
 									</ol>
 									@endif
-
-									<div id="respond">
-										<h3>Gửi câu hỏi:</h3>
-								
-										<form action="javascript:;" id="commentform" method="post">
-											<fieldset>
-												<div class="wrapper-block ib half">
-													<label class="label" for="author">
-														Tên:
-													</label>
-													<input type="text" id="author" name="author" size="30" value="{{Session::get('userFullName') ?? ''}}" />
-												</div>
-										
-												<div class="wrapper-block ib half">
-													<label class="label" for="email">
-														Địa chỉ email:
-													</label>
-													<input type="email" id="email" name="email" size="30" value="{{Session::get('userEmail') ?? ''}}" />
-												</div>
-										
-												<div class="wrapper-block">
-													<label class="label" for="comment">
-														Nội dung:
-													</label>
-													<textarea name="comment" id="comment"></textarea>
-												</div>
-									
-												<input type="submit" id="submit" value="Gửi câu hỏi" />
-											</fieldset>
-										</form>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -296,11 +266,17 @@
 									</a>
 									
 									<div class="rating">
-										<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-										<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-										<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-										<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-										<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+										<!-- Hiển thị số sao review của sản phẩm -->
+										@for($i = 0; $i < $suggestedProduct->average_star; $i++)
+											<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+										@endfor
+
+										<!-- Trường hợp sản phẩm được đánh giá < 5 sao thì thêm sao rỗng cho đủ 5 sao -->
+										@if($suggestedProduct->average_star < 5)
+											@for($i = 0; $i < (5 - $suggestedProduct->average_star); $i++)
+												<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+											@endfor	
+										@endif
 									</div>
 										
 									<div class="rating">

@@ -50,11 +50,17 @@
 								</a>
 							</h4>
 							<div class="rating">
-								<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-								<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-								<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-								<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
-								<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+								<!-- Hiển thị số sao review của sản phẩm -->
+								@for($i = 0; $i < $product->average_star; $i++)
+									<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
+								@endfor
+
+								<!-- Trường hợp sản phẩm được đánh giá < 5 sao thì thêm sao rỗng cho đủ 5 sao -->
+								@if($product->average_star < 5)
+									@for($i = 0; $i < (5 - $product->average_star); $i++)
+										<img src="{{ asset('public/guest/images/star-2.png') }}" width="19" height="18" alt="" />
+									@endfor	
+								@endif
 							</div>
 							<div class="rating">
 								@if($product->sale)

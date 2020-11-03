@@ -67,7 +67,7 @@
 
 			<ul>
 				<li>
-					<a href="#">
+					<a href="{{ request()->fullUrlWithQuery(['starFrom' => 5]) }}">
 						<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
 						<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
 						<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
@@ -77,7 +77,7 @@
 					<span>(Từ 5 sao)</span>
 				</li>
 				<li>
-					<a href="#">
+					<a href="{{ request()->fullUrlWithQuery(['starFrom' => 4]) }}">
 						<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
 						<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
 						<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
@@ -87,7 +87,7 @@
 					<span>(Từ 4 sao)</span>
 				</li>
 				<li>
-					<a href="#">
+					<a href="{{ request()->fullUrlWithQuery(['starFrom' => 3]) }}">
 						<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
 						<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
 						<img src="{{ asset('public/guest/images/star-1.png') }}" width="19" height="18" alt="" />
