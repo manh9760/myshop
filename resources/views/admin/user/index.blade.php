@@ -16,14 +16,19 @@
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title"><a href="{{route('admin.user.create')}}" class="btn btn-success btn-sm">Thêm mới <i class="fa fa-plus"></i></a></h3>
-            <div class="box-tools">
-              <div class="input-group" style="width: 150px;">
-                <input type="text" name="table_search" class="form-control input-sm pull-right" placeholder="Search">
-                <div class="input-group-btn">
-                  <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                </div>
-              </div>
+            <div class="box-title">
+              <form class="form-inline">
+                <input type="text" name="full_name" value="{{Request::get('full_name')}}" class="form-control" placeholder="Họ tên..." />
+                <input type="text" name="full_name" value="{{Request::get('full_name')}}" class="form-control" placeholder="Số điện thoại..." />
+                <input type="text" name="email" value="{{Request::get('email')}}" class="form-control" placeholder="Email..." />
+                <button type="submit" class="btn btn-info">
+                  <i class="fa fa-search"></i> Tìm kiếm
+                </button>
+                <button type="submit" name="export_excel" value="true" class="btn btn-success">
+                  <i class="fa fa-save"></i> Xuất File Excel
+                </button>
+                <a href="{{route('admin.user.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> Thêm mới</a>
+              </form>
             </div>
           </div><!-- /.box-header -->
           <div class="box-body table-responsive no-padding">
