@@ -136,7 +136,7 @@
                     <td>
                       <!-- <a href="{{route('admin.transaction.detail', $transaction->id)}}" class="js-view-transaction btn btn-xs btn-info" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i> Xem</a> -->
                       <a href="{{route('admin.transaction.detail', $transaction->id)}}" class="btn btn-xs btn-info"><i class="fa fa-eye"></i> Xem</a>
-                      <a href="{{ route('admin.transaction.delete', $transaction->id) }}" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Xóa</a> <br /> 
+                      <a href="{{ route('admin.transaction.delete', $transaction->id) }}" class="delete-confirm btn btn-xs btn-danger"><i class="fa fa-trash"></i> Xóa</a> <br /> 
                       <div class="btn-group">
                         <button type="button" class="btn btn-warning btn-xs">Cập nhật</button>
                         <button type="button" class="btn btn-warning btn-xs dropdown-toggle" data-toggle="dropdown">

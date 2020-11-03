@@ -17,7 +17,7 @@
 	@endif
 
 	<!-- Lọc sản phẩm theo thuộc tính -->
-	@if(isset($attributes))
+	@if(isset($attributes) && ($bodyClass != 'single-product'))
 	@foreach($attributes as $key => $attribute)
 	<div class="widget widget-tags">
 		<h4 class="widget-title">{{$key}}</h4>
@@ -32,7 +32,7 @@
 	@endforeach
 	@endif
 	
-	@if($pageTitle != "Tin tức công nghệ")
+	@if($pageTitle != "Tin tức công nghệ" && ($bodyClass != 'single-product'))
 	<style type="text/css">
 		.widget-content .active a {
 			color:black;
@@ -59,7 +59,7 @@
 	</div>
 	@endif
 
-	@if($pageTitle != "Tin tức công nghệ")
+	@if($pageTitle != "Tin tức công nghệ" && ($bodyClass != 'single-product'))
 	<!-- Lọc sản phẩm theo đánh giá -->
 	<div class="widget widget-recent-tweets">
 		<h4 class="widget-title">Đánh giá</h4>

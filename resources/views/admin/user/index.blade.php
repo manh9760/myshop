@@ -63,7 +63,7 @@
                     </td>
                     <td>
                       <a href="{{ route('admin.user.update', $user->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Sửa</a>
-                      <a href="{{ route('admin.user.delete', $user->id) }}" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Xóa</a>
+                      <a href="{{ route('admin.user.delete', $user->id) }}" class="delete-confirm btn btn-xs btn-danger"><i class="fa fa-trash"></i> Xóa</a>
                     </td>
                   </tr>
                   <?php $i++; ?>

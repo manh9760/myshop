@@ -47,7 +47,7 @@
                     <td>{{ $keyword->slug }}</td>
                     <td>
                       @if($keyword->hot)
-                        <a href="{{ route('admin.keyword.hot', $keyword->id) }}" class="label label-success">Nổi bật</a>
+                        <a href="{{ route('admin.keyword.hot', $keyword->id) }}" class="label label-success">Hiện</a>
                       @else
                         <a href="{{ route('admin.keyword.hot', $keyword->id) }}" class="label label-danger">Ẩn</a>
                       @endif
@@ -67,7 +67,7 @@
                     </td>
                     <td>
                       <a href="{{ route('admin.keyword.update', $keyword->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Sửa</a>
-                      <a href="{{ route('admin.keyword.delete', $keyword->id) }}" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Xóa</a>
+                      <a href="{{ route('admin.keyword.delete', $keyword->id) }}" class="delete-confirm btn btn-xs btn-danger"><i class="fa fa-trash"></i> Xóa</a>
                     </td>
                   </tr>
                   <?php $i++; ?>

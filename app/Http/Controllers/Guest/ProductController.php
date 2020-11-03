@@ -217,7 +217,7 @@ class ProductController extends GuestController {
     	$id = array_pop($arrSlug);
     	if($id) {
             $product = Product::with('category:id,name,slug', 'keywords')->findOrFail($id);
-            $reviews = Review::where('product_id', $id)->get();
+            $reviews = Review::where('product_id', $id)->where('status', 1)->get();
             $posts = Post::where('active', 1)->orderByDesc('id')->limit(4)->get();
             $saleProducts = Product::where('active', 1)
                 ->where('sale', '>', 0)

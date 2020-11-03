@@ -107,4 +107,14 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function () {
 	    Route::get('active/{id}', 'PostController@active')->name('admin.post.active');
 	    Route::get('delete/{id}', 'PostController@delete')->name('admin.post.delete');
 	});
+
+	Route::group(['prefix'=>'review'], function () {
+	    Route::get('', 'ReviewController@index')->name('admin.review.index');
+	    Route::get('create', 'ReviewController@create')->name('admin.review.create');
+	    Route::post('create', 'ReviewController@created');
+	    Route::get('update/{id}', 'ReviewController@update')->name('admin.review.update');
+	    Route::post('update/{id}', 'ReviewController@updated');
+	    Route::get('active/{id}', 'ReviewController@active')->name('admin.review.active');
+	    Route::get('delete/{id}', 'ReviewController@delete')->name('admin.review.delete');
+	});
 });

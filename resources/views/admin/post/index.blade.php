@@ -31,10 +31,8 @@
                     <tr>
                       <th>STT</th>
                       <th>Tiêu đề</th>
-                      <th>Đường dẫn</th>
                       <th>Hình đại diện</th>
                       <th>Trạng thái</th>
-                      <th>Mô tả</th>
                       <th>Ngày tạo</th>
                       <th>Ngày sửa</th>
                       <th>Tác vụ</th>
@@ -44,8 +42,7 @@
                       @foreach($posts as $post)
                         <tr>
                           <td>{{ $i }}</td>
-                          <td>{{ $post->title }}</td>
-                          <td>{{ $post->slug }}</td>
+                          <td style="max-width:300px"><strong>{{ $post->title }}</strong></td>
                           <td>
                             <img src="{{ asset(parse_url_file($post->avatar)) }}" width="80" />
                           </td>
@@ -56,7 +53,6 @@
                               <a href="{{ route('admin.post.active', $post->id) }}" class="label label-danger">Ẩn</a>
                             @endif
                           </td>
-                          <td>{{ $post->description }}</td>
                           <td>
                             @if($post->created_at)
                               Vào lúc {{ $post->created_at->format("H:i:s") }}<br />
@@ -71,7 +67,7 @@
                           </td>
                           <td>
                             <a href="{{ route('admin.post.update', $post->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Sửa</a>
-                            <a href="{{ route('admin.post.delete', $post->id) }}" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Xóa</a>
+                            <a href="{{ route('admin.post.delete', $post->id) }}" class="delete-confirm btn btn-xs btn-danger"><i class="fa fa-trash"></i> Xóa</a>
                           </td>
                         </tr>
                         <?php $i++; ?>

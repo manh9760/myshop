@@ -181,20 +181,11 @@
         <section class="sidebar">
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header">THỐNG KÊ BÁN HÀNG</li>
+            <li class="header">BÁN HÀNG</li>
             <li>
               <a href="{{route('admin.index')}}">
                 <i class="fa fa-pie-chart"></i> 
                 <span>Trang thống kê</span>
-              </a>
-            </li>
-            <li>
-              <a href="{{route('admin.category.index')}}">
-                <i class="fa fa-database"></i>
-                <span>Danh mục sản phẩm</span>
-                <span class="label label-primary pull-right">
-                  {{\DB::table('categories')->count()}}
-                </span>
               </a>
             </li>
             <li>
@@ -203,15 +194,6 @@
                 <span>Quản lý sản phẩm</span>
                 <span class="label label-primary pull-right">
                   {{\DB::table('products')->count()}}
-                </span>
-              </a>
-            </li>
-            <li>
-              <a href="{{route('admin.user.index')}}">
-                <i class="fa fa-users"></i>
-                <span>Quản lý người dùng</span>
-                <span class="label label-primary pull-right">
-                  {{\DB::table('users')->count()}}
                 </span>
               </a>
             </li>
@@ -225,11 +207,20 @@
               </a>
             </li>
             <li>
-              <a href="{{route('admin.menu.index')}}">
-                <i class="fa fa-folder-open"></i>
-                <span>Danh mục bài viết</span>
+              <a href="{{route('admin.user.index')}}">
+                <i class="fa fa-users"></i>
+                <span>Quản lý người dùng</span>
                 <span class="label label-primary pull-right">
-                  {{\DB::table('menus')->count()}}
+                  {{\DB::table('users')->count()}}
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="{{route('admin.review.index')}}">
+                <i class="fa fa-star-half-o"></i>
+                <span>Quản lý đánh giá</span>
+                <span class="label label-primary pull-right">
+                  {{\DB::table('reviews')->count()}}
                 </span>
               </a>
             </li>
@@ -239,6 +230,25 @@
                 <span>Quản lý bài viết</span>
                 <span class="label label-primary pull-right">
                   {{\DB::table('posts')->count()}}
+                </span>
+              </a>
+            </li>
+            <li class="header">DANH MỤC - NÂNG CAO</li>
+            <li>
+              <a href="{{route('admin.category.index')}}">
+                <i class="fa fa-database"></i>
+                <span>Danh mục sản phẩm</span>
+                <span class="label label-primary pull-right">
+                  {{\DB::table('categories')->count()}}
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="{{route('admin.menu.index')}}">
+                <i class="fa fa-folder-open"></i>
+                <span>Danh mục bài viết</span>
+                <span class="label label-primary pull-right">
+                  {{\DB::table('menus')->count()}}
                 </span>
               </a>
             </li>
@@ -304,6 +314,7 @@
 
     <!-- Thông báo (SweetAlert) -->
     <script src="{{ asset('public/admin/sweetalert/sweetalert2@9.js') }}"></script>
+    <script src="{{ asset('public/admin/sweetalert/sweetalert.min.js') }}"></script>
     @include('sweetalert::alert')
 
     <script type="text/javascript">
@@ -357,7 +368,25 @@
             }
           }); 
         });
+
+        // Xác nhận xóa dữ liệu
+        $('.delete-confirm').on('click', function (event) {
+          event.preventDefault();
+          const url = $(this).attr('href');
+          swal({
+            title: 'Đồng ý xóa?',
+            text: 'Dữ liệu sẽ bị xóa và không thể khôi phục!',
+            icon: 'warning',
+            buttons: ["Hủy", "Đồng ý"],
+          }).then(function(value) {
+            if (value) {
+              window.location.href = url;
+            }
+          });
+        });
+
       });
+
     </script>
 
     <!-- Các file js thêm -->
