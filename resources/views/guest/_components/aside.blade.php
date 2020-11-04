@@ -139,7 +139,7 @@
 				</a>
 			</div>
 			<div class="text">
-				<a href="{{ route('get.post_detail', $post->slug.'-'.$post->id) }}">{{$post->title}}</a>
+				<a href="{{ route('get.post_detail', $post->slug.'-'.$post->id) }}">{{Str::words($post->title, 15)}}</a>
 				<div class="date">{{ $post->created_at->format("d/m/Y") }}</div>
 			</div>
 		</div>

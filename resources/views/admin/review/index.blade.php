@@ -25,25 +25,21 @@
           <div class="box-header">
             <div class="box-title">
               <form class="form-inline">
-                <input type="text" name="full_name" value="{{Request::get('full_name')}}" class="form-control" placeholder="Họ tên..." />
-                <input type="text" name="email" value="{{Request::get('email')}}" class="form-control" placeholder="Email..." />
-                <select name="user_type" class="form-control">
-                  <option value="">--- Khách hàng ---</option>
-                  <option value="1" {{ Request::get('user_type') == 1 ? "selected='selected'" : ""}}>Thành viên</option>
-                  <option value="2" {{ Request::get('user_type') == 2 ? "selected='selected'" : ""}}>Chưa đăng ký</option>
+                <select name="star" class="form-control">
+                  <option value="">--- Số sao ---</option>
+                  <option value="5" {{ Request::get('star') == 5 ? "selected='selected'" : ""}}>5 sao</option>
+                  <option value="4" {{ Request::get('star') == 4 ? "selected='selected'" : ""}}>4 sao</option>
+                  <option value="3" {{ Request::get('star') == 3 ? "selected='selected'" : ""}}>3 sao</option>
+                  <option value="2" {{ Request::get('star') == 2 ? "selected='selected'" : ""}}>2 sao</option>
+                  <option value="1" {{ Request::get('star') == 1 ? "selected='selected'" : ""}}>1 sao</option>
                 </select>
                 <select name="status" class="form-control">
                   <option value="">--- Trạng thái ---</option>
-                  <option value="3" {{ Request::get('status') == 3 ? "selected='selected'" : ""}}>Đã giao</option>
-                  <option value="2" {{ Request::get('status') == 2 ? "selected='selected'" : ""}}>Đang vận chuyển</option>
-                  <option value="1" {{ Request::get('status') == 1 ? "selected='selected'" : ""}}>Tiếp nhận</option>
-                  <option value="4" {{ Request::get('status') == 4 ? "selected='selected'" : ""}}>Đã hủy</option>
+                  <option value="1" {{ Request::get('status') == 1 ? "selected='selected'" : ""}}>Hiện</option>
+                  <option value="2" {{ Request::get('status') == 2 ? "selected='selected'" : ""}}>Ẩn</option>
                 </select>
                 <button type="submit" class="btn btn-info">
                   <i class="fa fa-search"></i> Tìm kiếm
-                </button>
-                <button type="submit" name="export_excel" value="true" class="btn btn-success">
-                  <i class="fa fa-save"></i> Xuất File Excel
                 </button>
               </form>
             </div>
@@ -68,13 +64,13 @@
                     <td>{{ $review->user->full_name }}</td>
                     <td class="ratings">
                       <!-- Hiển thị số sao review của sản phẩm -->
-                      @for($i = 0; $i < $review->product->average_star; $i++)
+                      @for($i = 0; $i < $review->star; $i++)
                         <span class="active"><i class="fa fa-star"></i></span>
                       @endfor
 
                       <!-- Trường hợp sản phẩm được đánh giá < 5 sao thì thêm sao rỗng cho đủ 5 sao -->
-                      @if($review->product->average_star < 5)
-                        @for($i = 0; $i < (5 - $review->product->average_star); $i++)
+                      @if($review->star < 5)
+                        @for($i = 0; $i < (5 - $review->star); $i++)
                           <span><i class="fa fa-star"></i></span>
                         @endfor 
                       @endif

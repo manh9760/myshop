@@ -10,15 +10,37 @@ use Illuminate\Support\Str;
 use Carbon\Carbon;
 
 class PostController extends AdminController {
-    public function index() {
+    public function index(Request $request) {
         // Kiểm tra đăng nhập
         if (!$this->isLogined())
             return redirect()->to('/admin/login');
-        
-        $posts = Post::with('menu:id,name')->paginate(10);
-    	$data = [
+
+        $posts = Post::with('menu:id,name');
+        $menus = Menu::all();
+        // Các điều kiện lọc
+        if ($title = $request->title) {
+            $posts->where('title', 'like', '%'.$title.'%');
+        }
+        if ($menu = $request->menu) {
+            $posts->where('menu_id', $menu);
+        }
+        if ($status = $request->status) {
+            switch ($status) {
+                case 1:
+                    $posts->where('active', 1);
+                    break;
+                case 2:
+                    $posts->where('active', 0);
+                    break;
+            }   
+        }
+
+        $posts = $posts->orderByDesc('id')->paginate(10);
+    	
+        $data = [
     		'posts' => $posts,
-    	];
+    	    'menus' => $menus,
+        ];
     	return view('admin.post.index', $data);
     }
 

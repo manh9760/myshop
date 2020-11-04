@@ -8,13 +8,26 @@ use App\User;
 
 class UserController extends AdminController {
 
-    public function index() {
+    public function index(Request $request) {
         // Kiểm tra đăng nhập
         if (!$this->isLogined())
             return redirect()->to('/admin/login');
         
-        // select `id`, `name` from `categories`where `categories`.`id`
-        $users = User::paginate(10);
+        $users = User::where('role', 3);
+
+        // Các điều kiện lọc
+        if ($name = $request->name) {
+            $users->where('full_name', 'like', '%'.$name.'%');
+        }
+        if ($phone = $request->phone) {
+            $users->where('phone', 'like', '%'.$phone.'%');
+        }
+        if ($email = $request->email) {
+            $users->where('email', 'like', '%'.$email.'%');
+        }
+
+        $users = $users->orderByDesc('id')->paginate(10);
+
     	$data = [
     		'users' => $users,
     	];

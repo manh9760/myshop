@@ -9,12 +9,46 @@ use Illuminate\Support\Str;
 use Carbon\Carbon;
 
 class ReviewController extends AdminController {
-    public function index() {
+    public function index(Request $request) {
         // Kiểm tra đăng nhập
         if (!$this->isLogined())
             return redirect()->to('/admin/login');
+
+        $reviews = Review::whereRaw(1);
+
+        // Các điều kiện lọc
+        if ($status = $request->status) {
+            switch ($status) {
+                case 1:
+                    $reviews->where('status', 1);
+                    break;
+                case 2:
+                    $reviews->where('status', 0);
+                    break;
+            }   
+        }
+        if ($star = $request->star) {
+            switch ($star) {
+                case 1:
+                    $reviews->where('star', 1);
+                    break;
+                case 2:
+                    $reviews->where('star', 2);
+                    break;
+                case 3:
+                    $reviews->where('star', 3);
+                    break;
+                case 4:
+                    $reviews->where('star', 4);
+                    break;
+                case 5:
+                    $reviews->where('star', 5);
+                    break;
+            }   
+        }
         
-        $reviews = Review::orderByDesc('id')->paginate(10);
+        $reviews = $reviews->orderByDesc('id')->paginate(10);
+
     	$data = [
     		'reviews' => $reviews,
     	];

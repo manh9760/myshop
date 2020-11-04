@@ -3,7 +3,7 @@
 @section('content')
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h1>Quản lý người dùng<small>(Tổng {{$users->total()}} người dùng)</small></h1>
+    <h1>Quản lý người dùng<small>(Tổng AAA người dùng)</small></h1>
     <ol class="breadcrumb">
       <li><a href="{{route('admin.index')}}"><i class="fa fa-dashboard"></i> Trang thống kê</a></li>
       <li class="active">Danh sách người dùng</li>
@@ -18,14 +18,11 @@
           <div class="box-header">
             <div class="box-title">
               <form class="form-inline">
-                <input type="text" name="full_name" value="{{Request::get('full_name')}}" class="form-control" placeholder="Họ tên..." />
-                <input type="text" name="full_name" value="{{Request::get('full_name')}}" class="form-control" placeholder="Số điện thoại..." />
+                <input type="text" name="name" value="{{Request::get('name')}}" class="form-control" placeholder="Họ tên..." />
+                <input type="text" name="phone" value="{{Request::get('phone')}}" class="form-control" placeholder="Số điện thoại..." />
                 <input type="text" name="email" value="{{Request::get('email')}}" class="form-control" placeholder="Email..." />
                 <button type="submit" class="btn btn-info">
                   <i class="fa fa-search"></i> Tìm kiếm
-                </button>
-                <button type="submit" name="export_excel" value="true" class="btn btn-success">
-                  <i class="fa fa-save"></i> Xuất File Excel
                 </button>
                 <a href="{{route('admin.user.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> Thêm mới</a>
               </form>
@@ -78,7 +75,7 @@
           </div><!-- /.box-body -->
           <div class="box-footer clearfix">
             <ul class="pagination pagination-sm no-margin pull-right">
-              {!! $users->links() !!}
+              
             </ul>
           </div>
         </div><!-- /.box -->

@@ -42,6 +42,7 @@
                 <th>Tên sản phẩm</th>
                 <th>Danh mục</th>
                 <th>Giá sản phẩm</th>
+                <th>Tồn kho</th>
                 <th>Hình ảnh</th>
                 <th>Tình trạng</th>
                 <th>Ngày tạo</th>
@@ -53,7 +54,7 @@
                 @foreach($products as $product)
                   <tr>
                     <td>{{ $i }}</td>
-                    <td>{{ $product->name }}</td>
+                    <td style="max-width:180px">{{ $product->name }}</td>
                     <td>
                       <span class="label label-info">{{ $product->category->name ?? "[N\A]" }}</span>
                     </td>
@@ -64,6 +65,7 @@
                       @endif
                         Giá bán: {{ number_format($product->price,0,',','.') }} đ
                     </td>
+                    <td>{{ $product->number }}</td>
                     <td>
                       <img src="{{ asset(parse_url_file($product->avatar)) }}" width="80" />
                     </td>
