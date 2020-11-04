@@ -78,11 +78,15 @@
           <table class="table">
             <tr>
               <th style="width:50%">Thành tiền:</th>
-              <td>{{ number_format($transaction->total_money,0,',','.') }}  đ</td>
+              <td>
+                <?php 
+                  $total = $transaction->total_money - $city->shipping_fee;
+                ?>
+                {{ number_format($total,0,',','.') }}  đ</td>
             </tr>
             <tr>
               <th>Phí vận chuyển:</th>
-              <td>$5.80</td>
+              <td>{{ number_format($city->shipping_fee,0,',','.') }}  đ</td>
             </tr>
             <tr>
               <th>Tổng tiền thanh toán:</th>

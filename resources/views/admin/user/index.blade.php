@@ -3,7 +3,7 @@
 @section('content')
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h1>Quản lý người dùng<small>(Tổng AAA người dùng)</small></h1>
+    <h1>Quản lý người dùng<small>(Tổng {{count($users)}} người dùng)</small></h1>
     <ol class="breadcrumb">
       <li><a href="{{route('admin.index')}}"><i class="fa fa-dashboard"></i> Trang thống kê</a></li>
       <li class="active">Danh sách người dùng</li>

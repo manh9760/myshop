@@ -241,8 +241,7 @@ class CartController extends GuestController {
 
 	public function pay(CartRequest $request) {
         $data = $request->except('_token');
-        $totalMoney = str_replace(',','', \Cart::subtotal(0));
-        
+        $totalMoney = $data['total_money'];
         if (\Session::get('userId')) {
             $data['user_id'] = \Session::get('userId');
             $user = User::find(\Session::get('userId'));
@@ -259,7 +258,7 @@ class CartController extends GuestController {
                     ]);
             } 
         }  
-        $data['total_money'] = str_replace(',','', \Cart::subtotal(0));
+        $data['total_money'] = $totalMoney;
         $data['created_at'] = Carbon::now();
         $transactionId = Transaction::insertGetId($data);
         if ($transactionId) {
@@ -307,8 +306,12 @@ class CartController extends GuestController {
     // Load Tỉnh/Thành phố, Quận/Huyện,...
     public function getLocation(Request $request) {
         $parentId = $request->parent;
+        $fee = Location::where('id', $parentId)->get();
         if ($parentId)
             $locations = Location::where('parent_id', $parentId)->get();
-        return response(['data' => $locations]);
+        return response([
+            'data' => $locations,
+            'fee' => $fee,
+        ]);
     }
 }

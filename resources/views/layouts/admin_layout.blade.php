@@ -270,6 +270,15 @@
                 </span>
               </a>
             </li>
+            <li>
+              <a href="{{route('admin.shipping_fee.index')}}">
+                <i class="fa fa-link"></i>
+                <span>Quản lý phí vận chuyển</span>
+                <span class="label label-primary pull-right">
+                  {{\DB::table('locations')->where('type', 1)->count()}}
+                </span>
+              </a>
+            </li>
             <li class="header">HỆ THỐNG</li>
             <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Tài khoản nhân viên</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>

@@ -88,7 +88,6 @@
                       @endif
                     </td>
                     <td>
-                      <a href="{{ route('admin.review.update', $review->id) }}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Sửa</a>
                       <a href="{{ route('admin.review.delete', $review->id) }}" class="delete-confirm btn btn-xs btn-danger"><i class="fa fa-trash"></i> Xóa</a>
                     </td>
                   </tr>

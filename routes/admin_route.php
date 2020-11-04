@@ -110,11 +110,17 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function () {
 
 	Route::group(['prefix'=>'review'], function () {
 	    Route::get('', 'ReviewController@index')->name('admin.review.index');
-	    Route::get('create', 'ReviewController@create')->name('admin.review.create');
-	    Route::post('create', 'ReviewController@created');
-	    Route::get('update/{id}', 'ReviewController@update')->name('admin.review.update');
-	    Route::post('update/{id}', 'ReviewController@updated');
 	    Route::get('active/{id}', 'ReviewController@active')->name('admin.review.active');
 	    Route::get('delete/{id}', 'ReviewController@delete')->name('admin.review.delete');
+	});
+
+	Route::group(['prefix'=>'shipping_fee'], function () {
+	    Route::get('', 'ShippingFeeController@index')->name('admin.shipping_fee.index');
+	    Route::get('create', 'ShippingFeeController@create')->name('admin.shipping_fee.create');
+	    Route::post('create', 'ShippingFeeController@created');
+	    Route::get('update/{id}', 'ShippingFeeController@update')->name('admin.shipping_fee.update');
+	    Route::post('update/{id}', 'ShippingFeeController@updated');
+	    Route::get('active/{id}', 'ShippingFeeController@active')->name('admin.shipping_fee.active');
+	    Route::get('delete/{id}', 'ShippingFeeController@delete')->name('admin.shipping_fee.delete');
 	});
 });

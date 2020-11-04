@@ -122,15 +122,14 @@
 							<tr>
 								<th>Phí vận chuyển</th>
 								<td>
-									<label><input type="radio" name="shipping" value="" checked="checked" /> Miễn phí</label> <br />
-									<label><input type="radio" name="shipping" value="" />Nội thành: 29.000 đ</label> <br />
-									<label><input type="radio" name="shipping" value="" />Ngoại thành: 129.000 đ</label>
+									<label><span id="shipping">0</span> đ</label><br />
 								</td>
 							</tr>
 							<tr>
 								<th>Thành tiền</th>
 								<td>
-									<span class="order-total">{{ str_replace(',','.', \Cart::subtotal(0)) }} đ</span>
+									<input id="subtotal" value="{{ str_replace(',','', \Cart::subtotal(0)) }}" type="hidden" />
+									<span class="order-total"><span id="total">{{ str_replace(',','.', \Cart::subtotal(0)) }}</span> đ</span>
 								</td>
 							</tr>
 						</table>
@@ -150,7 +149,8 @@
 									<form action="{{ route('get.cart.items') }}" method="post">
 										@csrf
 										<input type="hidden" name="total_cost" value="{{$total_cost ?? 0}}">
-
+										<input type="hidden" name="total_money" id="total_in_bill" value="" />
+										
 										<table class="shipping">
 											<tr>
 												<th>Họ tên <abbr class="required" title="required">*</abbr></th>
@@ -187,7 +187,7 @@
 													@if($errors->first('city'))
 										            	<span style="color:red;">{{ $errors->first('city') }}</span>
 										          	@endif
-													<select class="js_location" data-type="city" name="city">
+													<select class="js_location shipping" data-type="city" name="city">
 														<option>__Chọn Tỉnh/Thành phố__</option>
 														@foreach($cities as $city)
 															<option value="{{$city->id}}">
@@ -300,6 +300,41 @@
 				}
 			});
 
+			// Tính phí vận chuyển
+			$(".shipping").change(function (event){
+				event.preventDefault();
+				let route = "{{ route('getLocationByAjax') }}";
+				let $this = $(this);
+				let type = $this.attr('data-type');
+				let parentId = $this.val();
+
+				// Lấy tổng tiền (chưa có phí ship)
+				let total = $('#subtotal').val();
+				$.ajax({
+					method: "GET",
+					url: route,
+					data: {type: type, parent: parentId}
+				})
+				.done(function(msg){
+					if(msg.data) {
+						// Phí ship
+						let ship = msg.fee[0].shipping_fee;
+						// Chuyển str sang Int
+						total = parseInt(total);
+						// Tổng tiền thanh toán (đã có phí ship)
+						total += ship;
+						// Gán giá trị mới cho tổng đơn hàng để truyền qua Controller thay đổi tổng tiền thanh toán
+						$('#total_in_bill').val(total);
+						// Định dạng lại phần hiển thị có dấu '.' cho giá trị tiền
+						ship = String(ship).replace(/(.)(?=(\d{3})+$)/g,'$1.');
+						total = String(total).replace(/(.)(?=(\d{3})+$)/g,'$1.');
+						$('#shipping').html(ship);
+						$('#total').html(total);
+					}
+				});
+			});
+
+			// Lấy đơn vị hành chính
 			$(".js_location").change(function (event){
 				event.preventDefault();
 				let route = "{{ route('getLocationByAjax') }}";

@@ -426,7 +426,10 @@
                               <div style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 0px; padding-left: 0px;">
                                   <!--<![endif]-->
                                   <div align="left" class="img-container center fixedwidth" style="padding-top: 10px;padding-right:0px; padding-bottom: 10px;padding-left:40px;font-size: 20px;">
-                                      <strong>Tạm tính: {{ number_format($transaction->total_money,0,',','.') }} đ</strong><br>
+                                      <?php 
+                                        $total = $transaction->total_money - $city->shipping_fee;
+                                      ?>
+                                      <strong>Tạm tính: {{ number_format($total,0,',','.') }} đ</strong><br>
                                   </div>
                               </div>
                           </div>
@@ -444,7 +447,7 @@
                               <div style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 0px; padding-left: 0px;">
                                   <!--<![endif]-->
                                   <div align="left" class="img-container center fixedwidth" style="padding-top: 10px;padding-right:0px; padding-bottom: 10px;padding-left:40px;font-size: 20px;">
-                                      <strong>Phí vận chuyển: 19.000 đ</strong><br>
+                                      <strong>Phí vận chuyển: {{ number_format($city->shipping_fee,0,',','.') }}  đ</strong><br>
                                   </div>
                               </div>
                           </div>
