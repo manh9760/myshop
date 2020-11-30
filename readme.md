@@ -1,12 +1,12 @@
 ## 1. Clone project
-Open cmd, go into xampp\htdocs folder. Run command:
+    Open cmd, go into xampp\htdocs folder. Run command:
 
-git clone https://github.com/manh9760/myshop.git
+    git clone https://github.com/manh9760/myshop.git
 
 ## 2. Generate depedencies in vendor folder
-Go to myshop project
+    Go to myshop project
 
-run composer install to generate depedencies in vendor folder
+    run composer install to generate depedencies in vendor folder
 
 ## 3. Change .env.example file to .env
 
