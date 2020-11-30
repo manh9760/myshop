@@ -19,3 +19,11 @@ run composer install to generate depedencies in vendor folder
     - Create new database named "myshop" (choose: utf8mb4_unicode_ci)
     
     - In cmd run: php artisan migrate
+    
+    - Import database file name "myshop.sql" in myshop project to myshop database
+    
+ ## 7. Enjoy:
+ 
+    - Go to Guest page: http://localhost:8080/myshop/ (replace 8080 port with your Apachge port)
+    
+    - And Admin page: http://localhost:8080/myshop/admin (use account: parabol123654@gmail.com and pass: manh1290)
