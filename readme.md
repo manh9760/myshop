@@ -13,3 +13,9 @@ run composer install to generate depedencies in vendor folder
 ## 4. Run command: php artisan key:generate
 
 ## 5. Configure .env and config\app.php file
+
+## 6. Create database:
+
+    - Create new database named "myshop" (choose: utf8mb4_unicode_ci)
+    
+    - In cmd run: php artisan migrate
