@@ -8,7 +8,7 @@ Go to myshop project
 
 run composer install to generate depedencies in vendor folder
 
-## Laravel Sponsors
+## 3. Change .env.example file to .env
 
 We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
