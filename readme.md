@@ -3,7 +3,7 @@ Open cmd, go into xampp\htdocs folder. Run command:
 
 git clone https://github.com/manh9760/myshop.git
 
-## 2. run composer install to generate depedencies in vendor folder
+## 2. Generate depedencies in vendor folder
 Go to myshop project
 
 run composer install to generate depedencies in vendor folder
