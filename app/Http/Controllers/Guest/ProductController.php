@@ -101,14 +101,14 @@ class ProductController extends GuestController {
             ->where('paid', '>', 0)
             ->orderByDesc('paid')
             ->select('id', 'name', 'slug', 'avatar', 'price', 'price_old', 'sale', 'average_star', 'description')
-            ->paginate(16);
+            ->paginate(12);
 
         $posts = Post::where('active', 1)->orderByDesc('id')->limit(4)->get();
 
         $products = $products
             ->orderByDesc('id')
             ->select('id', 'name', 'slug', 'avatar', 'price', 'price_old', 'price_entry', 'number', 'sale', 'average_star', 'description')
-            ->paginate(16);
+            ->paginate(12);
 
         // Không muốn hiển thị sản phẩm top sale bên aside
         $saleProducts = null;

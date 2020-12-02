@@ -17,23 +17,23 @@
 			<div class="page-banners-carousel" data-appear-animation="fadeIn">
 				<div class="items">
 					<div class="item">
-						<a href="javascript:;">
+						<a href="{{route('get.product.detail', 'card-man-hinh-asus-rog-strix-rtx3090-24g-gaming-2')}}">
 							<img class="main" src="{{ asset('public/guest/images/banners/banner-1.png') }}" alt="" />
 						</a>
 					</div>
 					<div class="item">
-						<a href="javascript:;">
-							<img class="main" src="{{ asset('public/guest/images/banners/banner-2.jpg') }}" alt="" />
+						<a href="{{route('get.product.detail', 'cpu-amd-ryzen-9-5950x-10')}}">
+							<img class="main" src="{{ asset('public/guest/images/banners/banner-2.png') }}" alt="" />
 						</a>
 					</div>
 					<div class="item">
-						<a href="javascript:;">
+						<a href="{{route('get.product.detail', 'o-cung-ssd-seagate-barracuda-120-500gb-25-inch-sata-6gbs-13')}}">
 							<img class="main" src="{{ asset('public/guest/images/banners/banner-3.png') }}" alt="" />
 						</a>
 					</div>
 					<div class="item">
-						<a href="javascript:;">
-							<img class="main" src="{{ asset('public/guest/images/banners/banner-4.png') }}" alt="" />
+						<a href="{{route('get.product.detail', 'nguon-asus-rog-thor-850w-platinum-15')}}">
+							<img class="main" src="{{ asset('public/guest/images/banners/banner-4.jpg') }}" alt="" />
 						</a>
 					</div>
 				</div>
@@ -105,8 +105,27 @@
 			</div>
 		
 			<!-- Phân trang -->
-			{!! $products->appends($query ?? [])->links() !!}
-			<!-- <div class="pagination">						
+			<!-- {!! $products->appends($query ?? [])->links() !!} -->
+			@if ($products->lastPage() > 1)
+			<div class="pagination">
+				<div class="numeric">
+					@if($products->currentPage() != 1)
+						<a href="{{ $products->url(1) }}" class="button {{ ($products->currentPage() == 1) ? 'current' : 'dark' }}">Trước</a>
+					@endif
+
+				    @for ($i = 1; $i <= $products->lastPage(); $i++)
+				        <a href="{{ $products->url($i) }}" class="button {{ ($products->currentPage() == $i) ? 'current' : 'dark' }}">{{ $i }}</a>
+				    @endfor
+
+				    @if($products->currentPage() != $products->lastPage())
+				    	<a href="{{ $products->url($products->currentPage()+1) }}" class="button {{ ($products->currentPage() == $products->lastPage()) ? 'current' : 'dark' }}">Sau</a>
+				    @endif
+				</div>
+			</div>
+			@endif
+
+			<!--
+ 			<div class="pagination">						
 				<div class="numeric">
 					<a href="javascript:;" class="button current">1</a>
 					<a href="javascript:;" class="button dark">2</a>

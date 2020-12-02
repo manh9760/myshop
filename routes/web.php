@@ -1,5 +1,10 @@
 <?php
 
+Route::group(['namespace'=>'Auth'], function () {
+    Route::get('/redirect/{social}', 'SocialAuthController@redirect');
+    Route::get('/callback/{social}', 'SocialAuthController@callback');
+});
+
 Route::group(['namespace'=>'Guest'], function () {
     Route::get('', 'ProductController@getProductList')->name('get.home');
     Route::get('danh-muc/{slug}', 'ProductController@getProductListByCategory')->name('get.product.list');

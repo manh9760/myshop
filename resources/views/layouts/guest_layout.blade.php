@@ -51,7 +51,6 @@
 		NProgress.start();
 	</script>
 	<script src="{{ asset('public/guest/js/libs/jquery.tipsy.js') }}"></script>
-	<script src="{{ asset('public/guest/js/libs/jquery.ui.totop.min.js') }}"></script>
 	<script src="{{ asset('public/guest/js/libs/jquery.fs.scroller.min.js') }}"></script>
 	<script src="{{ asset('public/guest/js/libs/jquery.fs.selecter.min.js') }}"></script>
 	<script src="{{ asset('public/guest/js/libs/jquery.magnific-popup.min.js') }}"></script>
@@ -67,12 +66,6 @@
 	<script src="{{ asset('public/guest/js/libs/masonry.pkgd.min.js') }}"></script>
 	<script src="{{ asset('public/guest/js/libs/idangerous.swiper-2.4.min.js') }}"></script>
 	<script src="{{ asset('public/guest/js/front.js') }}"></script>
-
-	<!-- JS cho phần Styles and Settings -->
-	<script src="{{ asset('public/guest/js/libs/jquery.cookie.js') }}"></script>
-	<script src="{{ asset('public/guest/js/libs/jquery.mCustomScrollbar.min.js') }}"></script>
-	<script src="{{ asset('public/guest/js/libs/less-1.5.1.min.js') }}"></script>
-	<script src="{{ asset('public/guest/js/styleSwitcher.js') }}"></script>
 
 	<!-- Thông báo -->
 	<script src="{{asset('public/guest/toastr/toastr.min.js')}}"></script>

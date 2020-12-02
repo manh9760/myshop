@@ -43,7 +43,7 @@
 						<input type="submit" value="Đăng nhập" />
 					</p>
 
-					<p>
+					<!-- <p>
 						<a href="javascript:;" class="button button-facebook">
 							<i class="fa fa-facebook"></i> 
 							<span class="border"></span> 
@@ -54,7 +54,7 @@
 							<span class="border"></span> 
 							<span class="text">Đăng nhập bằng Google</span>
 						</a>
-					</p>
+					</p> -->
 					<p>
 						Nếu bạn chưa đăng ký?  
 						<a href="{{route('get.register')}}" class="forgot-password">Tạo tài khoản</a>
