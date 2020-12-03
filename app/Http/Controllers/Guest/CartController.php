@@ -151,8 +151,8 @@ class CartController extends GuestController {
     public function getPaymentForm() {
         error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
 
-        $vnp_TmnCode = "L5S0ZLXU"; //Mã website tại VNPAY 
-        $vnp_HashSecret = "ZMRQENYAPGRNERPODYFEFOYKWUBEIXOQ"; //Chuỗi bí mật
+        $vnp_TmnCode = "Y1G4I0KI"; //Mã website tại VNPAY 
+        $vnp_HashSecret = "PHNTJLMZPBIMRJVMUIUEZEAMEUHXKWTB"; //Chuỗi bí mật
         $vnp_Url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = "http://localhost:8080/myshop/xu-ly-online";
 

@@ -96,13 +96,11 @@
 								</div>
 								
 								<footer>
-									@if(count($product->keywords) > 0)
 									<p><span>Lượt xem: <strong>{{ $product->view }}</strong></span></p>
-									@endif
 									@if(count($product->keywords) > 0)
 									<p><span>Từ khóa:</span>
 										@foreach($product->keywords as $keyword)
-											<a href="" style="border:1px solid #E91E63;display:inline-block;padding:0 5px;border-radius:5px;color:#E91E63">
+											<a href="#" style="border:1px solid #E91E63;display:inline-block;padding:0 5px;border-radius:5px;color:#E91E63">
 												{{$keyword->name}}
 											</a>
 										@endforeach

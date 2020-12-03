@@ -272,7 +272,7 @@
             </li>
             <li>
               <a href="{{route('admin.shipping_fee.index')}}">
-                <i class="fa fa-link"></i>
+                <i class="fa fa-bus"></i>
                 <span>Quản lý phí vận chuyển</span>
                 <span class="label label-primary pull-right">
                   {{\DB::table('locations')->where('type', 1)->count()}}

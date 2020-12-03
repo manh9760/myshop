@@ -162,7 +162,7 @@
           </div><!-- ./box-body -->
           <div class="box-footer">
             <div class="row">
-              <div class="col-sm-4 col-xs-8">
+              <div class="col-sm-6 col-xs-12">
                 <div class="description-block border-right">
                   <h5 class="description-header text-light-blue">
                     {{number_format(array_sum(json_decode($arrRevenueInMonth)),0,',','.')}}
@@ -170,7 +170,7 @@
                   <span class="description-text">Tổng doanh thu (VNĐ)</span>
                 </div><!-- /.description-block -->
               </div><!-- /.col -->
-              <div class="col-sm-4 col-xs-8">
+              <div class="col-sm-6 col-xs-12">
                 <div class="description-block border-right">
                   <h5 class="description-header text-green">
                     {{number_format(array_sum(json_decode($arrProfitInMonth)),0,',','.')}}
@@ -178,14 +178,16 @@
                   <span class="description-text">Tổng lợi nhuận (VNĐ)</span>
                 </div><!-- /.description-block -->
               </div><!-- /.col -->
+              <!--
               <div class="col-sm-4 col-xs-8">
                 <div class="description-block">
                   <h5 class="description-header">
                     {{number_format(array_sum(json_decode($arrCostInMonth)),0,',','.')}}
                   </h5>
                   <span class="description-text">Tổng chi phí (VNĐ)</span>
-                </div><!-- /.description-block -->
-              </div><!-- /.col -->
+                </div>
+              </div>
+              -->
             </div><!-- /.row -->
           </div><!-- /.box-footer -->
         </div><!-- /.box -->
@@ -346,16 +348,18 @@
           symbol: 'square'
         },
         data: listRevenue
-      }, {
-        name: 'Chi chí',
-        marker: {
-          symbol: 'diamond'
-        },
-        data: listCost
-      }, {
+      }, 
+      // {
+      //   name: 'Chi chí',
+      //   marker: {
+      //     symbol: 'diamond'
+      //   },
+      //   data: listCost
+      // }, 
+      {
         name: 'Lợi nhuận',
         marker: {
-          symbol: 'circle'
+          symbol: 'diamond'
         },
         data: listProfit
       }]

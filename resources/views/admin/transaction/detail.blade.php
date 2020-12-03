@@ -121,7 +121,13 @@
               <td>{{ number_format($item->product_price,0,',','.') }}  đ</td>
               <td>{{ number_format($item->total_price,0,',','.') }}  đ</td>
               <td>
-                <a href="{{route('admin.transaction.deleteOrder', $item->id)}}" class="btn btn-xs btn-danger">Xóa</a>
+                @if(($transaction->status == 3) || ($transaction->status == 4))
+                  <span class="{{$transaction->getStatus($transaction->status)['class']}}">
+                    {{ $transaction->getStatus($transaction->status)['name'] }}
+                  </span>
+                @else
+                  <a href="{{route('admin.transaction.deleteOrder', $item->id)}}" class="btn btn-xs btn-danger">Xóa</a>
+                @endif
               </td>
             </tr>
             @endforeach

@@ -76,10 +76,15 @@
                       @endif
                     </td>
                     <td>
+                      <style type="text/css">
+                        a.disabled {
+                          pointer-events: none;
+                        }
+                      </style>
                       @if($review->status)
-                        <a href="{{ route('admin.review.active', $review->id) }}" class="label label-success">Hiện</a>
+                        <a href="{{ route('admin.review.active', $review->id) }}" class="label label-success {{(Session::get('adminRole') != 1) ? 'disabled':''}}">Hiện</a>
                       @else
-                        <a href="{{ route('admin.review.active', $review->id) }}" class="label label-danger">Ẩn</a>
+                        <a href="{{ route('admin.review.active', $review->id) }}" class="label label-danger {{(Session::get('adminRole') != 1) ? 'disabled':''}}">Ẩn</a>
                       @endif
                     </td>
                     <td>
@@ -88,7 +93,7 @@
                       @endif
                     </td>
                     <td>
-                      <a href="{{ route('admin.review.delete', $review->id) }}" class="delete-confirm btn btn-xs btn-danger"><i class="fa fa-trash"></i> Xóa</a>
+                      <a href="{{ route('admin.review.delete', $review->id) }}" class="delete-confirm btn btn-xs btn-danger {{(Session::get('adminRole') != 1) ? 'disabled':''}}"><i class="fa fa-trash"></i> Xóa</a>
                     </td>
                   </tr>
                   <?php $k++; ?>

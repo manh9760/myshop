@@ -68,7 +68,14 @@
                         @if($transaction->email)
                           Email: {{ $transaction->email }}<br />
                         @endif
-                        @if($transaction->user_id)
+
+                        <!-- Kiểm tra email có trong ds khách hàng không -->
+                        <?php 
+                          $hasSignedUp = \DB::table('users')
+                            ->where('email', $transaction->email)
+                            ->first();
+                        ?>
+                        @if($hasSignedUp)
                           <span class="label label-info">Thành viên</span>
                         @else
                           <span class="label label-default">Chưa đăng ký</span>

@@ -26,8 +26,8 @@
             <p>Mời bạn <a href="{{route('get.user.info')}}">Click vào đây</a> để cập nhật thông tin cá nhân.</p>
             <hr>
             <p>
-              Điện thoại: 0565 902 617 <br /> 
-              Email: vanmanh.linhkien@gmail.com <br />
+              Điện thoại: 0977 160 823 <br /> 
+              Email: parabol123654@gmail.com <br />
               Địa chỉ: Số 236B, Lê Văn Sỹ, Phường 1, Quận Tân Bình, Hồ Chí Minh
             </p>
           </div>
