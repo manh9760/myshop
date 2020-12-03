@@ -22,8 +22,8 @@
           </h2>
           <div class="w3-container">
             <b>Xin chào {{$full_name}},</b>
-            <p>Chúng tôi xin chân thành cảm ơn bạn đã đăng ký tài khoản tại Cửa hàng linh kiện máy tính Văn Mạnh.</p>
-            <p>Mời bạn <a href="{{route('get.user.info')}}">Click vào đây</a> để cập nhật thông tin cá nhân.</p>
+            <p>Chào mừng bạn đến với Cửa hàng linh kiện máy tính Văn Mạnh.</p>
+            <p>Mời bạn <a href="{{route('get.user.active', $userId)}}">Click vào đây</a> để xác nhận thông tin đăng ký.</p>
             <hr>
             <p>
               Điện thoại: 0977 160 823 <br /> 

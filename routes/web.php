@@ -21,6 +21,7 @@ Route::group(['namespace'=>'Guest'], function () {
 
     Route::group(['prefix'=>'tai-khoan'], function () {
         Route::get('thong-tin', 'UserController@getInfo')->name('get.user.info');
+        Route::get('kich-hoat/{id}', 'UserController@active')->name('get.user.active');
     });
 
     // ----------------------- Giỏ hàng ------------------------------------------------

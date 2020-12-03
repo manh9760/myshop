@@ -35,13 +35,14 @@ class AuthenticationController extends GuestController {
             return redirect()->back();
         }
         
+        // Trả về id của user vừa thêm vào db
         $result = User::insertGetId($data);
         if ($result) {
         	\Session::flash('toastr', [
 	            'type' => 'success',
 	            'message' => 'Đăng ký thành công',
 	        ]);
-            Mail::to($request->email)->send(new RegisteredUser($request->full_name));
+            Mail::to($request->email)->send(new RegisteredUser($result, $request->full_name));
             return redirect()->route('get.login');
         } else {
             \Session::put('failedRegister', 'Thông tin tài khoản không hợp lệ!');
@@ -68,6 +69,7 @@ class AuthenticationController extends GuestController {
         $result = \DB::table('users')
             ->where('email', $data['email']) 
             ->where('password', md5($data['password']))
+            ->where('active', 1)
             ->first();
 
         if ($result) {
