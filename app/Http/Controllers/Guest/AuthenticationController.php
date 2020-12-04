@@ -39,8 +39,8 @@ class AuthenticationController extends GuestController {
         $result = User::insertGetId($data);
         if ($result) {
         	\Session::flash('toastr', [
-	            'type' => 'success',
-	            'message' => 'Đăng ký thành công',
+	            'type' => 'info',
+	            'message' => 'Vui lòng xác nhận trong email để hoàn thành đăng ký!',
 	        ]);
             Mail::to($request->email)->send(new RegisteredUser($result, $request->full_name));
             return redirect()->route('get.login');
@@ -76,6 +76,11 @@ class AuthenticationController extends GuestController {
             \Session::put('userId', $result->id);
             \Session::put('userEmail', $result->email);
             \Session::put('userFullName', $result->full_name);
+
+            \Session::flash('toastr', [
+                'type' => 'success',
+                'message' => 'Đăng nhập thành công!',
+            ]);
             return redirect()->intended('/');
         } else {
             \Session::put('failedLogin', 'Tài khoản không đúng!');

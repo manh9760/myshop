@@ -13,7 +13,7 @@ class CartRequest extends FormRequest {
     public function rules()
     {
         return [
-            'full_name' => 'required|min:5',
+            'full_name' => 'required|min:3',
             'phone' => 'required',
             'email' => 'required',
             'city' => 'numeric',
@@ -27,7 +27,7 @@ class CartRequest extends FormRequest {
         return [
             // ['Tên trường input'] => ['Ràng buộc']|['Ràng buộc']:['Tên bảng'],['Tên cột trong bảng']
             'full_name.required' => 'Vui lòng nhập Tên người nhận',
-            'full_name.min' => 'Tên khách hàng phải ít nhất 5 ký tự',
+            'full_name.min' => 'Tên khách hàng phải ít nhất 3 ký tự',
             'phone.required' => 'Vui lòng nhập số điện thoại',
             'email.required' => 'Vui lòng nhập địa chỉ email',
             'city.numeric' => 'Vui lòng chọn Tỉnh/Thành phố',

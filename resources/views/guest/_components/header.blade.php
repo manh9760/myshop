@@ -50,7 +50,8 @@
 										</a>
 									</li>
 									<li class="level-1">
-										<a href="#" class="item no-icon">
+										<a href="{{ route('get.user.info', Session::get('userId')) }}" 
+											class="item no-icon">
 											<span class="menu-item-content ib">
 												<span class="menu-text">Cập nhật tài khoản</span>
 											</span>

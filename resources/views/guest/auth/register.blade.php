@@ -31,8 +31,15 @@
 			          	@endif
 					</p>
 					<p>
-						<label for="username">Địa chỉ email: <span class="required">*</span></label>
-						<input type="email" id="username" name="email" style="width: 390px;" value="" class="{{ $errors->first('email') ? 'has-error':'' }}" />
+						<label for="phone">Số điện thoại: <span class="required">*</span></label>
+						<input type="text" name="phone" value="" class="{{ $errors->first('phone') ? 'has-error':'' }}" />
+						@if($errors->first('phone'))
+			            	<span style="color:red;">{{ $errors->first('phone') }}</span>
+			          	@endif
+					</p>
+					<p>
+						<label for="email">Địa chỉ email: <span class="required">*</span></label>
+						<input type="email" id="email" name="email" style="width: 390px;" value="" class="{{ $errors->first('email') ? 'has-error':'' }}" />
 						@if($errors->first('email'))
 			            	<span style="color:red;">{{ $errors->first('email') }}</span>
 			          	@endif

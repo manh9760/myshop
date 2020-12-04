@@ -103,13 +103,13 @@
 									$i++;
 								?>
 								@endforeach
-								<tr>
+								<!-- <tr>
 									<td colspan="6" class="actions">
 										<label for="coupon_code">Mã khuyến mãi</label>
 										<input name="coupon_code" type="text" class="input-text" id="coupon_code" value="" /> 
 										<input type="submit" class="button" name="apply_coupon" value="Áp dụng" />
 									</td>
-								</tr>
+								</tr> -->
 							</tbody>
 							@endif
 						</table>

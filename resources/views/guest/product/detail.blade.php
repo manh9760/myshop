@@ -217,10 +217,6 @@
 									<ol class="comment-list">
 										@foreach($reviews as $review)
 										<li class="comment odd depth-1">
-											<div class="comment-avatar">
-												<img src="images/temp/avatar_4.jpg" width="70" height="70" alt="" />
-											</div>
-									
 											<div class="comment-data">
 												<span class="author">{{$review->user->full_name}}</span>
 												<span class="time">{{ $review->created_at->format("d/m/Y") }}</span>

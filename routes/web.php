@@ -20,8 +20,12 @@ Route::group(['namespace'=>'Guest'], function () {
     Route::get('dang-xuat', 'AuthenticationController@logout')->name('get.logout');
 
     Route::group(['prefix'=>'tai-khoan'], function () {
-        Route::get('thong-tin', 'UserController@getInfo')->name('get.user.info');
+        Route::get('thong-tin/{id}', 'UserController@getInfo')->name('get.user.info');
         Route::get('kich-hoat/{id}', 'UserController@active')->name('get.user.active');
+        Route::get('don-hang/{id}', 'UserController@getOrders')->name('get.user.order');
+        Route::get('danh-gia/{id}', 'UserController@getReviews')->name('get.user.review');
+
+        Route::post('cap-nhat', 'UserController@updateInfo')->name('post.info');
     });
 
     // ----------------------- Giỏ hàng ------------------------------------------------
