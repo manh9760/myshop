@@ -32,7 +32,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th>Số điện thoại:</th>
+						<th>Số điện thoại <abbr class="required" title="required">*</abbr></th>
 						<td>
 							@if($errors->first('phone'))
 				            	<span style="color:red;">{{ $errors->first('phone') }}</span><br />

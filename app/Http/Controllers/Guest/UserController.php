@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Guest;
 use App\User;
 use Carbon\Carbon;
 use App\Models\Order;
+use App\Models\Review;
 use App\Models\Product;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -74,30 +75,79 @@ class UserController extends GuestController {
             return redirect()->to('/dang-nhap');
         $user = User::find($userId);
         $transactions = Transaction::where('email', $user->email)->get();
-        foreach ($transactions as $transaction) {
-            $orders = Order::with('product:id,name')
-                ->where('transaction_id', $transaction->id)
-                ->get();
-        }
+        
         $data = [
             'user' => $user,
             'page' => 'orders',
             'transactions' => $transactions,
-            'orders' => $orders,
             'bodyClass' => 'woocommerce-cart woocommerce-page page',
         ];
         return view('guest.user.order', $data);
     }
 
+    public function deleteOrder($id) {
+        $transaction = Transaction::find($id);
+        $transaction->status = 4;
+        $orders = Order::with('product:id,name,number')->where('transaction_id', $id)->get();
+        foreach ($orders as $item) {
+            // Tăng số lượng tồn kho của mỗi sản phẩm trong đơn hàng bị hủy
+            Product::where('id', $item->product_id)->increment('number', $item->quantity);
+        }
+
+        $order = Order::find($id);
+        if ($order) {
+            $money = $order->quantity * $order->product_price;
+            Transaction::where('id', $order->transaction_id)->decrement('total_money', $money);
+            
+            // Tăng số lượng tồn kho của mỗi sản phẩm trong đơn hàng bị hủy
+            Product::where('id', $order->product_id)->increment('number', $order->quantity);
+            $order->delete();
+        }
+        $transaction->save();
+        \Session::flash('toastr', [
+            'type' => 'success',
+            'message' => 'Đã xóa đơn hàng thành công!',
+        ]);
+        return redirect()->back();
+    }
+
     public function getReviews($userId) {
-        // Kiểm tra đăng nhập
-        if (!$this->isLogined())
-            return redirect()->to('/dang-nhap');
-        $user = User::find($userId);
+        $transactions = Transaction::where('user_id', $userId)
+            ->where('status', 3)
+            ->get();
+        $reviews = Review::where('user_id', $userId)->get();
+        $orders = Null;
+        foreach ($transactions as $transaction) {
+            $orders = Order::with('product:id,name,slug,avatar')
+                ->where('transaction_id', $transaction->id)
+                ->get();
+        }
         $data = [
-            'user' => $user,
             'page' => 'reviews',
+            'reviews' => $reviews,
+            'orders' => $orders,
         ];
         return view('guest.user.review', $data);
+    }
+
+    public function deleteReview($id) {
+        $review = Review::find($id);
+        if ($review) {
+            $product = Product::find($review->product_id);
+            $product->review_total--;
+            $product->review_star -= $review->star;
+            if ($product->review_total == 0) {
+                $product->average_star = 0;
+            } else {
+                $product->average_star = round($product->review_star / $product->review_total);
+            }
+            $product->save();
+            $review->delete();
+        }
+        \Session::flash('toastr', [
+            'type' => 'success',
+            'message' => 'Đã xóa đánh giá thành công!',
+        ]);
+        return redirect()->back();
     }
 }

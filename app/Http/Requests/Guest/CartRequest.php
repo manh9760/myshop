@@ -14,7 +14,12 @@ class CartRequest extends FormRequest {
     {
         return [
             'full_name' => 'required|min:3',
-            'phone' => 'required',
+            'phone' =>  [
+                'required',
+                'regex:/(086|096|097|098|032|033|034|035|036|037|038|039|088|091|094|083|084|085|081|082|089|090|093|070|079|077|076|078|092|056|058|099|059)[0-9]{7}/',
+                'min:10',
+                'max:10'
+            ],
             'email' => 'required',
             'city' => 'numeric',
             'district' => 'numeric',
@@ -29,6 +34,9 @@ class CartRequest extends FormRequest {
             'full_name.required' => 'Vui lòng nhập Tên người nhận',
             'full_name.min' => 'Tên khách hàng phải ít nhất 3 ký tự',
             'phone.required' => 'Vui lòng nhập số điện thoại',
+            'phone.regex' => '(Vui lòng nhập số điện thoại hợp lệ)',
+            'phone.min' => 'Số điện thoại hợp lệ có 10 số',
+            'phone.max' => 'Số điện thoại hợp lệ có 10 số',
             'email.required' => 'Vui lòng nhập địa chỉ email',
             'city.numeric' => 'Vui lòng chọn Tỉnh/Thành phố',
             'district.numeric' => 'Vui lòng chọn Quận/Huyện',

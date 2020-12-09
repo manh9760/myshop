@@ -21,7 +21,7 @@
 				</header>
 				
 				<div class="post-content">
-					@if(isset($transactions))
+					@if(count($transactions))
 					<table class="shop_table cart">
 						<thead>
 							<tr>
@@ -43,6 +43,11 @@
 									<span class="amount">{{ $transaction->created_at->format("d/m/Y") }}</span>
 								</td>
 								<td class="product-quantity" style="text-align:left;max-width:80px;">
+									<?php 
+										$orders = App\Models\Order::with('product:id,name')
+							                ->where('transaction_id', $transaction->id)
+							                ->get();
+									?>
 									@foreach($orders as $order)
 										@if($order->transaction_id == $transaction->id)
 										<span class="amount">
