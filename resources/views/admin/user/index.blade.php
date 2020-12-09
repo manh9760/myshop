@@ -4,10 +4,6 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>Quản lý người dùng<small>(Tổng {{count($users)}} người dùng)</small></h1>
-    <ol class="breadcrumb">
-      <li><a href="{{route('admin.index')}}"><i class="fa fa-dashboard"></i> Trang thống kê</a></li>
-      <li class="active">Danh sách người dùng</li>
-    </ol>
   </section>
 
   <!-- Main content -->
@@ -21,6 +17,17 @@
                 <input type="text" name="name" value="{{Request::get('name')}}" class="form-control" placeholder="Họ tên..." />
                 <input type="text" name="phone" value="{{Request::get('phone')}}" class="form-control" placeholder="Số điện thoại..." />
                 <input type="text" name="email" value="{{Request::get('email')}}" class="form-control" placeholder="Email..." />
+                <select name="user_active" class="form-control">
+                  <option value="-1">--- Trạng thái ---</option>
+                  <option value="1" {{ Request::get('user_active') == 1 ? "selected='selected'" : ""}}>Đã kích hoạt</option>
+                  <option value="0" {{ Request::get('user_active') == 0 ? "selected='selected'" : ""}}>Chưa kích hoạt</option>
+                </select>
+                <select name="user_role" class="form-control">
+                  <option value="">--- Tài khoản ---</option>
+                  <option value="3" {{ Request::get('user_role') == 3 ? "selected='selected'" : ""}}>Khách hàng</option>
+                  <option value="2" {{ Request::get('user_role') == 2 ? "selected='selected'" : ""}}>Nhân viên</option>
+                  <option value="1" {{ Request::get('user_role') == 1 ? "selected='selected'" : ""}}>Quản trị</option>
+                </select>
                 <button type="submit" class="btn btn-info">
                   <i class="fa fa-search"></i> Tìm kiếm
                 </button>
@@ -35,6 +42,7 @@
                 <th>Họ tên</th>
                 <th>Số điện thoại</th>
                 <th>Địa chỉ Email</th>
+                <th>Tài khoản</th>
                 <th>Trạng thái</th>
                 <th>Ngày tạo</th>
                 <th>Ngày sửa</th>
@@ -48,6 +56,15 @@
                     <td>{{ $user->full_name }}</td>
                     <td>{{ $user->phone }}</td>
                     <td>{{ $user->email }}</td>
+                    <td>
+                      @if($user->role == 1)
+                        <span class="label label-warning">Quản trị</span>
+                      @elseif($user->role == 2)
+                        <span class="label label-success">Nhân viên</span>
+                      @else
+                        <span class="label label-info">Khách hàng</span>
+                      @endif  
+                    </td>
                     <td>
                       @if($user->active)
                         <span class="label label-primary">Đã kích hoạt</span>
@@ -79,7 +96,7 @@
           </div><!-- /.box-body -->
           <div class="box-footer clearfix">
             <ul class="pagination pagination-sm no-margin pull-right">
-              
+              {!! $users->appends($query)->links() !!}
             </ul>
           </div>
         </div><!-- /.box -->

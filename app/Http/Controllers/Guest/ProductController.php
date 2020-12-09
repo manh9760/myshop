@@ -247,7 +247,6 @@ class ProductController extends GuestController {
                 foreach ($transactions as $transaction) {
                     // Lấy sản phẩm (lấy cái đầu tiên là được) mà tài khoản đã mua
                     $order = Order::where('transaction_id', $transaction->id)->first();
-                    dd($id);
                     if ($order->product_id == $id) {
                         $isUserBought = true;
                         break;

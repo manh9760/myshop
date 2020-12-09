@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RegisteredUser;
+use App\Http\Requests\Guest\UpdateInfoRequest;
 
 class UserController extends AdminController {
 
@@ -15,8 +16,12 @@ class UserController extends AdminController {
         // Kiểm tra đăng nhập
         if (!$this->isLogined())
             return redirect()->to('/admin/login');
-        
-        $users = User::where('role', 3);
+
+        if (\Session::get('adminRole') == 1) {
+            $users = User::whereRaw(1);
+        } else {
+            $users = User::where('role', 3);
+        }
 
         // Các điều kiện lọc
         if ($name = $request->name) {
@@ -29,10 +34,36 @@ class UserController extends AdminController {
             $users->where('email', 'like', '%'.$email.'%');
         }
 
+        if ($user_active = $request->user_active) {
+            switch ($user_active) {
+                case 1:
+                    $users->where('active', 1);
+                    break;
+                case 0:
+                    $users->where('active', 0);
+                    break;
+            }   
+        }
+
+        if ($user_role = $request->user_role) {
+            switch ($user_role) {
+                case 3:
+                    $users->where('role', 3);
+                    break;
+                case 2:
+                    $users->where('role', 2);
+                    break;
+                case 1:
+                    $users->where('role', 1);
+                    break;
+            }   
+        }
+
         $users = $users->orderByDesc('id')->paginate(10);
 
     	$data = [
     		'users' => $users,
+            'query' => $request->query(),
     	];
     	return view('admin.user.index', $data);
     }
@@ -41,12 +72,13 @@ class UserController extends AdminController {
         // Kiểm tra đăng nhập
         if (!$this->isLogined())
             return redirect()->to('/admin/login');
+        $isUpdateUser = false;
         
-    	return view('admin.user.create');
+    	return view('admin.user.create', compact('isUpdateUser'));
     }
 
 	public function created(RegisterRequest $request) {
-		$data = $request->except('_token', 'confirm_password');
+		$data = $request->except('_token', 'confirm_password', 'user_id');
         $confirm_password = md5($request->confirm_password);
         $data['password'] = md5($data['password']);
         $data['created_at'] = Carbon::now();
@@ -56,16 +88,27 @@ class UserController extends AdminController {
             return redirect()->back();
         }
 
+        // Nếu là tài khoản khách mới cần xác minh
+        if ($data['role'] != 3) {
+            $data['active'] = 1;
+        }
+
 		// Trả về id của user vừa thêm vào db
         $result = User::insertGetId($data);
+     
         if ($result) {
-            \Alert::warning('Thông báo', 'Vui lòng xác nhận trong email để hoàn thành đăng ký!');
-            Mail::to($request->email)->send(new RegisteredUser($result, $request->full_name));
-            return redirect()->back();
+            if($data['role'] != 3) {
+                \Alert::warning('Thành công', 'Tạo mới người dùng thành công!');
+            } else {
+                \Alert::warning('Thông báo', 'Vui lòng xác nhận trong email để hoàn thành đăng ký!');
+                Mail::to($request->email)->send(new RegisteredUser($result, $request->full_name));
+            }
+            return redirect()->to('/admin/user');
         } else {
             \Session::put('failedRegister', 'Thông tin tài khoản không hợp lệ!');
             return redirect()->back();
         }
+        
     }
 
     public function update($id) {
@@ -73,31 +116,22 @@ class UserController extends AdminController {
         if (!$this->isLogined())
             return redirect()->to('/admin/login');
         
+        $isUpdateUser = true;
     	$user = User::findOrFail($id);
-    	return view('admin.User.update', compact('user'));
+    	return view('admin.User.update', compact('user', 'isUpdateUser'));
     }
 
-	public function updated(UserRequest $request, $id) {
-    	$User = User::find($id);
-    	$data = $request->except('_token', 'avatar', 'attribute');
-     	$data['slug'] = Str::slug($request->name);
-    	$data['updated_at'] = Carbon::now();
-        if($data['sale'])
-            $data['price'] = $data['price_old'] - ($data['price_old']*($data['sale']/100));
-        else
-            $data['price'] = $data['price_old'];
-		if ($request->avatar) {
-            $avatar = upload_image('avatar');
-            if ($avatar['code'] == 1)
-                $data['avatar'] = $avatar['name'];
-        }
+	public function updated(UpdateInfoRequest $request, $id) {
+        $data = $request->except('_token');
+        $data['updated_at'] = Carbon::now();
 
-        $result = $User->update($data);
-        if ($id) {
-            $this->syncAttribute($request->attribute, $id);
-        }
+        $user = User::find($data['user_id']);
+        $user->full_name = $data['full_name'];
+        $user->phone = $data['phone'];
+        $user->role = $data['role'];
+        $user->save();
         \Alert::success('Thành công', 'Cập nhật tài khoản');
-		return redirect()->to('/admin/user');
+        return redirect()->to('/admin/user');
     }
 
     public function hot($id) {

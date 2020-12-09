@@ -1,7 +1,7 @@
 <!-- SMALL PAGE HEADER -->
 <header class="small">
 	<span class="pull-right">
-		<a href="{{ Session::get('userId') ? route('get.cart.index') : route('get.login') }}" class="my-account">
+		<a href="{{ Session::get('userId') ? route('get.user.order', Session::get('userId')) : route('get.login') }}" class="my-account">
 			<i class="fa fa-eye"></i> Theo dõi đơn hàng
 		</a>
 		<a href="{{route('get.post_list')}}" class="my-cart"><i class="fa fa-info"></i> Tin công nghệ</a>
@@ -43,7 +43,7 @@
 								</a>
 								<ul class="sub-menu">
 									<li class="level-1">
-										<a href="#" class="item no-icon">
+										<a href="{{ route('get.user.order', Session::get('userId')) }}" class="item no-icon">
 											<span class="menu-item-content ib">
 												<span class="menu-text">Đơn hàng đã đặt</span>
 											</span>

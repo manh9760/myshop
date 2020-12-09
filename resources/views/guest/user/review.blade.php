@@ -86,7 +86,7 @@
 						</tbody>
 					</table>
 					@else
-						<div style="text-align:center;color:blue;">Bạn chưa mua sản phẩm nào!</div>
+						<div style="text-align:center;color:blue;">Bạn nhận được hàng mới có thể đánh giá!</div>
 					@endif
 				</div>
 			</div>
