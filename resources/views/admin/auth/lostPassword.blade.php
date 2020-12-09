@@ -30,17 +30,11 @@
         <a href="#"><b>Quản trị viên</b></a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
-        @if(Session::get('errorLogin'))
-          <h4 class="login-box-msg text-danger">{{Session::get('errorLogin')}}</h4>
-          <?php Session::put('errorLogin', null); ?>
-        @elseif(Session::get('sentEmail'))
-          <h4 class="login-box-msg text-warning">{{Session::get('sentEmail')}}</h4>
-          <?php Session::put('sentEmail', null); ?>
-        @elseif(Session::get('createdNewPassword'))
-          <h4 class="login-box-msg text-success">{{Session::get('createdNewPassword')}}</h4>
-          <?php Session::put('createdNewPassword', null); ?>
+        @if(Session::get('invalidEmail'))
+          <p class="login-box-msg text-danger">{{Session::get('invalidEmail')}}</p>
+          <?php Session::put('invalidEmail', null); ?>
         @else 
-          <h4 class="login-box-msg">Đăng nhập bằng tài khoản quản trị</h4>
+          <p class="login-box-msg">Quên mật khẩu</p>
         @endif
         <form action="" method="post">
           @csrf
@@ -48,20 +42,9 @@
             <input type="email" name="email" class="form-control" placeholder="Địa chỉ Email">
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
-          <div class="form-group has-feedback">
-            <input type="password" name="password" class="form-control" placeholder="Mật khẩu">
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-          </div>
           <div class="row">
-            <div class="col-xs-8">
-              <div class="checkbox icheck">
-                <label>
-                  <a href="{{route('admin.lostPassword')}}">Quên mật khẩu?</a><br>
-                </label>
-              </div>
-            </div><!-- /.col -->
             <div class="col-xs-4">
-              <button type="submit" class="btn btn-primary btn-block btn-flat">Đăng nhập</button>
+              <button type="submit" class="btn btn-primary btn-block btn-flat">Xác nhận</button>
             </div><!-- /.col -->
           </div>
         </form>

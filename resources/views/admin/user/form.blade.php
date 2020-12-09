@@ -33,11 +33,21 @@
           <!-- loại tài khoản -->
           <div class="col-xs-3 form-group">
             <label for="role">Loại tài khoản <span class="text-danger">(*)</span></label>
-            <select class="form-control select2" name="role">
-              <option value="3" {{ (($user->role ?? 0) == 3) ? "selected='selected'" : "" }}>Khách hàng</option>
-              @if(Session::get('adminRole') == 1)
-                <option value="2" {{ (($user->role ?? 0) == 2) ? "selected='selected'" : ""}}>Nhân viên</option>
-                <option value="1" {{ (($user->role ?? 0) == 1) ? "selected='selected'" : ""}}>Quản trị</option>
+              @if(Session::get('adminId') == $user->id)
+                <input type="hidden" name="role" value="{{$user->role}}" />
+                <select class="form-control select2" name="role" disabled='disabled'>
+                  <option value="3" {{ (($user->role ?? 0) == 3) ? "selected='selected'" : "" }}>Khách hàng</option>
+                  <option value="2" {{ (($user->role ?? 0) == 2) ? "selected='selected'" : ""}}>Nhân viên</option>
+                  <option value="1" {{ (($user->role ?? 0) == 1) ? "selected='selected'" : ""}}>Quản trị</option>
+                </select>
+              @else
+                <select class="form-control select2" name="role">
+                  <option value="3" {{ (($user->role ?? 0) == 3) ? "selected='selected'" : "" }}>Khách hàng</option>
+                  @if(Session::get('adminRole') == 1)
+                    <option value="2" {{ (($user->role ?? 0) == 2) ? "selected='selected'" : ""}}>Nhân viên</option>
+                    <option value="1" {{ (($user->role ?? 0) == 1) ? "selected='selected'" : ""}}>Quản trị</option>
+                  @endif
+                </select>
               @endif
             </select>
           </div>

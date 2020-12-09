@@ -118,7 +118,7 @@ class UserController extends AdminController {
         
         $isUpdateUser = true;
     	$user = User::findOrFail($id);
-    	return view('admin.User.update', compact('user', 'isUpdateUser'));
+    	return view('admin.user.update', compact('user', 'isUpdateUser'));
     }
 
 	public function updated(UpdateInfoRequest $request, $id) {
@@ -129,6 +129,11 @@ class UserController extends AdminController {
         $user->full_name = $data['full_name'];
         $user->phone = $data['phone'];
         $user->role = $data['role'];
+
+        if (\Session::get('adminId') == $data['user_id']) {
+            \Session::put('adminFullName', $user->full_name);
+        }
+        
         $user->save();
         \Alert::success('Thành công', 'Cập nhật tài khoản');
         return redirect()->to('/admin/user');

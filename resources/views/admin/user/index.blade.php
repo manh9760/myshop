@@ -22,12 +22,14 @@
                   <option value="1" {{ Request::get('user_active') == 1 ? "selected='selected'" : ""}}>Đã kích hoạt</option>
                   <option value="0" {{ Request::get('user_active') == 0 ? "selected='selected'" : ""}}>Chưa kích hoạt</option>
                 </select>
+                @if(\Session::get('adminRole') == 1)
                 <select name="user_role" class="form-control">
                   <option value="">--- Tài khoản ---</option>
                   <option value="3" {{ Request::get('user_role') == 3 ? "selected='selected'" : ""}}>Khách hàng</option>
                   <option value="2" {{ Request::get('user_role') == 2 ? "selected='selected'" : ""}}>Nhân viên</option>
                   <option value="1" {{ Request::get('user_role') == 1 ? "selected='selected'" : ""}}>Quản trị</option>
                 </select>
+                @endif
                 <button type="submit" class="btn btn-info">
                   <i class="fa fa-search"></i> Tìm kiếm
                 </button>

@@ -61,6 +61,10 @@
 					<p style="margin-left:220px;">
 						<input type="submit" value="Đăng ký" />
 					</p>
+					<p>
+						Đã có tài khoản?  
+						<a href="{{route('get.login')}}" class="forgot-password">Đăng nhập</a>
+					</p>
 				</form>
 			</article>
 		</section>

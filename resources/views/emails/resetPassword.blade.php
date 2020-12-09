@@ -21,9 +21,7 @@
             <img src="{{ $message->embed(asset('public/guest/images/logos/logo-vm.png')) }}">
           </h2>
           <div class="w3-container">
-            <b>Xin chào {{$full_name}},</b>
-            <p>Chào mừng bạn đến với Cửa hàng linh kiện máy tính Văn Mạnh.</p>
-            <p>Mời bạn <a href="{{route('get.user.active', $userId)}}">Click vào đây</a> để xác nhận thông tin đăng ký.</p>
+            <p>Để lấy lại mật khẩu, vui lòng truy cập vào <a href="{{route('get.user.createPassword', $userId)}}">đường link này</a></p>
             <hr>
             <p>
               Điện thoại: 0977 160 823 <br /> 

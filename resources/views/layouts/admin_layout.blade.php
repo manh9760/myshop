@@ -57,7 +57,7 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Thông tin tài khoản</a>
+                      <a href="{{ route('admin.user.update', Session::get('adminId')) }}" class="btn btn-default btn-flat">Thông tin tài khoản</a>
                     </div>
                     <div class="pull-right">
                       <a href="{{route('admin.logout')}}" class="btn btn-default btn-flat">Đăng xuất</a>
@@ -176,10 +176,6 @@
                 </span>
               </a>
             </li>
-            <li class="header">HỆ THỐNG</li>
-            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Tài khoản nhân viên</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
           </ul>
         </section>
         <!-- /.sidebar -->

@@ -95,15 +95,6 @@ class UserController extends GuestController {
             $order->delete();
         }
 
-        // $order = Order::find($id);
-        // if ($order) {
-        //     $money = $order->quantity * $order->product_price;
-        //     Transaction::where('id', $order->transaction_id)->decrement('total_money', $money);
-            
-        //     // Tăng số lượng tồn kho của mỗi sản phẩm trong đơn hàng bị hủy
-        //     Product::where('id', $order->product_id)->increment('number', $order->quantity);
-        //     $order->delete();
-        // }
         $transaction->save();
         \Session::flash('toastr', [
             'type' => 'success',

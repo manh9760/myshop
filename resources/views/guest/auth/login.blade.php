@@ -38,6 +38,8 @@
 			            	<span style="color:red;">{{ $errors->first('password') }}</span>
 			          	@endif
 					</p>
+
+					<a href="{{route('get.lostPassword')}}" class="forgot-password">Lấy lại mật khẩu</a>
 					
 					<p style="margin-left:220px;">
 						<input type="submit" value="Đăng nhập" />

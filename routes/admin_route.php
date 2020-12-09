@@ -11,6 +11,12 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function () {
 	Route::post('login', 'AuthenticationController@login');
 	Route::get('logout', 'AuthenticationController@logout')->name('admin.logout');
 
+	Route::get('lost-password', 'AuthenticationController@getInputEmailForm')->name('admin.lostPassword');
+	Route::post('lost-password', 'AuthenticationController@sendEmail');
+
+	Route::get('reset-password/{id}', 'AuthenticationController@createPassword')->name('admin.createPassword');
+	Route::post('reset-password/{id}', 'AuthenticationController@savePassword');
+
 	Route::group(['prefix'=>'statistic'], function () {
 	    Route::get('', 'StatisticController@index')->name('admin.statistic.index');
 	    Route::get('create', 'StatisticController@create')->name('admin.statistic.create');

@@ -18,6 +18,11 @@ Route::group(['namespace'=>'Guest'], function () {
     Route::get('dang-nhap', 'AuthenticationController@getLoginForm')->name('get.login');
     Route::post('dang-nhap', 'AuthenticationController@login');
     Route::get('dang-xuat', 'AuthenticationController@logout')->name('get.logout');
+    Route::get('quen-mat-khau', 'AuthenticationController@getLostPasswordForm')->name('get.lostPassword');
+    Route::get('lay-mat-khau', 'AuthenticationController@resetPassword')->name('post.LostPassword');
+
+    Route::get('tao-mat-khau-moi/{userId}', 'AuthenticationController@createPasswordForm')->name('get.user.createPassword');
+    Route::get('luu-mat-khau-moi/{userId}', 'AuthenticationController@savePassword')->name('get.user.savePassword');
 
     Route::group(['prefix'=>'tai-khoan'], function () {
         Route::get('thong-tin/{id}', 'UserController@getInfo')->name('get.user.info');

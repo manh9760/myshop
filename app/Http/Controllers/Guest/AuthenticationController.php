@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Guest;
 use Illuminate\Http\Request;
 use App\Http\Requests\Guest\LoginRequest;
 use App\Http\Requests\Guest\RegisterRequest;
+use App\Http\Requests\Guest\CreatePasswordRequest;
 use App\User;
 use Carbon\Carbon;
 use App\Models\Product;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RegisteredUser;
+use App\Mail\ResetPassword;
 
 class AuthenticationController extends GuestController {
 
@@ -86,6 +88,90 @@ class AuthenticationController extends GuestController {
             \Session::put('failedLogin', 'Tài khoản không đúng!');
             return redirect()->back();
         }
+    }
+
+    public function getLostPasswordForm() {
+        $bodyClass = 'page';
+        $pageTitle = 'Lấy lại mật khẩu';
+        $saleProducts = Product::where('active', 1)
+            ->where('sale', '>', 0)
+            ->orderByDesc('sale')
+            ->limit(4)
+            ->get();
+        return view('guest.auth.lostPassword', compact('bodyClass', 'pageTitle', 'saleProducts'));
+    }
+
+    public function resetPassword(Request $request) {
+        $data = $request->except('_token');
+        $email = $data['email'];
+        $isEmailValid = false;
+        $users = User::whereRaw(1)->get();
+        $userId = 0;
+
+        if ($email == '') {
+            \Session::put('invalidEmail', 'Vui lòng nhập email!');
+            return redirect()->back();
+        }
+
+        foreach ($users as $user) {
+            if ($email == $user->email) {
+                $userId = $user->id;
+                $isEmailValid = true;
+                break;
+            }
+        }
+
+        if ($isEmailValid) {
+            Mail::to($email)->send(new ResetPassword($userId));
+            \Session::flash('toastr', [
+                'type' => 'info',
+                'message' => 'Truy cập vào email để tiến hành lấy mật khẩu!',
+            ]);
+            return redirect()->route('get.login');
+        } else {
+            \Session::put('invalidEmail', 'Địa chỉ email này chưa đăng ký!');
+            return redirect()->back();
+        }
+    }
+
+    public function createPasswordForm($userId) {
+        $user = User::findOrFail($userId);
+        $pageTitle = 'Tạo mật khẩu mới';
+        $bodyClass = 'page woocommerce-checkout';
+        $saleProducts = Product::where('active', 1)
+            ->where('sale', '>', 0)
+            ->orderByDesc('sale')
+            ->limit(4)
+            ->get();
+        $data = [
+            'user' => $user,
+            'pageTitle' =>$pageTitle,
+            'bodyClass' => $bodyClass,
+            'saleProducts' => $saleProducts,
+        ];
+        return view('guest.auth.createPassword', $data);
+    }
+
+    public function savePassword(CreatePasswordRequest $request, $userId) {
+        $user = User::findOrFail($userId);
+        $data = $request->except('_token', 'confirm_password');
+        $confirm_password = md5($request->confirm_password);
+        $data['password'] = md5($data['password']);
+        $data['updated_at'] = Carbon::now();
+
+        if ($confirm_password != $data['password']) {
+            \Session::put('invalidConfirmPassword', 'Mật khẩu nhập lại không đúng!');
+            return redirect()->back();
+        }
+
+        $user->password = $data['password'];
+        $user->updated_at = $data['updated_at'];
+        $user->save();
+        \Session::flash('toastr', [
+            'type' => 'success',
+            'message' => 'Tạo mật khẩu mới thành công!',
+        ]);
+        return redirect()->route('get.login');
     }
 
     public function logout(Request $request) {
