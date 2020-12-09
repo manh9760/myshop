@@ -92,17 +92,18 @@ class UserController extends GuestController {
         foreach ($orders as $item) {
             // Tăng số lượng tồn kho của mỗi sản phẩm trong đơn hàng bị hủy
             Product::where('id', $item->product_id)->increment('number', $item->quantity);
-        }
-
-        $order = Order::find($id);
-        if ($order) {
-            $money = $order->quantity * $order->product_price;
-            Transaction::where('id', $order->transaction_id)->decrement('total_money', $money);
-            
-            // Tăng số lượng tồn kho của mỗi sản phẩm trong đơn hàng bị hủy
-            Product::where('id', $order->product_id)->increment('number', $order->quantity);
             $order->delete();
         }
+
+        // $order = Order::find($id);
+        // if ($order) {
+        //     $money = $order->quantity * $order->product_price;
+        //     Transaction::where('id', $order->transaction_id)->decrement('total_money', $money);
+            
+        //     // Tăng số lượng tồn kho của mỗi sản phẩm trong đơn hàng bị hủy
+        //     Product::where('id', $order->product_id)->increment('number', $order->quantity);
+        //     $order->delete();
+        // }
         $transaction->save();
         \Session::flash('toastr', [
             'type' => 'success',
@@ -115,7 +116,6 @@ class UserController extends GuestController {
         $transactions = Transaction::where('user_id', $userId)
             ->where('status', 3)
             ->get();
-        $reviews = Review::where('user_id', $userId)->get();
         $orders = Null;
         foreach ($transactions as $transaction) {
             $orders = Order::with('product:id,name,slug,avatar')
@@ -124,8 +124,7 @@ class UserController extends GuestController {
         }
         $data = [
             'page' => 'reviews',
-            'reviews' => $reviews,
-            'orders' => $orders,
+            'transactions' => $transactions,
         ];
         return view('guest.user.review', $data);
     }

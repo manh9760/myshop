@@ -33,9 +33,9 @@
               <tr>
                 <th>STT</th>
                 <th>Họ tên</th>
-                <th>Hình ảnh</th>
                 <th>Số điện thoại</th>
                 <th>Địa chỉ Email</th>
+                <th>Trạng thái</th>
                 <th>Ngày tạo</th>
                 <th>Ngày sửa</th>
                 <th>Tác vụ</th>
@@ -46,11 +46,15 @@
                   <tr>
                     <td>{{ $i }}</td>
                     <td>{{ $user->full_name }}</td>
-                    <td>
-                      <img src="{{ asset(parse_url_file($user->avatar)) }}" width="40" />
-                    </td>
                     <td>{{ $user->phone }}</td>
                     <td>{{ $user->email }}</td>
+                    <td>
+                      @if($user->active)
+                        <span class="label label-primary">Đã kích hoạt</span>
+                      @else
+                        <span class="label label-default">Chưa kích hoạt</span>
+                      @endif
+                    </td>
                     <td>
                       @if($user->created_at)
                         Vào lúc {{ $user->created_at->format("H:i:s") }}<br />

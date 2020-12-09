@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Guest\RegisterRequest;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegisteredUser;
 
 class UserController extends AdminController {
 
@@ -44,11 +47,25 @@ class UserController extends AdminController {
 
 	public function created(RegisterRequest $request) {
 		$data = $request->except('_token', 'confirm_password');
-        $data['password'] = Hash::make($data['password']);
+        $confirm_password = md5($request->confirm_password);
+        $data['password'] = md5($data['password']);
         $data['created_at'] = Carbon::now();
-		$id = User::insertGetId($data);
-        \Alert::success('Thành công', 'Thêm mới người dùng');
-		return redirect()->to('/admin/user');
+
+        if ($confirm_password != $data['password']) {
+            \Session::put('failedRegister', 'Mật khẩu nhập lại không đúng!');
+            return redirect()->back();
+        }
+
+		// Trả về id của user vừa thêm vào db
+        $result = User::insertGetId($data);
+        if ($result) {
+            \Alert::warning('Thông báo', 'Vui lòng xác nhận trong email để hoàn thành đăng ký!');
+            Mail::to($request->email)->send(new RegisteredUser($result, $request->full_name));
+            return redirect()->back();
+        } else {
+            \Session::put('failedRegister', 'Thông tin tài khoản không hợp lệ!');
+            return redirect()->back();
+        }
     }
 
     public function update($id) {
