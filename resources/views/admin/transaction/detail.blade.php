@@ -7,11 +7,6 @@
       Đơn hàng
       <small>#{{$transaction->id}}</small>
     </h1>
-    <ol class="breadcrumb">
-      <li><a href="{{route('admin.index')}}"><i class="fa fa-dashboard"></i> Trang thống kê</a></li>
-      <li><a href="{{route('admin.transaction.index')}}"><i class="fa fa-files-o"></i> Danh sách đơn hàng</a></li>
-      <li class="active">Chi tiết đơn hàng</li>
-    </ol>
   </section>
 
   <!-- Main content -->
@@ -109,7 +104,7 @@
               <th>Số lượng</th>
               <th>Đơn giá</th>
               <th>Thành tiền</th>
-              <th>Xóa</th>
+              <th>Trạng thái</th>
             </tr>
           </thead>
           <tbody>
@@ -121,13 +116,10 @@
               <td>{{ number_format($item->product_price,0,',','.') }}  đ</td>
               <td>{{ number_format($item->total_price,0,',','.') }}  đ</td>
               <td>
-                @if(($transaction->status == 3) || ($transaction->status == 4))
-                  <span class="{{$transaction->getStatus($transaction->status)['class']}}">
-                    {{ $transaction->getStatus($transaction->status)['name'] }}
-                  </span>
-                @else
-                  <a href="{{route('admin.transaction.deleteOrder', $item->id)}}" class="btn btn-xs btn-danger">Xóa</a>
-                @endif
+                <span class="{{$transaction->getStatus($transaction->status)['class']}}">
+                  {{ $transaction->getStatus($transaction->status)['name'] }}
+                </span>
+                  <!-- <a href="{{route('admin.transaction.deleteOrder', $item->id)}}" class="btn btn-xs btn-danger">Xóa</a> -->
               </td>
             </tr>
             @endforeach

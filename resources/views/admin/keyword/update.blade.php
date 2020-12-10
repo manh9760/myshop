@@ -4,10 +4,6 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>Cập nhật từ khóa</h1>
-    <ol class="breadcrumb">
-      <li><a href="{{route('admin.index')}}"><i class="fa fa-dashboard"></i> Trang thống kê</a></li>
-      <li class="active">Cập nhật từ khóa</li>
-    </ol>
   </section>
 
   <!-- Main content -->

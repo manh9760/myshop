@@ -4,10 +4,6 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>Quản lý từ khóa<small>(Tổng {{$keywords->total()}} từ khóa)</small></h1>
-    <ol class="breadcrumb">
-      <li><a href="{{route('admin.index')}}"><i class="fa fa-dashboard"></i> Trang thống kê</a></li>
-      <li class="active">Liệt kê từ khóa</li>
-    </ol>
   </section>
 
   <!-- Main content -->

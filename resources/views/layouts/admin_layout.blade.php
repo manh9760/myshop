@@ -78,7 +78,7 @@
         <section class="sidebar">
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header">BÁN HÀNG</li>
+            <li class="header">QUẢN LÝ BÁN HÀNG</li>
             <li>
               <a href="{{route('admin.index')}}">
                 <i class="fa fa-pie-chart"></i> 
@@ -121,7 +121,7 @@
                 </span>
               </a>
             </li>
-            <li>
+            <!-- <li>
               <a href="{{route('admin.post.index')}}">
                 <i class="fa fa-file-text"></i>
                 <span>Quản lý bài viết</span>
@@ -129,8 +129,7 @@
                   {{\DB::table('posts')->count()}}
                 </span>
               </a>
-            </li>
-            <li class="header">DANH MỤC - NÂNG CAO</li>
+            </li> -->
             <li>
               <a href="{{route('admin.category.index')}}">
                 <i class="fa fa-database"></i>
@@ -140,7 +139,7 @@
                 </span>
               </a>
             </li>
-            <li>
+            <!-- <li>
               <a href="{{route('admin.menu.index')}}">
                 <i class="fa fa-folder-open"></i>
                 <span>Danh mục bài viết</span>
@@ -148,7 +147,7 @@
                   {{\DB::table('menus')->count()}}
                 </span>
               </a>
-            </li>
+            </li> -->
             <li>
               <a href="{{route('admin.keyword.index')}}">
                 <i class="fa fa-key"></i>

@@ -33,11 +33,13 @@
                     </div>
                     <div class="form-group">
                         <label for="order_id">Mã hóa đơn</label>
-                        <input class="form-control" id="order_id" name="order_id" type="text" value="{{$transactionId}}" />
+                        <input class="form-control" type="text" value="{{$transactionId}}" disabled="disabled" />
+                        <input class="form-control" id="order_id" name="order_id" type="hidden" value="{{$transactionId}}" />
                     </div>
                     <div class="form-group">
                         <label for="amount">Số tiền</label>
-                        <input class="form-control" id="amount" name="amount" type="number" value="{{$totalMoney}}"/>
+                        <input class="form-control" type="text" value="{{ number_format($totalMoney,0,',','.') }}" disabled="disabled"/>
+                        <input class="form-control" id="amount" name="amount" type="hidden" value="{{$totalMoney}}"/>
                     </div>
                     <div class="form-group" style="display:none;">
                         <label for="order_desc">Nội dung thanh toán</label>
@@ -47,7 +49,7 @@
                         <label for="bank_code">Ngân hàng</label>
                         <select name="bank_code" id="bank_code" class="form-control">
                             <option value="NCB"> Ngan hang NCB</option>
-                            <option value="AGRIBANK"> Ngan hang Agribank</option>
+                            <!-- <option value="AGRIBANK"> Ngan hang Agribank</option>
                             <option value="SCB"> Ngan hang SCB</option>
                             <option value="VIETINBANK">Ngan hang Vietinbank</option>
                             <option value="VIETCOMBANK"> Ngan hang VCB</option>
@@ -55,7 +57,7 @@
                             <option value="DONGABANK"> Ngan hang Dong A</option>
                             <option value="TPBANK"> Ngân hàng TPBank</option>
                             <option value="OJB"> Ngân hàng OceanBank</option>
-                            <option value="BIDV"> Ngân hàng BIDV</option>
+                            <option value="BIDV"> Ngân hàng BIDV</option> -->
                         </select>
                     </div>
                     <div class="form-group" style="display:none;">

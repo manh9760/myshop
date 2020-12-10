@@ -4,10 +4,6 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>Danh mục sản phẩm<small>(Tổng {{$categories->total()}} danh mục)</small></h1>
-    <ol class="breadcrumb">
-      <li><a href="{{route('admin.index')}}"><i class="fa fa-dashboard"></i> Trang thống kê</a></li>
-      <li class="active">Liệt kê danh mục</li>
-    </ol>
   </section>
 
   <!-- Main content -->

@@ -1,11 +1,11 @@
 <!-- SMALL PAGE HEADER -->
 <header class="small">
 	<span class="pull-right">
-		<a href="{{ Session::get('userId') ? route('get.user.order', Session::get('userId')) : route('get.login') }}" class="my-account">
+		<!-- <a href="{{ Session::get('userId') ? route('get.user.order', Session::get('userId')) : route('get.login') }}" class="my-account">
 			<i class="fa fa-eye"></i> Theo dõi đơn hàng
 		</a>
 		<a href="{{route('get.post_list')}}" class="my-cart"><i class="fa fa-info"></i> Tin công nghệ</a>
-		<a href="javascript:;" class="my-cart"><i class="fa fa-facebook-square show-tooltip"></i> Mạng xã hội</a>
+		<a href="javascript:;" class="my-cart"><i class="fa fa-facebook-square show-tooltip"></i> Mạng xã hội</a> -->
 	</span>      
 	<span class="call-to-us">Cửa hàng linh kiện máy tính online</span>
 </header>

@@ -60,7 +60,7 @@
 	@endif
 
 	@if($pageTitle != "Tin tức công nghệ" && ($bodyClass != 'single-product'))
-	<!-- Lọc sản phẩm theo đánh giá -->
+<!--	 Lọc sản phẩm theo đánh giá 
 	<div class="widget widget-recent-tweets">
 		<h4 class="widget-title">Đánh giá</h4>
 		<div class="widget-content">
@@ -99,6 +99,7 @@
 			</ul>
 		</div>
 	</div>
+-->
 	@endif
 	
 	<!-- TOP các sản phẩm đang giảm giá -->
@@ -129,6 +130,7 @@
 	
 	<!-- Tin tức công nghệ -->
 	@if(isset($posts))
+	<!--
 	<div class="widget widget-popular-posts">
 		<h4 class="widget-title">Tin mới đăng</h4>
 		@foreach($posts as $post)
@@ -145,5 +147,6 @@
 		</div>
 		@endforeach				
 	</div>
+	-->
 	@endif			
 </aside>

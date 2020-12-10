@@ -5,10 +5,6 @@
   <section class="content-header">
     <!-- Dành cho mảng thì dùng count() -->
     <h1>Quản lý thuộc tính<small>(Tổng <?php echo(count($attributes)); ?> thuộc tính)</small></h1>
-    <ol class="breadcrumb">
-      <li><a href="{{route('admin.index')}}"><i class="fa fa-dashboard"></i> Trang thống kê</a></li>
-      <li class="active">Liệt kê thuộc tính</li>
-    </ol>
   </section>
 
   <!-- Main content -->

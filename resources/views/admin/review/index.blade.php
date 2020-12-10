@@ -11,10 +11,6 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>Quản lý đánh giá<small>(Tổng {{$reviews->total()}} đánh giá)</small></h1>
-    <ol class="breadcrumb">
-      <li><a href="{{route('admin.index')}}"><i class="fa fa-dashboard"></i> Trang thống kê</a></li>
-      <li class="active">Liệt kê đánh giá</li>
-    </ol>
   </section>
   
   <!-- Main content -->

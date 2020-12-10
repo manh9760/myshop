@@ -74,7 +74,7 @@ class UserController extends GuestController {
         if (!$this->isLogined())
             return redirect()->to('/dang-nhap');
         $user = User::find($userId);
-        $transactions = Transaction::where('email', $user->email)->get();
+        $transactions = Transaction::where('email', $user->email)->orderByDesc('id')->get();
         
         $data = [
             'user' => $user,

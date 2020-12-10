@@ -228,13 +228,28 @@ class CartController extends GuestController {
             }
             \Session::flash('toastr', [
                 'type' => 'error',
-                'message' => 'Mã đơn hàng không tồn tại',
+                'message' => 'Mã đơn hàng không tồn tại!',
             ]);
             return redirect()->to('/');
         }
+
+        \Cart::destroy(); // Sau khi hủy thanh toán online thì xóa sp trong giỏ hàng
+        $transactionId = $request->vnp_TxnRef; // Lấy id đơn hàng
+        $transaction = Transaction::find($transactionId);
+        $transaction->payment_method = 2; // Hóa đơn chưa thanh toán Online
+        $transaction->status = 4; // trạng thái hủy đơn hàng
+        $transaction->save();
+        
+        // Trả lại số lượng sản phẩm
+        $orders = Order::with('product:id,name,number,avatar')->where('transaction_id', $transactionId)->get();
+        foreach ($orders as $item) {
+            // Tăng số lượng tồn kho của mỗi sản phẩm trong đơn hàng bị hủy
+            Product::where('id', $item->product_id)->increment('number', $item->quantity);
+        }
+
         \Session::flash('toastr', [
             'type' => 'error',
-            'message' => 'Lỗi không thanh toán được',
+            'message' => 'Thanh toán không thành công!',
         ]);
         return redirect()->to('/');
     }
